@@ -122,6 +122,7 @@
       <DynamicSource Condition="'$(Configuration)|$(Platform)'=='Release|x64'">input</DynamicSource>
       <QtMocFileName Condition="'$(Configuration)|$(Platform)'=='Release|x64'">%(Filename).moc</QtMocFileName>
     </ClCompile>
+    <ClCompile Include="EchiquierManager.cpp" />
     <ClCompile Include="EchiquierWindow.cpp" />
     <ClCompile Include="googletest\src\gtest-all.cc" />
     <ClCompile Include="main.cpp" />
@@ -133,6 +134,7 @@
     <QtMoc Include="CalcWindow.hpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="EchiquierManager.hpp" />
     <ClInclude Include="Position.hpp" />
     <ClInclude Include="RoiPiece.hpp" />
     <QtMoc Include="EchiquierCase.hpp" />

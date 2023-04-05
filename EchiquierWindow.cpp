@@ -7,8 +7,11 @@
 
 namespace interface {
 	EchiquierWindow::EchiquierWindow(QWidget* parent) : QMainWindow(parent) {
+        
+
 		QWidget* central = new QWidget(this);
 		setCentralWidget(central);
+        setFixedSize(500, 500);
 		
 		pointeurGrille = new QGridLayout(central);
 

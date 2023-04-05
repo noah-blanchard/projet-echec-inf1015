@@ -35,6 +35,9 @@ int main(int argc, char *argv[])
 	QApplication app(argc, argv);
 	initialiserBibliothequeCours(argc, argv);
 
+	// make the application higher width and height
+	
+
 	//CalcWindow calcWindow;
 	//calcWindow.show();
 	interface::EchiquierWindow echiquier;
