@@ -111,6 +111,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="BasePiece.cpp" />
     <ClCompile Include="bibliotheque_cours\bibliotheque_cours.cpp" />
     <ClCompile Include="bibliotheque_cours\verification_allocation.cpp" />
     <ClCompile Include="Calc.cpp" />
@@ -124,6 +125,7 @@
     <ClCompile Include="EchiquierWindow.cpp" />
     <ClCompile Include="googletest\src\gtest-all.cc" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="Roi.cpp" />
     <ClCompile Include="TestCalc.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -131,8 +133,11 @@
     <QtMoc Include="CalcWindow.hpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Position.hpp" />
+    <ClInclude Include="RoiPiece.hpp" />
     <QtMoc Include="EchiquierCase.hpp" />
     <QtMoc Include="EchiquierWindow.hpp" />
+    <ClInclude Include="BasePiece.hpp" />
     <ClInclude Include="interface.hpp" />
     <ClInclude Include="pieces.hpp" />
   </ItemGroup>
