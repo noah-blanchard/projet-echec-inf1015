@@ -125,7 +125,7 @@
     <ClCompile Include="EchiquierWindow.cpp" />
     <ClCompile Include="googletest\src\gtest-all.cc" />
     <ClCompile Include="main.cpp" />
-    <ClCompile Include="Roi.cpp" />
+    <ClCompile Include="RoiPiece.cpp" />
     <ClCompile Include="TestCalc.cpp" />
   </ItemGroup>
   <ItemGroup>

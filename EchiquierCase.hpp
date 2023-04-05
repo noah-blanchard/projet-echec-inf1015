@@ -9,6 +9,7 @@ namespace interface {
 		
 		void setLight();
 		void setDark();
+		void setImage(QPixmap image);
 	
 	signals:
 		void cliqueCase();

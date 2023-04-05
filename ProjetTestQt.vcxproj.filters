@@ -52,7 +52,7 @@
     <ClCompile Include="BasePiece.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Roi.cpp">
+    <ClCompile Include="RoiPiece.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

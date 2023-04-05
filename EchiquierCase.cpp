@@ -19,4 +19,8 @@ namespace interface {
 		void EchiquierCase::mousePressEvent(QMouseEvent*) {
 			emit cliqueCase();
 		}
+
+		void EchiquierCase::setImage(QPixmap image) {
+			setPixmap(image.scaled(50, 50));
+		}
 	};

@@ -41,4 +41,16 @@ namespace interface {
 		std::string message = "Vous avez clique sur une case : " + std::to_string(ligne) + ", " + std::to_string(colonne);
         QMessageBox::information(this, "Clique", message.c_str());
 	}
+
+    void EchiquierWindow::updatePieces(std::vector<logique::BasePiece*> pieces) {
+        
+        for (logique::BasePiece* piece : pieces) {
+            logique::Position pos = piece->position;
+            QWidget* item = pointeurGrille->itemAtPosition(pos.ligne, pos.ligne)->widget();
+            EchiquierCase* label = qobject_cast<EchiquierCase*>(item);
+            QPixmap pixmap(piece->image.c_str());
+            label->setImage(pixmap.scaled(50, 50, Qt::KeepAspectRatio, Qt::SmoothTransformation));
+        }
+        
+    }
 }
