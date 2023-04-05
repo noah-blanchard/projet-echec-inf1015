@@ -1,5 +1,5 @@
 #pragma once
-#include "EchiquierCase.hpp";
+#include "EchiquierCase.hpp"
 
 namespace interface {
 
@@ -16,7 +16,7 @@ namespace interface {
 			setStyleSheet("background-color: #784400;");
 		}
 
-		void EchiquierCase::mousePressEvent(QMouseEvent* event) {
+		void EchiquierCase::mousePressEvent(QMouseEvent*) {
 			emit cliqueCase();
 		}
 	};
