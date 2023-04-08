@@ -34,62 +34,62 @@
     <ClCompile Include="googletest\src\gtest-all.cc">
       <Filter>Sources Bibliotheques</Filter>
     </ClCompile>
-    <ClCompile Include="CalcWindow.cpp">
+    <ClCompile Include="ViewChecker.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Calc.cpp">
+    <ClCompile Include="ModelChecker.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="TestCalc.cpp">
+    <ClCompile Include="ModelSquare.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="EchiquierWindow.cpp">
+    <ClCompile Include="ViewSquare.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="EchiquierCase.cpp">
+    <ClCompile Include="ModelPiece.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="BasePiece.cpp">
+    <ClCompile Include="ModelReinePiece.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="RoiPiece.cpp">
+    <ClCompile Include="ControllerChecker.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="EchiquierManager.cpp">
+    <ClCompile Include="ControllerSquare.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="ModelFouPiece.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <QtMoc Include="Calc.hpp">
+    <QtMoc Include="ViewChecker.h">
       <Filter>Header Files</Filter>
     </QtMoc>
-    <QtMoc Include="CalcWindow.hpp">
+    <QtMoc Include="ViewSquare.h">
       <Filter>Header Files</Filter>
     </QtMoc>
-    <QtMoc Include="EchiquierWindow.hpp">
-      <Filter>Header Files</Filter>
-    </QtMoc>
-    <QtMoc Include="EchiquierCase.hpp">
+    <QtMoc Include="ModelSquare.h">
       <Filter>Header Files</Filter>
     </QtMoc>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="interface.hpp">
+    <ClInclude Include="ModelChecker.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="pieces.hpp">
+    <ClInclude Include="ModelPiece.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="BasePiece.hpp">
+    <ClInclude Include="ModelReinePiece.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Position.hpp">
+    <ClInclude Include="ControllerChecker.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="RoiPiece.hpp">
+    <ClInclude Include="ControllerSquare.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="EchiquierManager.hpp">
+    <ClInclude Include="ModelFouPiece.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

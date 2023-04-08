@@ -111,39 +111,32 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="BasePiece.cpp" />
     <ClCompile Include="bibliotheque_cours\bibliotheque_cours.cpp" />
     <ClCompile Include="bibliotheque_cours\verification_allocation.cpp" />
-    <ClCompile Include="Calc.cpp" />
-    <ClCompile Include="CalcWindow.cpp" />
-    <ClCompile Include="EchiquierCase.cpp">
-      <DynamicSource Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">input</DynamicSource>
-      <QtMocFileName Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">%(Filename).moc</QtMocFileName>
-      <DynamicSource Condition="'$(Configuration)|$(Platform)'=='Release|x64'">input</DynamicSource>
-      <QtMocFileName Condition="'$(Configuration)|$(Platform)'=='Release|x64'">%(Filename).moc</QtMocFileName>
-    </ClCompile>
-    <ClCompile Include="EchiquierManager.cpp" />
-    <ClCompile Include="EchiquierWindow.cpp" />
-    <ClCompile Include="FouPiece.cpp" />
+    <ClCompile Include="ControllerChecker.cpp" />
+    <ClCompile Include="ControllerSquare.cpp" />
     <ClCompile Include="googletest\src\gtest-all.cc" />
     <ClCompile Include="main.cpp" />
-    <ClCompile Include="Position.cpp" />
-    <ClCompile Include="RoiPiece.cpp" />
-    <ClCompile Include="TestCalc.cpp" />
+    <ClCompile Include="ModelChecker.cpp" />
+    <ClCompile Include="ModelFouPiece.cpp" />
+    <ClCompile Include="ModelPiece.cpp" />
+    <ClCompile Include="ModelReinePiece.cpp" />
+    <ClCompile Include="ModelSquare.cpp" />
+    <ClCompile Include="ViewChecker.cpp" />
+    <ClCompile Include="ViewSquare.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <QtMoc Include="Calc.hpp" />
-    <QtMoc Include="CalcWindow.hpp" />
+    <QtMoc Include="ViewChecker.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="EchiquierManager.hpp" />
-    <ClInclude Include="FouPiece.hpp" />
-    <ClInclude Include="Position.hpp" />
-    <ClInclude Include="RoiPiece.hpp" />
-    <QtMoc Include="EchiquierCase.hpp" />
-    <QtMoc Include="EchiquierWindow.hpp" />
-    <ClInclude Include="BasePiece.hpp" />
-    <ClInclude Include="interface.hpp" />
+    <ClInclude Include="ControllerChecker.h" />
+    <ClInclude Include="ControllerSquare.h" />
+    <ClInclude Include="ModelChecker.h" />
+    <ClInclude Include="ModelFouPiece.h" />
+    <ClInclude Include="ModelPiece.h" />
+    <ClInclude Include="ModelReinePiece.h" />
+    <QtMoc Include="ModelSquare.h" />
+    <QtMoc Include="ViewSquare.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Condition="Exists('$(QtMsBuild)\qt.targets')">

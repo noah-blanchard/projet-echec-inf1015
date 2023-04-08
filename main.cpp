@@ -1,4 +1,5 @@
-﻿#include <QApplication>
+﻿#pragma once
+#include <QApplication>
 
 #if __has_include("bibliotheque_cours.hpp")
 #include "bibliotheque_cours.hpp"
@@ -12,6 +13,13 @@ auto& cdbg = clog;
 #include "verification_allocation.hpp"
 #include "debogage_memoire.hpp"  //NOTE: Incompatible avec le "placement new", ne pas utiliser cette entête si vous utilisez ce type de "new" dans les lignes qui suivent cette inclusion.
 #endif
+
+#include "ViewChecker.h"
+//#include "ModelChecker.h"
+//#include "ModelRoiPiece.h"
+#include "ModelFouPiece.h"
+#include "ModelReinePiece.h"
+
 
 void initialiserBibliothequeCours([[maybe_unused]] int argc, [[maybe_unused]] char* argv[])
 {
@@ -31,6 +39,20 @@ int main(int argc, char *argv[])
 	QApplication app(argc, argv);
 	initialiserBibliothequeCours(argc, argv);
 
+	logic::ModelChecker model;
+	model.getSquareAtPosition(0, 2)->setPiece(new logic::ModelFouPiece(false));
+	model.getSquareAtPosition(0, 3)->setPiece(new logic::ModelReinePiece(false));
+	//model.getSquareAtPosition(0, 4)->setPiece(new logic::ModelRoiPiece(false));
+	//model.getSquareAtPosition(0, 5)->setPiece(new logic::ModelFouPiece(false));
+
+	model.getSquareAtPosition(4, 4)->setPiece(new logic::ModelFouPiece(true));
+	model.getSquareAtPosition(7, 4)->setPiece(new logic::ModelReinePiece(true));
+	//model.getSquareAtPosition(7, 3)->setPiece(new logic::ModelRoiPiece(true));
+	//model.getSquareAtPosition(7, 5)->setPiece(new logic::ModelFouPiece(true));
+
+	view::ViewChecker view(&model);
+
+	view.show();
 	
 
 	return app.exec();
