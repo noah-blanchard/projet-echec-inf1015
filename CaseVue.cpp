@@ -1,26 +1,26 @@
 #pragma once
-#include "EchiquierCase.hpp"
+#include "CaseVue.hpp"
 
 namespace interface {
 
-		EchiquierCase::EchiquierCase(QWidget* parent) : QLabel(parent) {
+		CaseVue::CaseVue(QWidget* parent) : QLabel(parent) {
 			setFrameStyle(QFrame::Box);
 			setMinimumSize(50, 50);
 		}
 
-		void EchiquierCase::setLight() {
+		void CaseVue::setLight() {
 			setStyleSheet("background-color: #face93;");
 		}
 
-		void EchiquierCase::setDark() {
+		void CaseVue::setDark() {
 			setStyleSheet("background-color: #784400;");
 		}
 
-		void EchiquierCase::mousePressEvent(QMouseEvent*) {
+		void CaseVue::mousePressEvent(QMouseEvent*) {
 			emit cliqueCase();
 		}
 
-		void EchiquierCase::setImage(QPixmap image) {
+		void CaseVue::setImage(QPixmap image) {
 			setPixmap(image.scaled(50, 50));
 		}
 	};

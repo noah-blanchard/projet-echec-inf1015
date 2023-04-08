@@ -2,10 +2,10 @@
 #include <QLabel>
 
 namespace interface {
-	class EchiquierCase : public QLabel {
+	class CaseVue : public QLabel {
 		Q_OBJECT
 	public:
-		EchiquierCase(QWidget* parent = nullptr);
+		CaseVue(QWidget* parent = nullptr);
 		
 		void setLight();
 		void setDark();

@@ -1,8 +1,4 @@
-﻿#include "Calc.hpp"
-#include "CalcWindow.hpp"
-#include <QApplication>
-#include "EchiquierWindow.hpp"
-#include "RoiPiece.hpp"
+﻿#include <QApplication>
 
 #if __has_include("bibliotheque_cours.hpp")
 #include "bibliotheque_cours.hpp"
@@ -35,16 +31,7 @@ int main(int argc, char *argv[])
 	QApplication app(argc, argv);
 	initialiserBibliothequeCours(argc, argv);
 
-	// make the application higher width and height
 	
 
-	//CalcWindow calcWindow;
-	//calcWindow.show();
-	interface::EchiquierWindow echiquier;
-	echiquier.show();
-	logique::RoiPiece roi(0, 0, true);
-	vector<logique::BasePiece*> pieces;
-	pieces.push_back(&roi);
-	echiquier.updatePieces(pieces);
 	return app.exec();
 }

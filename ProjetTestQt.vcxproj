@@ -124,8 +124,10 @@
     </ClCompile>
     <ClCompile Include="EchiquierManager.cpp" />
     <ClCompile Include="EchiquierWindow.cpp" />
+    <ClCompile Include="FouPiece.cpp" />
     <ClCompile Include="googletest\src\gtest-all.cc" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="Position.cpp" />
     <ClCompile Include="RoiPiece.cpp" />
     <ClCompile Include="TestCalc.cpp" />
   </ItemGroup>
@@ -135,13 +137,13 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="EchiquierManager.hpp" />
+    <ClInclude Include="FouPiece.hpp" />
     <ClInclude Include="Position.hpp" />
     <ClInclude Include="RoiPiece.hpp" />
     <QtMoc Include="EchiquierCase.hpp" />
     <QtMoc Include="EchiquierWindow.hpp" />
     <ClInclude Include="BasePiece.hpp" />
     <ClInclude Include="interface.hpp" />
-    <ClInclude Include="pieces.hpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Condition="Exists('$(QtMsBuild)\qt.targets')">

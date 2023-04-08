@@ -10,10 +10,10 @@
 #include "BasePiece.hpp"
 
 namespace interface {
-	class EchiquierWindow : public QMainWindow {
+	class EchiquierVue : public QMainWindow {
 		Q_OBJECT
 	public:
-		EchiquierWindow(QWidget* parent = nullptr);
+		EchiquierVue(QWidget* parent = nullptr);
 
 		void updatePieces(std::vector<logique::BasePiece*> pieces);
 	private:
