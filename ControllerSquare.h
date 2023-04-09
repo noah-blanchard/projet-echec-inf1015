@@ -7,6 +7,7 @@ namespace logic {
 	{
 	public:
 		static void clickSquareControl(ModelSquare* clickedSquare, ModelChecker* checker);
+		static void clickSquareMove(ModelSquare* clickedSquare, ModelChecker* checker);
 	};
 }
 

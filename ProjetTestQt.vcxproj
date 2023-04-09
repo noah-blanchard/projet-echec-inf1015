@@ -131,9 +131,9 @@
   <ItemGroup>
     <ClInclude Include="ControllerChecker.h" />
     <ClInclude Include="ControllerSquare.h" />
-    <ClInclude Include="ModelChecker.h" />
+    <QtMoc Include="ModelChecker.h" />
     <ClInclude Include="ModelFouPiece.h" />
-    <ClInclude Include="ModelPiece.h" />
+    <QtMoc Include="ModelPiece.h" />
     <ClInclude Include="ModelReinePiece.h" />
     <QtMoc Include="ModelSquare.h" />
     <QtMoc Include="ViewSquare.h" />

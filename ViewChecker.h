@@ -12,8 +12,10 @@ namespace view {
 	public:
 		ViewChecker(logic::ModelChecker* model, QWidget* parent = nullptr);
 		//~ViewChecker() override;
-		void squareClicked();
+		void squareClickPiece();
+		void squareClickMove();
 	private:
+		ViewSquare* selectedViewSquare = nullptr;
 		QGridLayout* gridLayout;
 		QWidget* centralWidget;
 		logic::ModelChecker* model;

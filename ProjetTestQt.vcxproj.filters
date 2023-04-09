@@ -72,14 +72,14 @@
     <QtMoc Include="ModelSquare.h">
       <Filter>Header Files</Filter>
     </QtMoc>
+    <QtMoc Include="ModelPiece.h">
+      <Filter>Header Files</Filter>
+    </QtMoc>
+    <QtMoc Include="ModelChecker.h">
+      <Filter>Header Files</Filter>
+    </QtMoc>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="ModelChecker.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="ModelPiece.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="ModelReinePiece.h">
       <Filter>Header Files</Filter>
     </ClInclude>

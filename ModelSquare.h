@@ -14,8 +14,8 @@ namespace logic {
 		int getX() const { return x; }
 		int getY() const { return y; }
 		ModelPiece* getPiece() const { return piece; }
-		void setPiece(ModelPiece* piece) { this->piece = piece; }
-		void setPlayable();
+		void setPiece(ModelPiece* piece);
+		void setPlayable(bool p);
 		bool isPlayable() const { return playable; }
 	private:
 		int x, y;
@@ -25,6 +25,7 @@ namespace logic {
 
 	signals:
 		void playableSignal();
+		void updatePieceSignal();
 	};
 }
 
