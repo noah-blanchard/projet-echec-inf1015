@@ -19,7 +19,7 @@ auto& cdbg = clog;
 //#include "ModelRoiPiece.h"
 #include "ModelFouPiece.h"
 #include "ModelReinePiece.h"
-
+#include "ModelRoiPiece.h"
 
 void initialiserBibliothequeCours([[maybe_unused]] int argc, [[maybe_unused]] char* argv[])
 {
@@ -42,13 +42,13 @@ int main(int argc, char *argv[])
 	logic::ModelChecker model;
 	model.getSquareAtPosition(0, 2)->setPiece(new logic::ModelFouPiece(false));
 	model.getSquareAtPosition(0, 3)->setPiece(new logic::ModelReinePiece(false));
-	//model.getSquareAtPosition(0, 4)->setPiece(new logic::ModelRoiPiece(false));
-	//model.getSquareAtPosition(0, 5)->setPiece(new logic::ModelFouPiece(false));
+	model.getSquareAtPosition(0, 4)->setPiece(new logic::ModelRoiPiece(false));
+	model.getSquareAtPosition(0, 5)->setPiece(new logic::ModelFouPiece(false));
 
-	model.getSquareAtPosition(4, 4)->setPiece(new logic::ModelFouPiece(true));
+	model.getSquareAtPosition(7, 2)->setPiece(new logic::ModelFouPiece(true));
 	model.getSquareAtPosition(7, 4)->setPiece(new logic::ModelReinePiece(true));
-	//model.getSquareAtPosition(7, 3)->setPiece(new logic::ModelRoiPiece(true));
-	//model.getSquareAtPosition(7, 5)->setPiece(new logic::ModelFouPiece(true));
+	model.getSquareAtPosition(7, 3)->setPiece(new logic::ModelRoiPiece(true));
+	model.getSquareAtPosition(7, 5)->setPiece(new logic::ModelFouPiece(true));
 
 	view::ViewChecker view(&model);
 

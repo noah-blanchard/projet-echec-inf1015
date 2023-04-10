@@ -61,6 +61,9 @@
     <ClCompile Include="ModelFouPiece.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="ModelRoiPiece.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <QtMoc Include="ViewChecker.h">
@@ -90,6 +93,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="ModelFouPiece.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ModelRoiPiece.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

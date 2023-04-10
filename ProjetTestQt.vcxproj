@@ -121,6 +121,7 @@
     <ClCompile Include="ModelFouPiece.cpp" />
     <ClCompile Include="ModelPiece.cpp" />
     <ClCompile Include="ModelReinePiece.cpp" />
+    <ClCompile Include="ModelRoiPiece.cpp" />
     <ClCompile Include="ModelSquare.cpp" />
     <ClCompile Include="ViewChecker.cpp" />
     <ClCompile Include="ViewSquare.cpp" />
@@ -131,6 +132,7 @@
   <ItemGroup>
     <ClInclude Include="ControllerChecker.h" />
     <ClInclude Include="ControllerSquare.h" />
+    <ClInclude Include="ModelRoiPiece.h" />
     <QtMoc Include="ModelChecker.h" />
     <ClInclude Include="ModelFouPiece.h" />
     <QtMoc Include="ModelPiece.h" />
