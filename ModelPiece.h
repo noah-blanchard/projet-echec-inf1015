@@ -15,9 +15,13 @@ namespace logic {
 		//~ModelPiece();
 
 		bool isWhite();
-		virtual std::vector<class ModelSquare*> getValidMoves(class ModelSquare* square, class ModelChecker* checker) = 0;
+		virtual std::vector<class ModelSquare*> getValidMoves(class ModelChecker* checker) = 0;
 		std::string getImagePath() const { return imagePath; }
+		void setCurrentSquare(ModelSquare * square);
 		//void move(ModelSquare* square);
+	
+	protected:
+		ModelSquare* currentSquare = nullptr;
 	private:
 		std::string imagePath;
 		bool white;

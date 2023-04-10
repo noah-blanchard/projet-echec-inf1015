@@ -9,6 +9,8 @@ namespace logic {
 
 	void ModelSquare::setPiece(ModelPiece* piece) { 
 		this->piece = piece;
+		if (piece != nullptr)
+			piece->setCurrentSquare(this);
 		emit updatePieceSignal();
 	}
 }

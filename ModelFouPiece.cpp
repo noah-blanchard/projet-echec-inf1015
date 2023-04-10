@@ -4,11 +4,11 @@ namespace logic {
 	const std::string ModelFouPiece::whiteImagePath = "images/white/fou_white.png";
 	const std::string ModelFouPiece::blackImagePath = "images/black/fou_black.png";
 
-	std::vector<ModelSquare*> ModelFouPiece::getValidMoves(ModelSquare* square, ModelChecker* checker)
+	std::vector<ModelSquare*> ModelFouPiece::getValidMoves(ModelChecker* checker)
 	{
 		std::vector<ModelSquare*> validMoves;
-		int x = square->getX();
-		int y = square->getY();
+		int x = currentSquare->getX();
+		int y = currentSquare->getY();
 		int i = 1;
 		while (x + i < 8 && y + i < 8) {
 			if (checker->getSquareAtPosition(x + i, y + i)->getPiece() == nullptr) {

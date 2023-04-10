@@ -13,6 +13,10 @@ namespace logic {
 		emit movedSignal();
 	}*/
 
+	void ModelPiece::setCurrentSquare(ModelSquare* square) {
+		currentSquare = square;
+	}
+
 	ModelPiece::ModelPiece(bool isWhite, std::string whitePath, std::string blackPath)
 	{
 		white = isWhite;
