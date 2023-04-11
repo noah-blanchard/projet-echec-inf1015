@@ -53,9 +53,9 @@ int main(int argc, char *argv[])
 
 	model.getSquareAtPosition(0, 3)->setPiece(new logic::ModelRoiPiece(false));
 	model.getSquareAtPosition(5, 0)->setPiece(new logic::ModelRoiPiece(true));
-	model.getSquareAtPosition(5, 6)->setPiece(new logic::ModelPionPiece(true));
+	model.getSquareAtPosition(5, 6)->setPiece(new logic::ModelPionPiece(false, false));
 	model.getSquareAtPosition(6, 0)->setPiece(new logic::ModelFouPiece(true));
-	model.getSquareAtPosition(6, 2)->setPiece(new logic::ModelFouPiece(true));
+	model.getSquareAtPosition(6, 2)->setPiece(new logic::ModelFouPiece(false));
 	
 	view::ViewChecker view(&model);
 

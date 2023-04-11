@@ -6,7 +6,7 @@ namespace logic {
 	{
 	public:
 		ModelPionPiece() = default;
-		ModelPionPiece(bool isWhite);
+		ModelPionPiece(bool isWhite, bool firstMove);
 		//~ModelPionPiece();
 
 		//get valid moves
