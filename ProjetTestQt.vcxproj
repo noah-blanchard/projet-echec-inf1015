@@ -117,6 +117,7 @@
     <ClCompile Include="ControllerSquare.cpp" />
     <ClCompile Include="googletest\src\gtest-all.cc" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="ModelCavalierPiece.cpp" />
     <ClCompile Include="ModelChecker.cpp" />
     <ClCompile Include="ModelFouPiece.cpp" />
     <ClCompile Include="ModelPiece.cpp" />
@@ -133,6 +134,7 @@
   <ItemGroup>
     <ClInclude Include="ControllerChecker.h" />
     <ClInclude Include="ControllerSquare.h" />
+    <ClInclude Include="ModelCavalierPiece.h" />
     <ClInclude Include="ModelPionPiece.h" />
     <ClInclude Include="ModelRoiPiece.h" />
     <QtMoc Include="ModelChecker.h" />
