@@ -14,6 +14,7 @@ namespace view {
 		//~ViewChecker() override;
 		void squareClickPiece();
 		void squareClickMove();
+		void unallowedMoveNotification();
 	private:
 		ViewSquare* selectedViewSquare = nullptr;
 		QGridLayout* gridLayout;

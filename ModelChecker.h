@@ -24,6 +24,9 @@ namespace logic {
 		ModelSquare* blackKingSquare;
 		ModelSquare* squares[8][8];
 		ModelSquare* selectedSquare = nullptr;
+
+	signals:
+		void unallowedMoveSignal();
 	
 	};
 }

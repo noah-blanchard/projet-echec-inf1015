@@ -8,6 +8,8 @@ namespace view {
 		gridLayout = new QGridLayout(centralWidget);
 		this->model = model;
 		this->setCentralWidget(centralWidget);
+
+		connect(this->model, &logic::ModelChecker::unallowedMoveSignal, this, &ViewChecker::unallowedMoveNotification);
 		
 		for (int i = 0; i < 8; ++i) {
 			for (int j = 0; j < 8; ++j) {
@@ -19,6 +21,10 @@ namespace view {
 		}
 	}
 
+	void ViewChecker::unallowedMoveNotification() {
+		QMessageBox::warning(this, "Unallowed move", "You can't move there");
+	}
+	
 	void ViewChecker::squareClickPiece() {
 		model->resetPlayableSquares();
 		ViewSquare* clickedSquare = qobject_cast<ViewSquare*>(sender());

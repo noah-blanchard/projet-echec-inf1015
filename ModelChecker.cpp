@@ -50,6 +50,7 @@ namespace logic {
 					if (std::find(validMoves.begin(), validMoves.end(), kingPosition) != validMoves.end()) {
 						square->setPiece(validMove->getPiece());
 						validMove->setPiece(nullptr);
+						emit unallowedMoveSignal();
 						return false;
 					}
 				}
