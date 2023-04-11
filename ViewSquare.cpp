@@ -9,17 +9,17 @@ namespace view {
 	const QString ViewSquare::COLOR_DARK = "background-color: #B58863;";
 	const QString ViewSquare::COLOR_PLAYABLE = "background-color: #9AB0E4";
 
-	void ViewSquare::connectToPiece() {
-		if (model->getPiece() != nullptr) {
-			connect(this->getModel(), &logic::ModelSquare::updatePieceSignal, this, &ViewSquare::updatePiece);
-		}
-	}
-	
-	void ViewSquare::disconnectFromPiece() {
-		if (model->getPiece() != nullptr) {
-			disconnect(this->getModel(), &logic::ModelSquare::updatePieceSignal, this, &ViewSquare::updatePiece);
-		}
-	}
+	//void ViewSquare::connectToPiece() {
+	//	if (model->getPiece() != nullptr) {
+	//		connect(this->getModel(), &logic::ModelSquare::updatePieceSignal, this, &ViewSquare::updatePiece);
+	//	}
+	//}
+	//
+	//void ViewSquare::disconnectFromPiece() {
+	//	if (model->getPiece() != nullptr) {
+	//		disconnect(this->getModel(), &logic::ModelSquare::updatePieceSignal, this, &ViewSquare::updatePiece);
+	//	}
+	//}
 
 	void ViewSquare::updatePlayable() {
 		if (model->isPlayable()) {
@@ -48,7 +48,8 @@ namespace view {
 	}
 
 	void ViewSquare::setImage(QPixmap pixmap) {
-		setPixmap(pixmap.scaled(50, 50, Qt::KeepAspectRatio, Qt::SmoothTransformation));
+		if (!pixmap.isNull()) setPixmap(pixmap.scaled(50, 50, Qt::KeepAspectRatio, Qt::SmoothTransformation));
+		else setPixmap(QPixmap());
 	}
 
 	ViewSquare::ViewSquare(logic::ModelSquare* model, QWidget* parent)

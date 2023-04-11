@@ -120,6 +120,7 @@
     <ClCompile Include="ModelChecker.cpp" />
     <ClCompile Include="ModelFouPiece.cpp" />
     <ClCompile Include="ModelPiece.cpp" />
+    <ClCompile Include="ModelPionPiece.cpp" />
     <ClCompile Include="ModelReinePiece.cpp" />
     <ClCompile Include="ModelRoiPiece.cpp" />
     <ClCompile Include="ModelSquare.cpp" />
@@ -132,6 +133,7 @@
   <ItemGroup>
     <ClInclude Include="ControllerChecker.h" />
     <ClInclude Include="ControllerSquare.h" />
+    <ClInclude Include="ModelPionPiece.h" />
     <ClInclude Include="ModelRoiPiece.h" />
     <QtMoc Include="ModelChecker.h" />
     <ClInclude Include="ModelFouPiece.h" />

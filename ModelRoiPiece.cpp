@@ -5,6 +5,7 @@
 namespace logic {
 	const std::string ModelRoiPiece::whiteImagePath = "images/white/roi_white.png";
 	const std::string ModelRoiPiece::blackImagePath = "images/black/roi_black.png";
+	//int counter = 0;
 
 	std::vector<ModelSquare*> ModelRoiPiece::getValidMoves(ModelChecker* checker)
 	{
@@ -92,5 +93,9 @@ namespace logic {
 			}
 		}
 		return validMoves;
+	}
+
+	ModelRoiPiece::ModelRoiPiece(bool isWhite) : ModelPiece(isWhite, whiteImagePath, blackImagePath) {
+		//++counter;
 	}
 }

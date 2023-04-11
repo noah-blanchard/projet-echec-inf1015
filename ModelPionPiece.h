@@ -1,21 +1,19 @@
 #pragma once
-#include <string>
 #include "ModelPiece.h"
 
 namespace logic {
-	//static int counter;
-
-	class ModelRoiPiece : public ModelPiece
+	class ModelPionPiece : public ModelPiece
 	{
 	public:
-		ModelRoiPiece() = default;
-		ModelRoiPiece(bool isWhite);
-		//~ModelRoiPiece();
-		
+		ModelPionPiece() = default;
+		ModelPionPiece(bool isWhite);
+		//~ModelPionPiece();
+
 		//get valid moves
 		std::vector<ModelSquare*> getValidMoves(ModelChecker* checker) override;
-
+	
 	private:
+		bool firstMove = true;
 		static const std::string whiteImagePath;
 		static const std::string blackImagePath;
 	};
