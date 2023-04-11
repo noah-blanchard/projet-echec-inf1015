@@ -7,6 +7,10 @@ namespace logic {
 	const std::string ModelRoiPiece::blackImagePath = "images/black/roi_black.png";
 	//int counter = 0;
 
+	bool ModelRoiPiece::isKing() {
+		return true;
+	}
+
 	std::vector<ModelSquare*> ModelRoiPiece::getValidMoves(ModelChecker* checker)
 	{
 		std::vector<ModelSquare*> validMoves;

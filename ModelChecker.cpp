@@ -43,12 +43,21 @@ namespace logic {
 		square->setPiece(nullptr );
 
 		for (int i = 0; i < 8; ++i) {
-			for (int j = 0; j < 8; ++i) {
-
+			for (int j = 0; j < 8; ++j) {
+				
+				if (squares[i][j]->getPiece() != nullptr && squares[i][j]->getPiece()->isWhite() != validMove->getPiece()->isWhite()) {
+					std::vector<ModelSquare*> validMoves = squares[i][j]->getPiece()->getValidMoves(this);
+					if (std::find(validMoves.begin(), validMoves.end(), kingPosition) != validMoves.end()) {
+						square->setPiece(validMove->getPiece());
+						validMove->setPiece(nullptr);
+						return false;
+					}
+				}
 			}
 		}
-
-		
+		square->setPiece(validMove->getPiece());
+		validMove->setPiece(nullptr);
+		return true;		
 	}
 	
 	ModelSquare* ModelChecker::getSelectedSquare() const

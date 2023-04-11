@@ -15,9 +15,17 @@ namespace logic {
 	{
 		
 		//checker->getSelectedSquare()->getPiece()->move(clickedSquare);
-		clickedSquare->setPiece(checker->getSelectedSquare()->getPiece());
-		checker->getSelectedSquare()->setPiece(nullptr);
-		checker->setSelectedSquare(nullptr);
-		checker->resetPlayableSquares();
+		if (checker->validateMove(checker->getSelectedSquare(), clickedSquare)) {
+			clickedSquare->setPiece(checker->getSelectedSquare()->getPiece());
+			checker->getSelectedSquare()->setPiece(nullptr);
+			
+			if (clickedSquare->getPiece()->isKing() && clickedSquare->getPiece()->isWhite())
+				checker->setWhiteKingSquare(clickedSquare);
+			else if (clickedSquare->getPiece()->isKing() && !clickedSquare->getPiece()->isWhite())
+				checker->setBlackKingSquare(clickedSquare);
+
+			checker->setSelectedSquare(nullptr);
+			checker->resetPlayableSquares();
+		}
 	}
 }

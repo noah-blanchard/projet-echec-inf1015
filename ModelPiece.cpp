@@ -8,6 +8,10 @@ namespace logic {
 		return white;
 	}
 
+	bool ModelPiece::isKing() {
+		return false;
+	}
+
 	/*void ModelPiece::move(ModelSquare* square) {
 		square->setPiece(this);
 		emit movedSignal();

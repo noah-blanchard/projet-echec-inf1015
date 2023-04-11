@@ -20,11 +20,11 @@ namespace logic {
 		void setWhiteKingSquare(ModelSquare* square);
 		void setBlackKingSquare(ModelSquare* square);
 	private:
-		bool validateMove(ModelSquare* square, ModelSquare* validMove);
+		ModelSquare* whiteKingSquare;
+		ModelSquare* blackKingSquare;
 		ModelSquare* squares[8][8];
 		ModelSquare* selectedSquare = nullptr;
-		static ModelSquare* whiteKingSquare;
-		static ModelSquare* blackKingSquare;
+	
 	};
 }
 

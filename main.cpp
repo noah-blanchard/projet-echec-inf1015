@@ -52,7 +52,9 @@ int main(int argc, char *argv[])
 	model.getSquareAtPosition(7, 5)->setPiece(new logic::ModelFouPiece(true));*/
 
 	model.getSquareAtPosition(0, 3)->setPiece(new logic::ModelRoiPiece(false));
+	model.setBlackKingSquare(model.getSquareAtPosition(0, 3));
 	model.getSquareAtPosition(5, 0)->setPiece(new logic::ModelRoiPiece(true));
+	model.setWhiteKingSquare(model.getSquareAtPosition(5, 0));
 	model.getSquareAtPosition(5, 6)->setPiece(new logic::ModelPionPiece(false, false));
 	model.getSquareAtPosition(6, 0)->setPiece(new logic::ModelFouPiece(true));
 	model.getSquareAtPosition(6, 2)->setPiece(new logic::ModelFouPiece(false));
