@@ -23,6 +23,7 @@ namespace logic {
 		ModelSquare* whiteKingSquare;
 		ModelSquare* blackKingSquare;
 		ModelSquare* squares[8][8];
+		//std::unique_ptr < std::shared_ptr<ModelSquare*>> squares;
 		ModelSquare* selectedSquare = nullptr;
 
 	signals:

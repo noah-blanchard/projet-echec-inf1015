@@ -10,9 +10,7 @@ namespace view {
 	public:
 		ViewSquare(logic::ModelSquare* model, QWidget* parent = nullptr);
 		~ViewSquare() override;
-
-		void connectToPiece();
-		void disconnectFromPiece();
+		
 		void setImage(QPixmap image);
 
 		logic::ModelSquare* getModel() const { return model; }

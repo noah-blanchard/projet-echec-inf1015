@@ -7,11 +7,14 @@ namespace logic {
 		emit playableSignal();
 	}
 
-	void ModelSquare::setPiece(ModelPiece* piece) { 
+	void ModelSquare::setPiece(std::shared_ptr<ModelPiece> piece) { 
 		this->piece = piece;
 		if (piece != nullptr) {
 			piece->setCurrentSquare(this);
 		}
 		emit updatePieceSignal();
+	}
+
+	ModelSquare::~ModelSquare() {
 	}
 }

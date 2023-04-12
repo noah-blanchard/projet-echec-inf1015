@@ -86,6 +86,13 @@ namespace logic {
 
 	ModelChecker::~ModelChecker()
 	{
+		for (int i = 0; i < 8; i++) {
+			for (int j = 0; j < 8; j++) {
+				delete squares[i][j];
+			}
+		}
+		//delete whiteKingSquare;
+		//delete blackKingSquare;
 	}
 
 }

@@ -26,4 +26,9 @@ namespace logic {
 		white = isWhite;
 		imagePath = isWhite ? whitePath : blackPath;
 	}
+
+	ModelPiece::~ModelPiece()
+	{
+		//delete currentSquare;
+	}
 }

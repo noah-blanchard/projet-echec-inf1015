@@ -12,7 +12,7 @@ namespace logic {
 	public:
 		ModelPiece() = default;
 		ModelPiece(bool isWhite, std::string whitePath, std::string blackPath);
-		//~ModelPiece();
+		~ModelPiece();
 
 		bool isWhite();
 		virtual std::vector<class ModelSquare*> getValidMoves(class ModelChecker* checker, bool validate) = 0;

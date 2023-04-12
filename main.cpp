@@ -52,15 +52,23 @@ int main(int argc, char *argv[])
 	model.getSquareAtPosition(7, 3)->setPiece(new logic::ModelRoiPiece(true));
 	model.getSquareAtPosition(7, 5)->setPiece(new logic::ModelFouPiece(true));*/
 
-	model.getSquareAtPosition(0, 3)->setPiece(new logic::ModelRoiPiece(false));
+	// créer les objets en utilisant std::make_shared
+	auto roiNoir = std::make_shared<logic::ModelRoiPiece>(false);
+	auto roiBlanc = std::make_shared<logic::ModelRoiPiece>(true);
+	auto fouBlanc = std::make_shared<logic::ModelFouPiece>(true);
+	auto fouNoir = std::make_shared<logic::ModelFouPiece>(false);
+	auto cavalierBlanc = std::make_shared<logic::ModelCavalierPiece>(true);
+	auto pionNoir = std::make_shared<logic::ModelPionPiece>(false, false);
+
+	// utiliser les shared_ptr pour initialiser les cases
+	model.getSquareAtPosition(0, 3)->setPiece(roiNoir);
 	model.setBlackKingSquare(model.getSquareAtPosition(0, 3));
-	model.getSquareAtPosition(5, 0)->setPiece(new logic::ModelRoiPiece(true));
+	model.getSquareAtPosition(5, 0)->setPiece(roiBlanc);
 	model.setWhiteKingSquare(model.getSquareAtPosition(5, 0));
-	model.getSquareAtPosition(5, 6)->setPiece(new logic::ModelPionPiece(false, false));
-	model.getSquareAtPosition(6, 0)->setPiece(new logic::ModelFouPiece(true));
-	model.getSquareAtPosition(6, 2)->setPiece(new logic::ModelFouPiece(false));
-	model.getSquareAtPosition(0, 0)->setPiece(new logic::ModelCavalierPiece(true));
-	
+	model.getSquareAtPosition(5, 6)->setPiece(pionNoir);
+	model.getSquareAtPosition(6, 0)->setPiece(fouBlanc);
+	model.getSquareAtPosition(6, 2)->setPiece(fouNoir);
+	model.getSquareAtPosition(0, 0)->setPiece(cavalierBlanc);
 	view::ViewChecker view(&model);
 
 	view.show();
