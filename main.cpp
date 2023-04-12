@@ -21,6 +21,7 @@ auto& cdbg = clog;
 #include "ModelReinePiece.h"
 #include "ModelRoiPiece.h"
 #include "ModelPionPiece.h"
+#include "ModelCavalierPiece.h"
 
 void initialiserBibliothequeCours([[maybe_unused]] int argc, [[maybe_unused]] char* argv[])
 {
@@ -58,6 +59,7 @@ int main(int argc, char *argv[])
 	model.getSquareAtPosition(5, 6)->setPiece(new logic::ModelPionPiece(false, false));
 	model.getSquareAtPosition(6, 0)->setPiece(new logic::ModelFouPiece(true));
 	model.getSquareAtPosition(6, 2)->setPiece(new logic::ModelFouPiece(false));
+	model.getSquareAtPosition(0, 0)->setPiece(new logic::ModelCavalierPiece(true));
 	
 	view::ViewChecker view(&model);
 

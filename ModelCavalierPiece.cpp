@@ -1,5 +1,6 @@
 #include "ModelCavalierPiece.h"
 #include "ModelChecker.h"
+#include <utility>
 
 namespace logic {
 	const std::string ModelCavalierPiece::whiteImagePath = "images/white/cavalier_white.png";
@@ -10,68 +11,27 @@ namespace logic {
 		std::vector<ModelSquare*> validMoves;
 		int x = currentSquare->getX();
 		int y = currentSquare->getY();
+		const int DESK_LENGHT = 8;
 
-		if (x - 1 >= 0 && y - 2 >= 0) {
-			if (checker->getSquareAtPosition(x - 1, y - 2)->getPiece() == nullptr || checker->getSquareAtPosition(x - 1, y - 2)->getPiece()->isWhite() != this->isWhite()) { // if the square is empty
-				validMoves.push_back(checker->getSquareAtPosition(x - 1, y - 2)); // add it to the list of valid moves
+		int possibleMoves[][2] = {{-1, -2}, {1, -2}, {2, -1}, {2, 1}, {1, 2}, {-1, 2}, {-2, 1}, {-2, -1}};
+		const int nPossibleMoves = 8;
+
+		auto isMoveValid = [&checker, this](int posX, int posY) {
+			return (posX >= 0 && posX < DESK_LENGHT && posY >= 0 && posY < DESK_LENGHT) && 
+				(checker->getSquareAtPosition(posX, posY)->getPiece() == nullptr || 
+					checker->getSquareAtPosition(posX, posY)->getPiece()->isWhite() != this->isWhite());
+		};
+
+		for (int i = 0; i < nPossibleMoves; ++i) {
+
+			int newX = x + possibleMoves[i][0];
+			int newY = y + possibleMoves[i][1];
+
+			if (isMoveValid(newX, newY)) {
+				validMoves.push_back(checker->getSquareAtPosition(newX, newY));
 			}
 		}
-		if (x + 1 < 8 && y - 2 >= 0) {
-			if (checker->getSquareAtPosition(x + 1, y - 2)->getPiece() == nullptr) {
-				validMoves.push_back(checker->getSquareAtPosition(x + 1, y - 2));
-			}
-			else if (checker->getSquareAtPosition(x + 1, y - 2)->getPiece()->isWhite() != this->isWhite()) {
-					validMoves.push_back(checker->getSquareAtPosition(x + 1, y - 2));
-			}
-		}
-		if (x + 2 < 8 && y - 1 >= 0) {
-			if (checker->getSquareAtPosition(x + 2, y - 1)->getPiece() == nullptr) {
-				validMoves.push_back(checker->getSquareAtPosition(x + 2, y - 1));
-			}
-			else if (checker->getSquareAtPosition(x + 2, y - 1)->getPiece()->isWhite() != this->isWhite()) {
-					validMoves.push_back(checker->getSquareAtPosition(x + 2, y - 1));
-			}
-		}
-		if (x + 2 < 8 && y + 1 < 8) {
-			if (checker->getSquareAtPosition(x + 2, y + 1)->getPiece() == nullptr) {
-				validMoves.push_back(checker->getSquareAtPosition(x + 2, y + 1));
-			}
-			else if (checker->getSquareAtPosition(x + 2, y + 1)->getPiece()->isWhite() != this->isWhite()) {
-					validMoves.push_back(checker->getSquareAtPosition(x + 2, y + 1));
-			}
-		}
-		if (x + 1 < 8 && y + 2 < 8) {
-			if (checker->getSquareAtPosition(x + 1, y + 2)->getPiece() == nullptr) {
-				validMoves.push_back(checker->getSquareAtPosition(x + 1, y + 2));
-			}
-			else if (checker->getSquareAtPosition(x + 1, y + 2)->getPiece()->isWhite() != this->isWhite()) {
-					validMoves.push_back(checker->getSquareAtPosition(x + 1, y + 2));
-			}
-		}
-		if (x - 1 >= 0 && y + 2 < 8) {
-			if (checker->getSquareAtPosition(x - 1, y + 2)->getPiece() == nullptr) {
-				validMoves.push_back(checker->getSquareAtPosition(x - 1, y + 2));
-			}
-			else if (checker->getSquareAtPosition(x - 1, y + 2)->getPiece()->isWhite() != this->isWhite()) {
-					validMoves.push_back(checker->getSquareAtPosition(x - 1, y + 2));
-			}
-		}
-		if (x - 2 >= 0 && y + 1 < 8) {
-			if (checker->getSquareAtPosition(x - 2, y + 1)->getPiece() == nullptr) {
-				validMoves.push_back(checker->getSquareAtPosition(x - 2, y + 1));
-			}
-			else if (checker->getSquareAtPosition(x - 2, y + 1)->getPiece()->isWhite() != this->isWhite()) {
-					validMoves.push_back(checker->getSquareAtPosition(x - 2, y + 1));
-			}
-		}
-		if (x - 2 >= 0 && y - 1 >= 0) {
-			if (checker->getSquareAtPosition(x - 2, y - 1)->getPiece() == nullptr) {
-				validMoves.push_back(checker->getSquareAtPosition(x - 2, y - 1));
-			}
-			else if (checker->getSquareAtPosition(x - 2, y - 1)->getPiece()->isWhite() != this->isWhite()) {
-					validMoves.push_back(checker->getSquareAtPosition(x - 2, y - 1));
-			}
-		}
+
 		return validMoves;
 	}
 
