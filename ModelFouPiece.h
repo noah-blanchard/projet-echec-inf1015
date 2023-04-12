@@ -12,7 +12,7 @@ namespace logic {
 		//~ModelFouPiece();
 		
 		//get valid moves
-		std::vector<ModelSquare*> getValidMoves(ModelChecker* checker) override;
+		std::vector<ModelSquare*> getValidMoves(ModelChecker* checker, bool validate) override;
 	private:
 		static const std::string whiteImagePath;
 		static const std::string blackImagePath;

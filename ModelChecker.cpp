@@ -46,11 +46,11 @@ namespace logic {
 			for (int j = 0; j < 8; ++j) {
 				
 				if (squares[i][j]->getPiece() != nullptr && squares[i][j]->getPiece()->isWhite() != validMove->getPiece()->isWhite()) {
-					std::vector<ModelSquare*> validMoves = squares[i][j]->getPiece()->getValidMoves(this);
+					std::vector<ModelSquare*> validMoves = squares[i][j]->getPiece()->getValidMoves(this, false);
 					if (std::find(validMoves.begin(), validMoves.end(), kingPosition) != validMoves.end()) {
 						square->setPiece(validMove->getPiece());
 						validMove->setPiece(nullptr);
-						emit unallowedMoveSignal();
+						//emit unallowedMoveSignal();
 						return false;
 					}
 				}

@@ -5,7 +5,7 @@ namespace logic {
 	const std::string ModelCavalierPiece::whiteImagePath = "images/white/cavalier_white.png";
 	const std::string ModelCavalierPiece::blackImagePath = "images/black/cavalier_black.png";
 
-	std::vector<ModelSquare*> ModelCavalierPiece::getValidMoves(ModelChecker* checker)
+	std::vector<ModelSquare*> ModelCavalierPiece::getValidMoves(ModelChecker* checker, bool validate)
 	{
 		std::vector<ModelSquare*> validMoves;
 		int x = currentSquare->getX();

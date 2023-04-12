@@ -8,7 +8,7 @@ namespace logic {
         ModelCavalierPiece() = default;
         ModelCavalierPiece(bool isWhite);
 
-        std::vector<ModelSquare*> getValidMoves(ModelChecker* checker) override;
+        std::vector<ModelSquare*> getValidMoves(ModelChecker* checker, bool validate) override;
 
     private:
         static const std::string whiteImagePath;
