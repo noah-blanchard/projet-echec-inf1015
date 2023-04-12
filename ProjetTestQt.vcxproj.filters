@@ -72,7 +72,7 @@
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <QtMoc Include="ViewChecker.h">
+    <QtMoc Include="ViewSquare.h">
       <Filter>Header Files</Filter>
     </QtMoc>
     <QtMoc Include="ModelSquare.h">
@@ -84,7 +84,7 @@
     <QtMoc Include="ModelChecker.h">
       <Filter>Header Files</Filter>
     </QtMoc>
-    <QtMoc Include="ViewSquare.h">
+    <QtMoc Include="ViewChecker.h">
       <Filter>Header Files</Filter>
     </QtMoc>
   </ItemGroup>
