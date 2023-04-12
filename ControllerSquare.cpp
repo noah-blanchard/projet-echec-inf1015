@@ -15,7 +15,7 @@ namespace logic {
 	{
 		
 		//checker->getSelectedSquare()->getPiece()->move(clickedSquare);
-		if (true/*checker->validateMove(checker->getSelectedSquare(), clickedSquare*/) {
+		//if (true/*checker->validateMove(checker->getSelectedSquare(), clickedSquare*/) {
 			clickedSquare->setPiece(checker->getSelectedSquare()->getPiece());
 			checker->getSelectedSquare()->setPiece(nullptr);
 			
@@ -26,6 +26,6 @@ namespace logic {
 
 			checker->setSelectedSquare(nullptr);
 			checker->resetPlayableSquares();
-		}
+		//}
 	}
 }

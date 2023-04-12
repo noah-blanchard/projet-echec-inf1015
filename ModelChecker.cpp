@@ -29,6 +29,8 @@ namespace logic {
 	
 	bool ModelChecker::validateMove(ModelSquare* square, ModelSquare* validMove) {
 		ModelSquare* kingPosition = nullptr;
+		ModelSquare* tempSquare = new ModelSquare();
+		tempSquare->setPiece(validMove->getPiece());
 		validMove->setPiece(square->getPiece());
 		if (square == whiteKingSquare || square == blackKingSquare) {
 			kingPosition = validMove;
@@ -49,7 +51,7 @@ namespace logic {
 					std::vector<ModelSquare*> validMoves = squares[i][j]->getPiece()->getValidMoves(this, false);
 					if (std::find(validMoves.begin(), validMoves.end(), kingPosition) != validMoves.end()) {
 						square->setPiece(validMove->getPiece());
-						validMove->setPiece(nullptr);
+						validMove->setPiece(tempSquare->getPiece());
 						//emit unallowedMoveSignal();
 						return false;
 					}
@@ -57,7 +59,8 @@ namespace logic {
 			}
 		}
 		square->setPiece(validMove->getPiece());
-		validMove->setPiece(nullptr);
+		validMove->setPiece(tempSquare->getPiece());
+		delete tempSquare;
 		return true;		
 	}
 	

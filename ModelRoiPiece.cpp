@@ -102,33 +102,28 @@ namespace logic {
 	std::vector<ModelSquare*> ModelRoiPiece::getValidMoves(ModelChecker* checker, bool validate)
 	{
 		std::vector<ModelSquare*> validMoves;
-		int x = currentSquare->getX();
-		int y = currentSquare->getY();
+		int posX = currentSquare->getX();
+		int posY = currentSquare->getY();
 
-		// Check all possible squares around the current square
-		for (int i = -1; i <= 1; i++) {
-			for (int j = -1; j <= 1; j++) {
-				if (i == 0 && j == 0) {
-					// Ignore the current square
-					continue;
-				}
-				int newX = x + i;
-				int newY = y + j;
-				if (newX < 0 || newX > 7 || newY < 0 || newY > 7) {
-					// Ignore squares outside the board
-					continue;
-				}
-				ModelSquare* square = checker->getSquareAtPosition(newX, newY);
-				ModelPiece* piece = square->getPiece();
-				if (piece == nullptr || piece->isWhite() != this->isWhite()) {
-					// The square is empty or contains an opponent's piece
-					// Check if the move is valid
-					if (!validate || checker->validateMove(currentSquare, square)) {
-						validMoves.push_back(square);
-					}
-				}
+		int possibleMoves[][2] = { {1, 1}, {-1, -1}, {1, -1}, {-1, 1}, {1, 0}, {-1, 0}, {0, 1}, {0, -1} };
+
+		auto isMoveValid = [&checker, this](int posX, int posY) {
+			return (posX >= 0 && posX < 8 && posY >= 0 && posY < 8) && // check if the move is on the board
+				(checker->getSquareAtPosition(posX, posY)->getPiece() == nullptr || // check if the move is on an empty square
+					checker->getSquareAtPosition(posX, posY)->getPiece()->isWhite() != this->isWhite()); // check if the move is on an enemy piece
+		};
+
+		for (int i = 0; i < 8; ++i)
+		{
+			int newX = posX + possibleMoves[i][0];
+			int newY = posY + possibleMoves[i][1];
+			ModelSquare* square = checker->getSquareAtPosition(newX, newY);
+
+			if (isMoveValid(newX, newY) && (!validate || checker->validateMove(currentSquare, square))){
+				validMoves.push_back(checker->getSquareAtPosition(newX, newY));
 			}
 		}
+
 		return validMoves;
 	}
 

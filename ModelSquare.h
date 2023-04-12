@@ -7,6 +7,7 @@ namespace logic {
 	{
 		Q_OBJECT
 	public:
+		ModelSquare() : light(false), x(-1), y(-1) {}
 		ModelSquare(bool isLight, int x, int y) : light(isLight), x(x), y(y) {}
 		//ModelSquare(bool isLight, int x, int y, ModelPiece* piece) : light(isLight), x(x), y(y), piece(piece) {}
 		//~ModelSquare();
