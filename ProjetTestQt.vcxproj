@@ -115,6 +115,7 @@
     <ClCompile Include="bibliotheque_cours\verification_allocation.cpp" />
     <ClCompile Include="ControllerChecker.cpp" />
     <ClCompile Include="ControllerSquare.cpp" />
+    <ClCompile Include="GameManager.cpp" />
     <ClCompile Include="googletest\src\gtest-all.cc" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="ModelCavalierPiece.cpp" />
@@ -134,6 +135,7 @@
   <ItemGroup>
     <ClInclude Include="ControllerChecker.h" />
     <ClInclude Include="ControllerSquare.h" />
+    <ClInclude Include="GameManager.h" />
     <ClInclude Include="ModelCavalierPiece.h" />
     <ClInclude Include="ModelPionPiece.h" />
     <ClInclude Include="ModelRoiPiece.h" />

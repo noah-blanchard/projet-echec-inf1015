@@ -1,6 +1,7 @@
 #pragma once
 #include "ViewChecker.h"
 #include <QMessageBox>
+#include "GameManager.h"
 
 namespace view {
 	ViewChecker::ViewChecker(logic::ModelChecker* model, QWidget* parent) {
@@ -24,13 +25,23 @@ namespace view {
 	void ViewChecker::unallowedMoveNotification() {
 		QMessageBox::warning(this, "Unallowed move", "You can't move there");
 	}
+
+	void ViewChecker::unallowedPieceNotification() {
+		std::string color = logic::GameManager::isWhiteTurn() ? "white" : "black";
+		std::string message = "It is " + color + "'s turn";
+
+		QMessageBox::warning(this, "Unallowed piece", message.c_str());
+	}
 	
 	void ViewChecker::squareClickPiece() {
 		model->resetPlayableSquares();
 		ViewSquare* clickedSquare = qobject_cast<ViewSquare*>(sender());
-		if (clickedSquare->getModel()->getPiece() != nullptr) {
+		if (clickedSquare->getModel()->getPiece() != nullptr && clickedSquare->getModel()->getPiece()->isWhite() == logic::GameManager::isWhiteTurn()) {
 			selectedViewSquare = clickedSquare;
 			logic::ControllerSquare::clickSquareControl(clickedSquare->getModel(), model);
+		}
+		else {
+			unallowedPieceNotification();
 		}
 	}
 
@@ -40,6 +51,7 @@ namespace view {
 			//selectedViewSquare->disconnectFromPiece();
 			//model->setSelectedSquare(clickedSquare->getModel());			
 			logic::ControllerSquare::clickSquareMove(clickedSquare->getModel(), model);
+			logic::GameManager::nextTurn();
 		}
 	}
 }

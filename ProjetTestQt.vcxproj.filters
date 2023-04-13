@@ -64,14 +64,14 @@
     <ClCompile Include="ModelRoiPiece.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="ModelPionPiece.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="ModelCavalierPiece.cpp">
+    <ClCompile Include="GameManager.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
+    <QtMoc Include="ViewChecker.h">
+      <Filter>Header Files</Filter>
+    </QtMoc>
     <QtMoc Include="ViewSquare.h">
       <Filter>Header Files</Filter>
     </QtMoc>
@@ -82,9 +82,6 @@
       <Filter>Header Files</Filter>
     </QtMoc>
     <QtMoc Include="ModelChecker.h">
-      <Filter>Header Files</Filter>
-    </QtMoc>
-    <QtMoc Include="ViewChecker.h">
       <Filter>Header Files</Filter>
     </QtMoc>
   </ItemGroup>
@@ -104,10 +101,7 @@
     <ClInclude Include="ModelRoiPiece.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="ModelPionPiece.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="ModelCavalierPiece.h">
+    <ClInclude Include="GameManager.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

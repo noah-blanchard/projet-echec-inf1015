@@ -14,14 +14,7 @@ auto& cdbg = clog;
 #include "debogage_memoire.hpp"  //NOTE: Incompatible avec le "placement new", ne pas utiliser cette entête si vous utilisez ce type de "new" dans les lignes qui suivent cette inclusion.
 #endif
 
-#include "ViewChecker.h"
-//#include "ModelChecker.h"
-//#include "ModelRoiPiece.h"
-#include "ModelFouPiece.h"
-#include "ModelReinePiece.h"
-#include "ModelRoiPiece.h"
-#include "ModelPionPiece.h"
-#include "ModelCavalierPiece.h"
+#include "GameManager.h"
 
 void initialiserBibliothequeCours([[maybe_unused]] int argc, [[maybe_unused]] char* argv[])
 {
@@ -41,37 +34,8 @@ int main(int argc, char *argv[])
 	QApplication app(argc, argv);
 	initialiserBibliothequeCours(argc, argv);
 
-	logic::ModelChecker model;
-	/*model.getSquareAtPosition(0, 2)->setPiece(new logic::ModelFouPiece(false));
-	model.getSquareAtPosition(0, 3)->setPiece(new logic::ModelReinePiece(false));
-	model.getSquareAtPosition(0, 4)->setPiece(new logic::ModelRoiPiece(false));
-	model.getSquareAtPosition(0, 5)->setPiece(new logic::ModelFouPiece(false));
-
-	model.getSquareAtPosition(7, 2)->setPiece(new logic::ModelFouPiece(true));
-	model.getSquareAtPosition(7, 4)->setPiece(new logic::ModelReinePiece(true));
-	model.getSquareAtPosition(7, 3)->setPiece(new logic::ModelRoiPiece(true));
-	model.getSquareAtPosition(7, 5)->setPiece(new logic::ModelFouPiece(true));*/
-
-	// créer les objets en utilisant std::make_shared
-	auto roiNoir = std::make_shared<logic::ModelRoiPiece>(false);
-	auto roiBlanc = std::make_shared<logic::ModelRoiPiece>(true);
-	auto fouBlanc = std::make_shared<logic::ModelFouPiece>(true);
-	auto fouNoir = std::make_shared<logic::ModelFouPiece>(false);
-	auto cavalierBlanc = std::make_shared<logic::ModelCavalierPiece>(true);
-	auto pionNoir = std::make_shared<logic::ModelPionPiece>(false, false);
-
-	// utiliser les shared_ptr pour initialiser les cases
-	model.getSquareAtPosition(0, 3)->setPiece(roiNoir);
-	model.setBlackKingSquare(model.getSquareAtPosition(0, 3));
-	model.getSquareAtPosition(5, 0)->setPiece(roiBlanc);
-	model.setWhiteKingSquare(model.getSquareAtPosition(5, 0));
-	model.getSquareAtPosition(5, 6)->setPiece(pionNoir);
-	model.getSquareAtPosition(6, 0)->setPiece(fouBlanc);
-	model.getSquareAtPosition(6, 2)->setPiece(fouNoir);
-	model.getSquareAtPosition(0, 0)->setPiece(cavalierBlanc);
-	view::ViewChecker view(&model);
-
-	view.show();
+	logic::GameManager::startEndgame1();
+	
 	
 
 	return app.exec();
