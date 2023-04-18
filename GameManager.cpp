@@ -57,7 +57,37 @@ namespace logic {
         showChecker();
     }
 
+    void GameManager::testKingMax() {
+       try {
+           checkerModel = std::make_unique<logic::ModelChecker>();
+            checkerView = std::make_unique<view::ViewChecker>(checkerModel.get());
+            showChecker();
+			auto king1 = std::make_shared<ModelRoiPiece>(true);
+            checkerModel->getSquareAtPosition(0, 0)->setPiece(king1);
+			checkerView->showInfo("King 1 created");
+			auto king2 = std::make_shared<ModelRoiPiece>(false);
+            checkerModel->getSquareAtPosition(0, 1)->setPiece(king2);
+			checkerView->showInfo("King 2 created");
+			auto king3 = std::make_shared<ModelRoiPiece>(true);
+		}
+        catch (std::exception& e) {
+            checkerView->showError(e.what());
+        }
+    }
+
+    void GameManager::reset() {
+        ModelRoiPiece::resetInstanceCounter();;
+        closeChecker();
+        checkerModel = nullptr;
+        checkerView = nullptr;
+    }
+
     void GameManager::showChecker() {
         checkerView->show();
     }
+
+    void GameManager::closeChecker() {
+		checkerView->close();
+    }
+
 }

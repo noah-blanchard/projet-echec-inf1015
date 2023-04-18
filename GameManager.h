@@ -13,9 +13,13 @@ namespace logic {
 		// game objects
 		static std::unique_ptr<ModelChecker> checker;
 
+		static void deletePieceAtPosition(int x, int y);
 		static void startDefaultGame();
 		static void startEndgame1();
 		static void showChecker();
+		static void closeChecker();
+		static void testKingMax();
+		static void reset();
 	private:
 		static bool whiteTurn;
 		static bool blackTurn;

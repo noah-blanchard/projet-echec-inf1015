@@ -10,6 +10,7 @@ namespace logic {
 	void ModelSquare::setPiece(std::shared_ptr<ModelPiece> piece) { 
 		this->piece = piece;
 		if (piece != nullptr) {
+			piece->setCurrentSquare(nullptr);
 			piece->setCurrentSquare(this);
 		}
 		emit updatePieceSignal();

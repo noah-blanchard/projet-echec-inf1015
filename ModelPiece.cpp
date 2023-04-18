@@ -29,6 +29,6 @@ namespace logic {
 
 	ModelPiece::~ModelPiece()
 	{
-		//delete currentSquare;
+		this->setCurrentSquare(nullptr);
 	}
 }

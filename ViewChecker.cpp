@@ -54,4 +54,12 @@ namespace view {
 			logic::GameManager::nextTurn();
 		}
 	}
+
+	void ViewChecker::showInfo(std::string message) {
+		QMessageBox::information(this, "Info", message.c_str());
+	}
+
+	void ViewChecker::showError(std::string message) {
+		QMessageBox::critical(this, "Error", message.c_str());
+	}
 }

@@ -5,8 +5,12 @@
 namespace logic {
 	const std::string ModelRoiPiece::whiteImagePath = "images/white/roi_white.png";
 	const std::string ModelRoiPiece::blackImagePath = "images/black/roi_black.png";
-	//int counter = 0;
+	int ModelRoiPiece::instanceCounter = 0;
 
+	void ModelRoiPiece::resetInstanceCounter() {
+		instanceCounter = 0;
+	}
+	
 	bool ModelRoiPiece::isKing() {
 		return true;
 	}
@@ -129,6 +133,14 @@ namespace logic {
 
 	
 	ModelRoiPiece::ModelRoiPiece(bool isWhite) : ModelPiece(isWhite, whiteImagePath, blackImagePath) {
-		//++counter;
+		if (instanceCounter < 2) {
+			instanceCounter++;
+		}
+		else {
+			///delete this;
+			throw std::exception("Only 2 instances of ModelRoiPiece can be created");
+		}
 	}
+
+	ModelRoiPiece::ModelRoiPiece() : ModelRoiPiece(false) {}
 }

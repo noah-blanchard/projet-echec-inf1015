@@ -8,9 +8,10 @@ namespace logic {
 	class ModelRoiPiece : public ModelPiece
 	{
 	public:
-		ModelRoiPiece() = default;
 		ModelRoiPiece(bool isWhite);
+		ModelRoiPiece();
 		//~ModelRoiPiece();
+		static void resetInstanceCounter();
 		bool isKing() override;
 		//get valid moves
 		std::vector<ModelSquare*> getValidMoves(ModelChecker* checker, bool validate) override;
@@ -18,6 +19,7 @@ namespace logic {
 	private:
 		static const std::string whiteImagePath;
 		static const std::string blackImagePath;
+		static int instanceCounter;
 	};
 }
 
