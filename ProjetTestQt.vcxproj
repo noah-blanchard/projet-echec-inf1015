@@ -118,33 +118,35 @@
     <ClCompile Include="GameManager.cpp" />
     <ClCompile Include="googletest\src\gtest-all.cc" />
     <ClCompile Include="main.cpp" />
-    <ClCompile Include="ModelCavalierPiece.cpp" />
+    <ClCompile Include="ModelKnighPiece.cpp" />
     <ClCompile Include="ModelChecker.cpp" />
-    <ClCompile Include="ModelFouPiece.cpp" />
+    <ClCompile Include="ModelBishopPiece.cpp" />
     <ClCompile Include="ModelPiece.cpp" />
-    <ClCompile Include="ModelPionPiece.cpp" />
-    <ClCompile Include="ModelReinePiece.cpp" />
-    <ClCompile Include="ModelRoiPiece.cpp" />
+    <ClCompile Include="ModelPawnPiece.cpp" />
+    <ClCompile Include="ModelQueenPiece.cpp" />
+    <ClCompile Include="ModelKingPiece.cpp" />
     <ClCompile Include="ModelSquare.cpp" />
+    <ClCompile Include="TempModelSquare.cpp" />
     <ClCompile Include="ViewChecker.cpp" />
     <ClCompile Include="ViewSquare.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <QtMoc Include="ViewChecker.h" />
+    <QtMoc Include="ViewCheckerMainWindow.h" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ControllerChecker.h" />
     <ClInclude Include="ControllerSquare.h" />
     <ClInclude Include="GameManager.h" />
-    <ClInclude Include="ModelCavalierPiece.h" />
-    <ClInclude Include="ModelPionPiece.h" />
-    <ClInclude Include="ModelRoiPiece.h" />
+    <ClInclude Include="ModelKnightPiece.h" />
+    <ClInclude Include="ModelPawnPiece.h" />
+    <ClInclude Include="ModelKingPiece.h" />
+    <ClInclude Include="TempModelSquare.h" />
     <QtMoc Include="ModelChecker.h" />
-    <ClInclude Include="ModelFouPiece.h" />
+    <ClInclude Include="ModelBishopPiece.h" />
     <QtMoc Include="ModelPiece.h" />
-    <ClInclude Include="ModelReinePiece.h" />
+    <ClInclude Include="ModelQueenPiece.h" />
     <QtMoc Include="ModelSquare.h" />
-    <QtMoc Include="ViewSquare.h" />
+    <QtMoc Include="ViewSquareLabel.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Condition="Exists('$(QtMsBuild)\qt.targets')">

@@ -1,7 +1,14 @@
+/**
+ * @file GameManager.h
+ * @author Noah Blanchard / Bai Wu Li
+ * @brief GameManager class definition
+ * @date 20/04/2023
+ */
+
 #pragma once
 #include <memory>
 #include "ModelChecker.h"
-#include "ViewChecker.h"
+#include "ViewCheckerMainWindow.h"
 
 namespace logic {
 	class GameManager {
@@ -21,18 +28,18 @@ namespace logic {
 		static void testKingMax();
 		static void reset();
 	private:
-		static bool whiteTurn;
-		static bool blackTurn;
-		static bool whiteCheck;
-		static bool blackCheck;
-		static bool whiteCheckMate;
-		static bool blackCheckMate;
+		static bool whiteTurn_;
+		static bool blackTurn_;
+		static bool whiteCheck_;
+		static bool blackCheck_;
+		static bool whiteCheckMate_;
+		static bool blackCheckMate_;
 
 		//models
-		static std::unique_ptr<ModelChecker> checkerModel;
+		static std::unique_ptr<ModelChecker> checkerModel_;
 
 		//views
-		static std::unique_ptr<view::ViewChecker> checkerView;
+		static std::unique_ptr<view::ViewCheckerMainWindow> checkerView_;
 
 	};
 }

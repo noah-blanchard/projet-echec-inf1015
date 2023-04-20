@@ -1,13 +1,20 @@
-#include "ModelPionPiece.h"
+/**
+ * @file ModelPawnPiece.cpp
+ * @author Noah Blanchard / Bai Wu Li
+ * @brief Implementation of the ModelPawnPiece class
+ * @date 20/04/2023
+ */
+
+#include "ModelPawnPiece.h"
 #include "ModelSquare.h"
 #include "ModelChecker.h"
 
 namespace logic {
 	
-	const std::string ModelPionPiece::whiteImagePath = "images/white/pion_white.png";
-	const std::string ModelPionPiece::blackImagePath = "images/black/pion_black.png";
+	const std::string ModelPawnPiece::whiteImagePath_ = "images/white/pion_white.png";
+	const std::string ModelPawnPiece::blackImagePath_ = "images/black/pion_black.png";
 
-	std::vector<ModelSquare*> ModelPionPiece::getValidMoves(ModelChecker* checker, bool validate) {
+	std::vector<ModelSquare*> ModelPawnPiece::getValidMoves(ModelChecker* checker, bool validate) {
 		std::vector<ModelSquare*> validMoves;
 		int x = currentSquare->getX();
 		int y = currentSquare->getY();
@@ -67,5 +74,5 @@ namespace logic {
 			
 	}
 	
-	ModelPionPiece::ModelPionPiece(bool isWhite, bool firstMove) : ModelPiece(isWhite, whiteImagePath, blackImagePath), firstMove(firstMove) {}
+	ModelPawnPiece::ModelPawnPiece(bool isWhite, bool firstMove) : ModelPiece(isWhite, whiteImagePath_, blackImagePath_), firstMove(firstMove) {}
 }

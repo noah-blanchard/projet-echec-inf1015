@@ -1,3 +1,10 @@
+/**
+ * @file ModelPiece.h
+ * @author Noah Blanchard / Bai Wu Li
+ * @brief Model for the Piece
+ * @date 20/04/2023
+ */
+
 #pragma once
 #include <string>
 #include <vector>
@@ -16,7 +23,7 @@ namespace logic {
 
 		bool isWhite();
 		virtual std::vector<class ModelSquare*> getValidMoves(class ModelChecker* checker, bool validate) = 0;
-		std::string getImagePath() const { return imagePath; }
+		std::string getImagePath() const { return imagePath_; }
 		void setCurrentSquare(ModelSquare * square);
 		virtual bool isKing();
 		//void move(ModelSquare* square);
@@ -24,8 +31,8 @@ namespace logic {
 	protected:
 		ModelSquare* currentSquare = nullptr;
 	private:
-		std::string imagePath;
-		bool white;
+		std::string imagePath_;
+		bool white_;
 
 	/*signals:
 		void movedSignal();*/

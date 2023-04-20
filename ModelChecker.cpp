@@ -1,3 +1,10 @@
+/**
+ * @file ModelChecker.cpp
+ * @author Noah Blanchard / Bai Wu Li
+ * @brief Implementation of the ModelChecker class
+ * @date 20/04/2023
+ */
+
 #pragma once
 #include "ModelChecker.h"
 
@@ -5,24 +12,24 @@ namespace logic {
 
 	void ModelChecker::setSelectedSquare(ModelSquare* square)
 	{
-		selectedSquare = square;
+		selectedSquare_ = square;
 	}
 
 	void ModelChecker::setWhiteKingSquare(ModelSquare* square)
 	{
-		whiteKingSquare = square;
+		whiteKingSquare_ = square;
 	}
 	
 	void ModelChecker::setBlackKingSquare(ModelSquare* square)
 	{
-		blackKingSquare = square;
+		blackKingSquare_ = square;
 	}
 
 	void ModelChecker::resetPlayableSquares()
 	{
 		for (int i = 0; i < 8; i++) {
 			for (int j = 0; j < 8; j++) {
-				squares[i][j]->setPlayable(false);
+				squares_[i][j]->setPlayable(false);
 			}
 		}
 	}
@@ -30,27 +37,27 @@ namespace logic {
 	bool ModelChecker::validateMove(ModelSquare* square, ModelSquare* validMove) {
 		bool result = true;
 		ModelSquare* kingPosition = nullptr;
-		ModelSquare* tempSquare = new ModelSquare();
+		TempModelSquare tempSquare;
 		tempSquare->setPiece(validMove->getPiece());
 		validMove->setPiece(square->getPiece());
-		if (square == whiteKingSquare || square == blackKingSquare) {
+		if (square == whiteKingSquare_ || square == blackKingSquare_) {
 			kingPosition = validMove;
 		}
 		else if (square->getPiece()->isWhite()) {
-			kingPosition = whiteKingSquare;
+			kingPosition = whiteKingSquare_;
 		}
 		else {
-			kingPosition = blackKingSquare;
+			kingPosition = blackKingSquare_;
 		}
 
 		square->setPiece(nullptr);
 
 		for (int i = 0; i < 8; ++i) {
 			for (int j = 0; j < 8; ++j) {
-				if (!(squares[i][j]->getPiece() != nullptr && squares[i][j]->getPiece()->isWhite() != validMove->getPiece()->isWhite()))
+				if (!(squares_[i][j]->getPiece() != nullptr && squares_[i][j]->getPiece()->isWhite() != validMove->getPiece()->isWhite()))
 					continue;
 
-				std::vector<ModelSquare*> validMoves = squares[i][j]->getPiece()->getValidMoves(this, false);
+				std::vector<ModelSquare*> validMoves = squares_[i][j]->getPiece()->getValidMoves(this, false);
 
 				if (!(std::find(validMoves.begin(), validMoves.end(), kingPosition) != validMoves.end()))
 					continue;
@@ -63,18 +70,17 @@ namespace logic {
 
 		square->setPiece(validMove->getPiece());
 		validMove->setPiece(tempSquare->getPiece());
-		delete tempSquare;
 		return result;		
 	}
 	
 	ModelSquare* ModelChecker::getSelectedSquare() const
 	{
-		return selectedSquare;
+		return selectedSquare_;
 	}
 
 	ModelSquare* ModelChecker::getSquareAtPosition(int x, int y) const
 	{
-		return squares[x][y];
+		return squares_[x][y];
 	}
 
 
@@ -82,7 +88,7 @@ namespace logic {
 	{
 		for (int i = 0; i < 8; i++) {
 			for (int j = 0; j < 8; j++) {
-				squares[i][j] = new ModelSquare((i + j) % 2 == 0, i, j);
+				squares_[i][j] = new ModelSquare((i + j) % 2 == 0, i, j);
 			}
 		}
 	}
@@ -91,7 +97,7 @@ namespace logic {
 	{
 		for (int i = 0; i < 8; i++) {
 			for (int j = 0; j < 8; j++) {
-				delete squares[i][j];
+				delete squares_[i][j];
 			}
 		}
 		//delete whiteKingSquare;

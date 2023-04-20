@@ -49,7 +49,7 @@
     <ClCompile Include="ModelPiece.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="ModelReinePiece.cpp">
+    <ClCompile Include="ModelQueenPiece.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="ControllerChecker.cpp">
@@ -58,21 +58,30 @@
     <ClCompile Include="ControllerSquare.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="ModelFouPiece.cpp">
+    <ClCompile Include="ModelBishopPiece.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="ModelRoiPiece.cpp">
+    <ClCompile Include="ModelKingPiece.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="GameManager.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="ModelKnighPiece.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="ModelPawnPiece.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="TempModelSquare.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <QtMoc Include="ViewChecker.h">
+    <QtMoc Include="ViewCheckerMainWindow.h">
       <Filter>Header Files</Filter>
     </QtMoc>
-    <QtMoc Include="ViewSquare.h">
+    <QtMoc Include="ViewSquareLabel.h">
       <Filter>Header Files</Filter>
     </QtMoc>
     <QtMoc Include="ModelSquare.h">
@@ -86,7 +95,7 @@
     </QtMoc>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="ModelReinePiece.h">
+    <ClInclude Include="ModelQueenPiece.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="ControllerChecker.h">
@@ -95,13 +104,22 @@
     <ClInclude Include="ControllerSquare.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="ModelFouPiece.h">
+    <ClInclude Include="ModelBishopPiece.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="ModelRoiPiece.h">
+    <ClInclude Include="ModelKingPiece.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="GameManager.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ModelKnightPiece.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ModelPawnPiece.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="TempModelSquare.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

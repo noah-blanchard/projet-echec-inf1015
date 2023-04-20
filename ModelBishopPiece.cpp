@@ -1,10 +1,17 @@
-#include "ModelFouPiece.h"
+/**
+ * @file ModelBishopPiece.cpp
+ * @author Noah Blanchard / Bai Wu Li
+ * @brief Implementation of the Bishop Piece
+ * @date 20/04/2023
+ */
+
+#include "ModelBishopPiece.h"
 
 namespace logic {
-    const std::string ModelFouPiece::whiteImagePath = "images/white/fou_white.png";
-    const std::string ModelFouPiece::blackImagePath = "images/black/fou_black.png";
+    const std::string ModelBishopPiece::whiteImagePath_ = "images/white/fou_white.png";
+    const std::string ModelBishopPiece::blackImagePath_ = "images/black/fou_black.png";
 
-    std::vector<ModelSquare*> ModelFouPiece::getValidMoves(ModelChecker* checker, bool validate)
+    std::vector<ModelSquare*> ModelBishopPiece::getValidMoves(ModelChecker* checker, bool validate)
     {
         std::vector<ModelSquare*> validMoves;
         int x = currentSquare->getX();

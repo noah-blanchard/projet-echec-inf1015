@@ -1,11 +1,18 @@
+/**
+ * @file ModelQueenPiece.cpp
+ * @author Noah Blanchard / Bai Wu Li
+ * @brief Implementation of the Queen Piece
+ * @date 20/04/2023
+ */
+
 #pragma once
-#include "ModelReinePiece.h"
+#include "ModelQueenPiece.h"
 
 namespace logic {
-	const std::string ModelReinePiece::whiteImagePath = "images/white/reine_white.png";
-	const std::string ModelReinePiece::blackImagePath = "images/black/reine_black.png";
+	const std::string ModelQueenPiece::whiteImagePath_ = "images/white/reine_white.png";
+	const std::string ModelQueenPiece::blackImagePath_ = "images/black/reine_black.png";
 	
-	std::vector<ModelSquare*> ModelReinePiece::getValidMoves(ModelChecker* checker, bool validate) {
+	std::vector<ModelSquare*> ModelQueenPiece::getValidMoves(ModelChecker* checker, bool validate) {
 		std::vector<ModelSquare*> validMoves;
 		int x = currentSquare->getX();
 		int y = currentSquare->getY();

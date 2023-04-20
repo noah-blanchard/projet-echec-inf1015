@@ -1,11 +1,18 @@
-#include "ModelCavalierPiece.h"
+/**
+ * @file ModelKnightPiece.cpp
+ * @author Noah Blanchard / Bai Wu Li
+ * @brief Implementation of the Model for the Knight Piece
+ * @date 20/04/2023
+ */
+
+#include "ModelKnightPiece.h"
 #include "ModelChecker.h"
 
 namespace logic {
-    const std::string ModelCavalierPiece::whiteImagePath = "images/white/cavalier_white.png";
-    const std::string ModelCavalierPiece::blackImagePath = "images/black/cavalier_black.png";
+    const std::string ModelKnightPiece::whiteImagePath_ = "images/white/cavalier_white.png";
+    const std::string ModelKnightPiece::blackImagePath_ = "images/black/cavalier_black.png";
 
-    std::vector<ModelSquare*> ModelCavalierPiece::getValidMoves(ModelChecker* checker, bool validate)
+    std::vector<ModelSquare*> ModelKnightPiece::getValidMoves(ModelChecker* checker, bool validate)
     {
         std::vector<ModelSquare*> validMoves;
         int posX = currentSquare->getX();
@@ -35,6 +42,6 @@ namespace logic {
         return validMoves;
     }
 
-    ModelCavalierPiece::ModelCavalierPiece(bool isWhite) : ModelPiece(isWhite, whiteImagePath, blackImagePath) {
+    ModelKnightPiece::ModelKnightPiece(bool isWhite) : ModelPiece(isWhite, whiteImagePath_, blackImagePath_) {
     }
 }

@@ -1,4 +1,11 @@
-﻿#pragma once
+﻿/**
+ * @file main.cpp
+ * @author Noah Blanchard / Bai Wu Li
+ * @brief Main file
+ * @date 20/04/2023
+ */
+
+#pragma once
 #include <QApplication>
 
 #if __has_include("bibliotheque_cours.hpp")

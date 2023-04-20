@@ -1,3 +1,10 @@
+/**
+ * @file ModelPiece.cpp
+ * @author Noah Blanchard / Bai Wu Li
+ * @brief Implementation of the ModelPiece class
+ * @date 20/04/2023
+ */
+
 #pragma once
 #include "ModelPiece.h"
 #include "ModelSquare.h"
@@ -5,7 +12,7 @@
 namespace logic {
 	
 	bool ModelPiece::isWhite() {
-		return white;
+		return white_;
 	}
 
 	bool ModelPiece::isKing() {
@@ -23,8 +30,8 @@ namespace logic {
 
 	ModelPiece::ModelPiece(bool isWhite, std::string whitePath, std::string blackPath)
 	{
-		white = isWhite;
-		imagePath = isWhite ? whitePath : blackPath;
+		white_ = isWhite;
+		imagePath_ = isWhite ? whitePath : blackPath;
 	}
 
 	ModelPiece::~ModelPiece()

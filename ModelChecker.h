@@ -1,5 +1,13 @@
+/**
+ * @file ModelChecker.h
+ * @author Noah Blanchard / Bai Wu Li
+ * @brief Model for the Checker Board
+ * @date 20/04/2023
+ */
+
 #pragma once
 #include "ModelSquare.h"
+#include "TempModelSquare.h"
 #include <QObject>
 
 namespace logic {
@@ -20,11 +28,11 @@ namespace logic {
 		void setWhiteKingSquare(ModelSquare* square);
 		void setBlackKingSquare(ModelSquare* square);
 	private:
-		ModelSquare* whiteKingSquare;
-		ModelSquare* blackKingSquare;
-		ModelSquare* squares[8][8];
+		ModelSquare* whiteKingSquare_;
+		ModelSquare* blackKingSquare_;
+		ModelSquare* squares_[8][8];
 		//std::unique_ptr < std::shared_ptr<ModelSquare*>> squares;
-		ModelSquare* selectedSquare = nullptr;
+		ModelSquare* selectedSquare_ = nullptr;
 
 	signals:
 		void unallowedMoveSignal();

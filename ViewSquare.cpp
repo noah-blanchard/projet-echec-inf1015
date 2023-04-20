@@ -1,75 +1,70 @@
+/**
+ * @file ViewSquare.cpp
+ * @author Noah Blanchard / Bai Wu Li
+ * @brief View for the Model Square
+ * @date 20/04/2023
+ */
+
 #pragma once
-#include "ViewSquare.h"
+#include "ViewSquareLabel.h"
 #include "ModelSquare.h"
 #include <QMessageBox>
 
 namespace view {
 
-	const QString ViewSquare::COLOR_LIGHT = "background-color: #F0D9B5;";
-	const QString ViewSquare::COLOR_DARK = "background-color: #B58863;";
-	const QString ViewSquare::COLOR_PLAYABLE = "background-color: #9AB0E4";
+	const QString ViewSquareLabel::COLOR_LIGHT_ = "background-color: #F0D9B5;";
+	const QString ViewSquareLabel::COLOR_DARK_ = "background-color: #B58863;";
+	const QString ViewSquareLabel::COLOR_PLAYABLE_ = "background-color: #9AB0E4";
 
-	//void ViewSquare::connectToPiece() {
-	//	if (model->getPiece() != nullptr) {
-	//		connect(this->getModel(), &logic::ModelSquare::updatePieceSignal, this, &ViewSquare::updatePiece);
-	//	}
-	//}
-	//
-	//void ViewSquare::disconnectFromPiece() {
-	//	if (model->getPiece() != nullptr) {
-	//		disconnect(this->getModel(), &logic::ModelSquare::updatePieceSignal, this, &ViewSquare::updatePiece);
-	//	}
-	//}
-
-	void ViewSquare::updatePlayable() {
-		if (model->isPlayable()) {
-			setStyleSheet(COLOR_PLAYABLE);
+	void ViewSquareLabel::updatePlayable() {
+		if (model_->isPlayable()) {
+			setStyleSheet(COLOR_PLAYABLE_);
 		}
 		else {
-			setStyleSheet(model->isLight() ? COLOR_LIGHT : COLOR_DARK);
+			setStyleSheet(model_->isLight() ? COLOR_LIGHT_ : COLOR_DARK_);
 		}
 	}
 
-	void ViewSquare::updatePiece() {
-		if (model->getPiece() != nullptr) {
-			setImage(QPixmap(model->getPiece()->getImagePath().c_str()));
+	void ViewSquareLabel::updatePiece() {
+		if (model_->getPiece() != nullptr) {
+			setImage(QPixmap(model_->getPiece()->getImagePath().c_str()));
 		}
 		else {
 			setImage(QPixmap());
 		}
 	}
 
-	void ViewSquare::mousePressEvent(QMouseEvent* event)
+	void ViewSquareLabel::mousePressEvent(QMouseEvent* event)
 	{
-		if (model->isPlayable())
+		if (model_->isPlayable())
 			emit clickMove();
-		else if (model->getPiece() != nullptr)
+		else if (model_->getPiece() != nullptr)
 			emit clickPiece();
 	}
 
-	void ViewSquare::setImage(QPixmap pixmap) {
+	void ViewSquareLabel::setImage(QPixmap pixmap) {
 		if (!pixmap.isNull()) setPixmap(pixmap.scaled(50, 50, Qt::KeepAspectRatio, Qt::SmoothTransformation));
 		else setPixmap(QPixmap());
 	}
 
-	ViewSquare::ViewSquare(logic::ModelSquare* model, QWidget* parent)
+	ViewSquareLabel::ViewSquareLabel(logic::ModelSquare* model, QWidget* parent)
 		: QLabel(parent)
-		, model(model)
+		, model_(model)
 	{
 		
 		setFixedSize(50, 50);
 		setAlignment(Qt::AlignCenter);
-		setStyleSheet(model->isLight() ? COLOR_LIGHT : COLOR_DARK);
+		setStyleSheet(model->isLight() ? COLOR_LIGHT_ : COLOR_DARK_);
 		if (model->getPiece() != nullptr) {
 			setImage(QPixmap(model->getPiece()->getImagePath().c_str()));
 		}
 
 		// connect the models signals.
-		connect(model, &logic::ModelSquare::playableSignal, this, &ViewSquare::updatePlayable);
-		connect(model, &logic::ModelSquare::updatePieceSignal, this, &ViewSquare::updatePiece);
+		connect(model, &logic::ModelSquare::playableSignal, this, &ViewSquareLabel::updatePlayable);
+		connect(model, &logic::ModelSquare::updatePieceSignal, this, &ViewSquareLabel::updatePiece);
 	}
 
-	ViewSquare::~ViewSquare()
+	ViewSquareLabel::~ViewSquareLabel()
 	{
 	}
 }
