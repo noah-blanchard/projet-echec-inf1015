@@ -6,8 +6,12 @@
  */
 
 #include "ControllerChecker.h"
+#include "GameManager.h"
 #include <iostream>
 
 namespace logic {
-
+	void ControllerChecker::restartGameEvent() {
+		GameManager::reset();
+		GameManager::startEndgame1();
+	}
 }

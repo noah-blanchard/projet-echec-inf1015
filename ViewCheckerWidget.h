@@ -6,8 +6,9 @@
  */
 
 #pragma once
-#include <QMainWindow>
+#include <QWidget>
 #include <QGridLayout>
+#include <QMainWindow>
 #include <QSplitter>
 #include <QPushButton>
 #include "ModelChecker.h"
@@ -15,15 +16,14 @@
 #include "ViewSquareLabel.h"
 
 namespace view {
-	class ViewCheckerMainWindow : public QMainWindow
+	class ViewCheckerWidget : public QMainWindow
 	{
 		Q_OBJECT
 	public:
-		ViewCheckerMainWindow(logic::ModelChecker* model, QWidget* parent = nullptr);
+		ViewCheckerWidget(logic::ModelChecker* model, QWidget* parent = nullptr);
 		//~ViewChecker() override;
 		void squareClickPiece();
 		void squareClickMove();
-		void clickRestartGame();
 		void unallowedMoveNotification();
 		void unallowedPieceNotification();
 		void showInfo(std::string message);
@@ -31,6 +31,7 @@ namespace view {
 	private:
 		ViewSquareLabel* selectedViewSquare_ = nullptr;
 		QGridLayout* gridLayout_;
+		QSplitter* splitterLayout_;
 		QWidget* centralWidget_;
 		logic::ModelChecker* model_;
 	};
