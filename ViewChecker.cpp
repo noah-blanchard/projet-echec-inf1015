@@ -32,7 +32,6 @@ namespace view {
 
 	ViewCheckerMainWindow::ViewCheckerMainWindow(logic::ModelChecker* model, QWidget* parent) {
 		centralWidget_ = new QWidget(this);
-
 		QSplitter* splitter = new QSplitter(Qt::Horizontal, centralWidget_);
 		splitter->setFixedSize(1000, 500);
 		QWidget* leftSection = new QWidget(splitter);
@@ -76,6 +75,7 @@ namespace view {
 
 		// set main window size
 		setFixedSize(1000, 500);
+		setWindowTitle("Simple Chess Game");
 	}
 
 	
