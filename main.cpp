@@ -45,7 +45,5 @@ int main(int argc, char *argv[])
 	logic::GameManager::reset();
 	logic::GameManager::startEndgame1();
 	
-	
-
 	return app.exec();
 }

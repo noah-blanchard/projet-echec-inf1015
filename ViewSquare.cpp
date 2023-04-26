@@ -10,41 +10,38 @@
 #include "ModelSquare.h"
 #include <QMessageBox>
 
-namespace view {
+namespace view
+{
 
-	const QString ViewSquareLabel::COLOR_LIGHT_ = "background-color: #F0D9B5;";
-	const QString ViewSquareLabel::COLOR_DARK_ = "background-color: #B58863;";
+	const QString ViewSquareLabel::COLOR_LIGHT_    = "background-color: #F0D9B5;";
+	const QString ViewSquareLabel::COLOR_DARK_     = "background-color: #B58863;";
 	const QString ViewSquareLabel::COLOR_PLAYABLE_ = "background-color: #9AB0E4";
 
-	void ViewSquareLabel::updatePlayable() {
-		if (model_->isPlayable()) {
-			setStyleSheet(COLOR_PLAYABLE_);
-		}
-		else {
-			setStyleSheet(model_->isLight() ? COLOR_LIGHT_ : COLOR_DARK_);
-		}
+	void ViewSquareLabel::updatePlayable()
+	{
+		setStyleSheet(model_->isPlayable() ? COLOR_PLAYABLE_ : model_->isLight() ? COLOR_LIGHT_ : COLOR_DARK_);
 	}
 
-	void ViewSquareLabel::updatePiece() {
-		if (model_->getPiece() != nullptr) {
+	void ViewSquareLabel::updatePiece()
+	{
+		if (model_->getPiece() != nullptr)
+		{
 			setImage(QPixmap(model_->getPiece()->getImagePath().c_str()));
 		}
-		else {
+		else
+		{
 			setImage(QPixmap());
 		}
 	}
 
 	void ViewSquareLabel::mousePressEvent(QMouseEvent* event)
 	{
-		if (model_->isPlayable())
-			emit clickMove();
-		else if (model_->getPiece() != nullptr)
-			emit clickPiece();
+		emit model_->isPlayable() ? clickMove() : model_->getPiece() != nullptr ? clickPiece() : void();
 	}
 
-	void ViewSquareLabel::setImage(QPixmap pixmap) {
-		if (!pixmap.isNull()) setPixmap(pixmap.scaled(50, 50, Qt::KeepAspectRatio, Qt::SmoothTransformation));
-		else setPixmap(QPixmap());
+	void ViewSquareLabel::setImage(QPixmap pixmap)
+	{
+		setPixmap(pixmap.isNull() ? QPixmap() : pixmap.scaled(50, 50, Qt::KeepAspectRatio, Qt::SmoothTransformation));
 	}
 
 	ViewSquareLabel::ViewSquareLabel(logic::ModelSquare* model, QWidget* parent)
@@ -55,7 +52,9 @@ namespace view {
 		setFixedSize(50, 50);
 		setAlignment(Qt::AlignCenter);
 		setStyleSheet(model->isLight() ? COLOR_LIGHT_ : COLOR_DARK_);
-		if (model->getPiece() != nullptr) {
+
+		if (model->getPiece() != nullptr)
+		{
 			setImage(QPixmap(model->getPiece()->getImagePath().c_str()));
 		}
 
