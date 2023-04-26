@@ -11,6 +11,7 @@ namespace logic {
 	class ControllerChecker
 	{
 	public:
+		static void restartGameEvent();
 	};
 }
 

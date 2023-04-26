@@ -6,31 +6,81 @@
  */
 
 #pragma once
-#include <QMessageBox>
 #include "ViewCheckerMainWindow.h"
+#include <QMessageBox>
 #include "GameManager.h"
 
-namespace view
-{
-	ViewCheckerMainWindow::ViewCheckerMainWindow(logic::ModelChecker* model, QWidget* parent)
-	{
+
+namespace view {
+	//ViewCheckerMainWindow::ViewCheckerMainWindow(logic::ModelChecker* model, QWidget* parent) {
+	//	centralWidget_ = new QWidget(this);
+	//	gridLayout_ = new QGridLayout(centralWidget_);
+	//	this->model_ = model;
+	//	this->setCentralWidget(centralWidget_);
+
+	//	connect(this->model_, &logic::ModelChecker::unallowedMoveSignal, this, &ViewCheckerMainWindow::unallowedMoveNotification);
+	//	
+	//	for (int i = 0; i < 8; ++i) {
+	//		for (int j = 0; j < 8; ++j) {
+	//			ViewSquareLabel* square = new ViewSquareLabel(model->getSquareAtPosition(i, j), this);
+	//			connect(square, &ViewSquareLabel::clickPiece, this, &ViewCheckerMainWindow::squareClickPiece);
+	//			connect(square, &ViewSquareLabel::clickMove, this, &ViewCheckerMainWindow::squareClickMove);
+	//			gridLayout_->addWidget(square, i, j);
+	//		}
+	//	}
+	//}
+
+	ViewCheckerMainWindow::ViewCheckerMainWindow(logic::ModelChecker* model, QWidget* parent) {
 		centralWidget_ = new QWidget(this);
-		gridLayout_    = new QGridLayout(centralWidget_);
-		this->model_   = model;
+		QSplitter* splitter = new QSplitter(Qt::Horizontal, centralWidget_);
+		splitter->setFixedSize(1000, 500);
+		QWidget* leftSection = new QWidget(splitter);
+		QWidget* rightSection = new QWidget(splitter);
+		rightSection->setFixedWidth(500);
+		QVBoxLayout* rightLayout = new QVBoxLayout(rightSection);
+		QPushButton* button = new QPushButton("Restart Game", rightSection);
+		connect(button, &QPushButton::clicked, this, &ViewCheckerMainWindow::clickRestartGame);
+
+
+		gridLayout_ = new QGridLayout(leftSection);
+		this->model_ = model;
 		this->setCentralWidget(centralWidget_);
 
+		// connect signal and slot
 		connect(this->model_, &logic::ModelChecker::unallowedMoveSignal, this, &ViewCheckerMainWindow::unallowedMoveNotification);
-		
-		for (int i = 0; i < 8; ++i)
-		{
-			for (int j = 0; j < 8; ++j)
-			{
+
+		// create left section
+		for (int i = 0; i < 8; ++i) {
+			for (int j = 0; j < 8; ++j) {
 				ViewSquareLabel* square = new ViewSquareLabel(model->getSquareAtPosition(i, j), this);
+				square->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
 				connect(square, &ViewSquareLabel::clickPiece, this, &ViewCheckerMainWindow::squareClickPiece);
 				connect(square, &ViewSquareLabel::clickMove, this, &ViewCheckerMainWindow::squareClickMove);
 				gridLayout_->addWidget(square, i, j);
 			}
 		}
+		// set left section as central widget
+
+		// create right section
+
+		// add button to right section
+		rightLayout->addWidget(button);
+		// add stretch to push button to the top
+		rightLayout->addStretch();
+
+		// create horizontal splitter
+		
+		// set main window as central widget
+		setCentralWidget(centralWidget_);
+
+		// set main window size
+		setFixedSize(1000, 500);
+		setWindowTitle("Simple Chess Game");
+	}
+
+	
+	void ViewCheckerMainWindow::clickRestartGame() {
+		logic::ControllerChecker::restartGameEvent();
 	}
 
 	void ViewCheckerMainWindow::unallowedMoveNotification()

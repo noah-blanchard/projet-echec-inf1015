@@ -36,7 +36,7 @@ namespace logic {
 		static bool blackCheckMate_;
 
 		//models
-		static std::unique_ptr<ModelChecker> checkerModel_;
+		//static std::unique_ptr<ModelChecker> checkerModel_;
 
 		//views
 		static std::unique_ptr<view::ViewCheckerMainWindow> checkerView_;
