@@ -8,7 +8,7 @@
 #pragma once
 #include "ViewCheckerMainWindow.h"
 #include <QMessageBox>
-#include "GameManager.h"
+#include /*"GameManager.h"*/ "State.h"
 
 
 namespace view {
@@ -102,12 +102,12 @@ namespace view {
 
 		ViewSquareLabel* clickedSquare = qobject_cast<ViewSquareLabel*>(sender());
 
-		bool isPieceAllowed = clickedSquare->getModel()->getPiece() != nullptr && clickedSquare->getModel()->getPiece()->isWhite() == logic::GameManager::isWhiteTurn();
+		bool isPieceAllowed = clickedSquare->getModel()->getPiece() != nullptr /* && clickedSquare->getModel()->getPiece()->isWhite() == logic::GameManager::isWhiteTurn()*/;
 		
 		if (isPieceAllowed)
 		{
 			selectedViewSquare_ = clickedSquare;
-			logic::ControllerSquare::clickSquareControl(clickedSquare->getModel(), model_);
+			logic::/*ControllerSquare */GameController::/*clickSquareControl*/selectPiece(clickedSquare->getModel(), model_);
 		}
 		else
 		{
@@ -126,8 +126,12 @@ namespace view {
 
 		//selectedViewSquare->disconnectFromPiece();
 		//model->setSelectedSquare(clickedSquare->getModel());			
-		logic::ControllerSquare::clickSquareMove(clickedSquare->getModel(), model_);
-		logic::GameManager::nextTurn();
+		logic::/*ControllerSquare*/GameController::/*clickSquareMove*/movePiece(clickedSquare->getModel(), model_);
+		/*logic::GameManager::nextTurn();*/
+		if (logic::GameController::isGameOver())
+		{
+			QMessageBox::information(this, "Game Over", "Checkmate");
+		}
 	}
 
 	void ViewCheckerMainWindow::showInfo(std::string message)

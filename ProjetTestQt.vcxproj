@@ -61,7 +61,7 @@
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <ClCompile>
-      <LanguageStandard>stdcpplatest</LanguageStandard>
+      <LanguageStandard>stdcpp20</LanguageStandard>
       <AdditionalIncludeDirectories>$(SolutionDir)include;$(SolutionDir)\googletest\include;$(SolutionDir)\googletest;$(Qt_INCLUDEPATH_);%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <SupportJustMyCode>true</SupportJustMyCode>
       <WarningLevel>Level4</WarningLevel>
@@ -126,6 +126,7 @@
     <ClCompile Include="ModelQueenPiece.cpp" />
     <ClCompile Include="ModelKingPiece.cpp" />
     <ClCompile Include="ModelSquare.cpp" />
+    <ClCompile Include="State.cpp" />
     <ClCompile Include="TempModelSquare.cpp" />
     <ClCompile Include="ViewChecker.cpp" />
     <ClCompile Include="ViewSquare.cpp" />
@@ -140,6 +141,7 @@
     <ClInclude Include="ModelKnightPiece.h" />
     <ClInclude Include="ModelPawnPiece.h" />
     <ClInclude Include="ModelKingPiece.h" />
+    <ClInclude Include="State.h" />
     <ClInclude Include="TempModelSquare.h" />
     <QtMoc Include="ModelChecker.h" />
     <ClInclude Include="ModelBishopPiece.h" />

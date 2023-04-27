@@ -12,6 +12,8 @@
 //#include "ModelSquare.h"
 
 namespace logic {
+
+
 	class ModelPiece : public QObject
 	{
 		Q_OBJECT

@@ -22,6 +22,7 @@ auto& cdbg = clog;
 #endif
 
 #include "GameManager.h"
+#include "State.h"
 
 void initialiserBibliothequeCours([[maybe_unused]] int argc, [[maybe_unused]] char* argv[])
 {
@@ -41,9 +42,11 @@ int main(int argc, char *argv[])
 	QApplication app(argc, argv);
 	initialiserBibliothequeCours(argc, argv);
 
-	logic::GameManager::testKingMax();
-	logic::GameManager::reset();
-	logic::GameManager::startEndgame1();
+	//logic::GameManager::testKingMax();
+	//logic::GameManager::reset();
+	//logic::GameManager::startEndgame1();
+
+	logic::GameController::startNewGame();	
 	
 	return app.exec();
 }
