@@ -27,6 +27,8 @@ namespace logic {
 		
 		void setWhiteKingSquare(ModelSquare* square);
 		void setBlackKingSquare(ModelSquare* square);
+		ModelSquare* getWhiteKingSquare() const { return whiteKingSquare_; }
+		ModelSquare* getBlackKingSquare() const { return blackKingSquare_; }
 	private:
 		ModelSquare* whiteKingSquare_;
 		ModelSquare* blackKingSquare_;

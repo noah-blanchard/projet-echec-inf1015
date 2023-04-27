@@ -24,6 +24,8 @@ namespace view {
 		void squareClickPiece();
 		void squareClickMove();
 		void clickRestartGame();
+		void clickUndo();
+		void clickRedo();
 		void unallowedMoveNotification();
 		void unallowedPieceNotification();
 		void showInfo(std::string message);

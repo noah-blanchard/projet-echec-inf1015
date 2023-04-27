@@ -41,6 +41,12 @@ namespace view {
 		QPushButton* button = new QPushButton("Restart Game", rightSection);
 		connect(button, &QPushButton::clicked, this, &ViewCheckerMainWindow::clickRestartGame);
 
+		QPushButton* undo = new QPushButton("Undo", rightSection);
+		connect(undo, &QPushButton::clicked, this, &ViewCheckerMainWindow::clickUndo);
+
+		QPushButton* redo = new QPushButton("Redo", rightSection);
+		connect(redo, &QPushButton::clicked, this, &ViewCheckerMainWindow::clickRedo);
+
 
 		gridLayout_ = new QGridLayout(leftSection);
 		this->model_ = model;
@@ -65,6 +71,8 @@ namespace view {
 
 		// add button to right section
 		rightLayout->addWidget(button);
+		rightLayout->addWidget(undo);
+		rightLayout->addWidget(redo);
 		// add stretch to push button to the top
 		rightLayout->addStretch();
 
@@ -81,6 +89,16 @@ namespace view {
 	
 	void ViewCheckerMainWindow::clickRestartGame() {
 		logic::ControllerChecker::restartGameEvent();
+	}
+
+	void ViewCheckerMainWindow::clickUndo()
+	{
+		logic::GameController::undo();
+	}
+
+	void ViewCheckerMainWindow::clickRedo()
+	{
+		logic::GameController::redo();
 	}
 
 	void ViewCheckerMainWindow::unallowedMoveNotification()
