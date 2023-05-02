@@ -115,6 +115,7 @@
     <ClCompile Include="bibliotheque_cours\verification_allocation.cpp" />
     <ClCompile Include="ControllerChecker.cpp" />
     <ClCompile Include="ControllerSquare.cpp" />
+    <ClCompile Include="GameController.cpp" />
     <ClCompile Include="GameManager.cpp" />
     <ClCompile Include="googletest\src\gtest-all.cc" />
     <ClCompile Include="main.cpp" />

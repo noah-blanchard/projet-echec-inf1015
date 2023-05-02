@@ -38,4 +38,8 @@ namespace logic {
 	{
 		this->setCurrentSquare(nullptr);
 	}
+
+	void ModelPiece::firstMoveDone() {
+		//do nothing
+	}
 }

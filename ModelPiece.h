@@ -27,6 +27,7 @@ namespace logic {
 		virtual std::vector<class ModelSquare*> getValidMoves(class ModelChecker* checker, bool validate) = 0;
 		std::string getImagePath() const { return imagePath_; }
 		void setCurrentSquare(ModelSquare * square);
+		virtual void firstMoveDone();
 		virtual bool isKing();
 		//void move(ModelSquare* square);
 	

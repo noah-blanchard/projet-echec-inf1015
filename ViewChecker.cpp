@@ -47,6 +47,14 @@ namespace view {
 		QPushButton* redo = new QPushButton("Redo", rightSection);
 		connect(redo, &QPushButton::clicked, this, &ViewCheckerMainWindow::clickRedo);
 
+		QPushButton* loadFile = new QPushButton("Load File", rightSection);
+		connect(loadFile, &QPushButton::clicked, this, &ViewCheckerMainWindow::clickLoadFile);
+
+		filePathLineEdit_ = new QLineEdit(rightSection);
+		filePathLineEdit_->setReadOnly(true);
+
+		QPushButton* startLayout = new QPushButton("Start a game with this template", rightSection);
+		connect(startLayout, &QPushButton::clicked, this, &ViewCheckerMainWindow::clickStartFile);
 
 		gridLayout_ = new QGridLayout(leftSection);
 		this->model_ = model;
@@ -73,6 +81,9 @@ namespace view {
 		rightLayout->addWidget(button);
 		rightLayout->addWidget(undo);
 		rightLayout->addWidget(redo);
+		rightLayout->addWidget(loadFile);
+		rightLayout->addWidget(filePathLineEdit_);
+		rightLayout->addWidget(startLayout);
 		// add stretch to push button to the top
 		rightLayout->addStretch();
 
@@ -112,6 +123,22 @@ namespace view {
 		std::string message = "It is " + color + "'s turn";
 
 		QMessageBox::warning(this, "Unallowed piece", message.c_str());
+	}
+
+	void ViewCheckerMainWindow::clickLoadFile()
+	{
+		QString filePath = QFileDialog::getOpenFileName(this, "Load Layout File", "", "Text Files (*.txt)");
+		if (filePath != "") {
+			layoutFile_ = new QFile(filePath);
+			filePathLineEdit_->setText(filePath);
+		}
+	}
+
+	void ViewCheckerMainWindow::clickStartFile()
+	{
+		if (layoutFile_ != nullptr) {
+			logic::GameController::startGameFileLayout(layoutFile_);
+		}
 	}
 	
 	void ViewCheckerMainWindow::squareClickPiece()

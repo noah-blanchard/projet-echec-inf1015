@@ -18,9 +18,10 @@ namespace logic {
 
 		//get valid moves
 		std::vector<ModelSquare*> getValidMoves(ModelChecker* checker, bool validate) override;
+		void firstMoveDone() override;
 	
 	private:
-		bool firstMove = true;
+		bool firstMove_ = true;
 		static const std::string whiteImagePath_;
 		static const std::string blackImagePath_;
 	};

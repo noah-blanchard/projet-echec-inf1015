@@ -10,6 +10,9 @@
 #include <QGridLayout>
 #include <QSplitter>
 #include <QPushButton>
+#include <QLineEdit>
+#include <QFileDialog>
+#include <QFile>
 #include "ModelChecker.h"
 #include "ControllerChecker.h"
 #include "ViewSquareLabel.h"
@@ -26,6 +29,8 @@ namespace view {
 		void clickRestartGame();
 		void clickUndo();
 		void clickRedo();
+		void clickLoadFile();
+		void clickStartFile();
 		void unallowedMoveNotification();
 		void unallowedPieceNotification();
 		void showInfo(std::string message);
@@ -34,6 +39,8 @@ namespace view {
 		ViewSquareLabel* selectedViewSquare_ = nullptr;
 		QGridLayout* gridLayout_;
 		QWidget* centralWidget_;
+		QFile* layoutFile_;
+		QLineEdit* filePathLineEdit_;
 		logic::ModelChecker* model_;
 	};
 }

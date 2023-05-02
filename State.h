@@ -275,12 +275,15 @@ namespace logic
 			// change the state
 
 			currentTurn_->movePiece(clickedSquare, checker);
+			clickedSquare->getPiece()->firstMoveDone();
 			currentTurn_ = transitions_[currentTurn_];
 			
 			if (currentTurn_->isGameOver(checker, isGameOver_))
 			{
 				currentTurn_ = checkmate_;
 			}
+
+
  
 		}
 
@@ -324,6 +327,9 @@ namespace logic
 			checkerView_ = std::make_unique<view::ViewCheckerMainWindow>(checkerModel);
 			checkerView_->show();
 		}
+
+		static void startGameFileLayout(QFile* file);
+		static std::shared_ptr<ModelPiece> createPieceFromChar(char pieceChar, bool isWhite);
 
 		static bool isGameOver()
 		{
