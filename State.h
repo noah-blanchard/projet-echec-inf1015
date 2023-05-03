@@ -28,7 +28,7 @@ namespace logic
 	class SelectPieceCommand : public Command
 	{
 	public:
-		SelectPieceCommand(ModelSquare* clickedSquare, ModelChecker* checker)
+		SelectPieceCommand(ModelSquare* clickedSquare, ChessBoard* checker)
 		{
 			checker->setSelectedSquare(clickedSquare);
 			validMoves_ = clickedSquare->getPiece()->getValidMoves2(checker, true);
@@ -57,7 +57,7 @@ namespace logic
 	class MovePieceCommand : public Command
 	{
 	public:
-		MovePieceCommand(ModelSquare* clickedSquare, ModelChecker* checker) :
+		MovePieceCommand(ModelSquare* clickedSquare, ChessBoard* checker) :
 			clickedSquare_(clickedSquare),
 			checker_(checker) {}
 
@@ -108,7 +108,7 @@ namespace logic
 
 	private:
 		ModelSquare* clickedSquare_;
-		ModelChecker* checker_;
+		ChessBoard* checker_;
 		std::shared_ptr<ModelPiece> clickedSquarePiece_;
 		std::shared_ptr<ModelPiece> checkerPiece_;
 		std::vector <ModelSquare*> playableSquareToReset_;
@@ -162,24 +162,24 @@ namespace logic
 	public:
 		virtual ~GameTurn() = default;
 
-		virtual void selectPiece(ModelSquare* clickedSquare, ModelChecker* checker)
+		virtual void selectPiece(ModelSquare* clickedSquare, ChessBoard* checker)
 		{
 			CommandsInvoker::executeCommand(new SelectPieceCommand(clickedSquare, checker));
 		}
 
-		virtual void movePiece(ModelSquare* clickedSquare, ModelChecker* checker)
+		virtual void movePiece(ModelSquare* clickedSquare, ChessBoard* checker)
 		{
 			CommandsInvoker::executeCommand(new MovePieceCommand(clickedSquare, checker));
 		}
 
-		virtual bool isGameOver(ModelChecker* checker, bool& isGameOver) = 0;
+		virtual bool isGameOver(ChessBoard* checker, bool& isGameOver) = 0;
 	};
 
 
 	class WhiteTurn : public GameTurn
 	{
 	public:
-		void selectPiece(ModelSquare* clickedSquare, ModelChecker* checker) override
+		void selectPiece(ModelSquare* clickedSquare, ChessBoard* checker) override
 		{
 			if (clickedSquare->getPiece()->isWhite())
 			{
@@ -187,12 +187,12 @@ namespace logic
 			}
 		}
 
-		void movePiece(ModelSquare* clickedSquare, ModelChecker* checker) override
+		void movePiece(ModelSquare* clickedSquare, ChessBoard* checker) override
 		{
 			GameTurn::movePiece(clickedSquare, checker);
 		}
 
-		bool isGameOver(ModelChecker* checker, bool& isGameOver) override
+		bool isGameOver(ChessBoard* checker, bool& isGameOver) override
 		{
 			for (int i = 0; i < 8; ++i)
 			{
@@ -214,7 +214,7 @@ namespace logic
 	class BlackTurn : public GameTurn
 	{
 	public:
-		void selectPiece(ModelSquare* clickedSquare, ModelChecker* checker) override
+		void selectPiece(ModelSquare* clickedSquare, ChessBoard* checker) override
 		{
 			if (!clickedSquare->getPiece()->isWhite())
 			{
@@ -222,12 +222,12 @@ namespace logic
 			}
 		}
 
-		void movePiece(ModelSquare* clickedSquare, ModelChecker* checker) override
+		void movePiece(ModelSquare* clickedSquare, ChessBoard* checker) override
 		{
 			GameTurn::movePiece(clickedSquare, checker);
 		}
 
-		bool isGameOver(ModelChecker* checker, bool& isGameOver) override
+		bool isGameOver(ChessBoard* checker, bool& isGameOver) override
 		{
 			for (int i = 0; i < 8; ++i)
 			{
@@ -250,17 +250,17 @@ namespace logic
 	class Checkmate : public GameTurn
 	{
 	public :
-	void selectPiece(ModelSquare* clickedSquare, ModelChecker* checker) override
+	void selectPiece(ModelSquare* clickedSquare, ChessBoard* checker) override
 		{
 			// do nothing
 		}
 
-		void movePiece(ModelSquare* clickedSquare, ModelChecker* checker) override
+		void movePiece(ModelSquare* clickedSquare, ChessBoard* checker) override
 		{
 			// do nothing
 		}
 
-		bool isGameOver(ModelChecker* checker, bool& isGameOver) override
+		bool isGameOver(ChessBoard* checker, bool& isGameOver) override
 		{
 			return isGameOver = true;
 		}
@@ -270,12 +270,12 @@ namespace logic
 	{
 	public:
 
-		static void selectPiece(ModelSquare* clickedSquare, ModelChecker* checker)
+		static void selectPiece(ModelSquare* clickedSquare, ChessBoard* checker)
 		{
 			currentTurn_->selectPiece(clickedSquare, checker);
 		}
 
-		static void movePiece(ModelSquare* clickedSquare, ModelChecker* checker)
+		static void movePiece(ModelSquare* clickedSquare, ChessBoard* checker)
 		{
 			// change the state
 
@@ -307,7 +307,7 @@ namespace logic
 			//checkerView_->close();
 			checkerView_ = nullptr;
 			currentTurn_ = whiteTurn_;
-			ModelChecker* checkerModel = new ModelChecker();
+			ChessBoard* checkerModel = ChessBoard::getInstance();
 
 			// créer les objets en utilisant std::make_shared
 			auto blackKing = std::make_shared<ModelKingPiece>(false);

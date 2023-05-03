@@ -5,7 +5,7 @@ namespace logic
 
 	void GameController::startGameFileLayout(QFile* file) {
 		logic::ModelKingPiece::resetInstanceCounter();
-		ModelChecker* checkerModel = new ModelChecker();
+		ChessBoard* chessboard = ChessBoard::getInstance();
 
 		if (file->open(QIODevice::ReadOnly | QIODevice::Text)) {
 			QTextStream in(file);
@@ -19,12 +19,12 @@ namespace logic
 				bool isWhite = fields[2].toInt() == 1;
 				QString pieceChar = fields[3];
 
-				checkerModel->getSquareAtPosition(row, col)->setPiece(createPieceFromChar(pieceChar.toStdString()[0], isWhite));
+				chessboard->getSquareAtPosition(row, col)->setPiece(createPieceFromChar(pieceChar.toStdString()[0], isWhite));
 				if (pieceChar.toStdString()[0] == 'K') {
 					if (isWhite)
-						checkerModel->setWhiteKingSquare(checkerModel->getSquareAtPosition(row, col));
+						chessboard->setWhiteKingSquare(chessboard->getSquareAtPosition(row, col));
 					else
-						checkerModel->setBlackKingSquare(checkerModel->getSquareAtPosition(row, col));
+						chessboard->setBlackKingSquare(chessboard->getSquareAtPosition(row, col));
 				}
 
 				// Faites quelque chose avec les informations extraites
@@ -33,10 +33,9 @@ namespace logic
 			file->close();
 		}
 
-		checkerView_ = nullptr;
 		currentTurn_ = whiteTurn_;
-
-		checkerView_ = std::make_unique<view::ViewCheckerMainWindow>(checkerModel);
+		view::ViewCheckerMainWindow *checkerView = new view::ViewCheckerMainWindow(chessboard);
+		checkerView_ = std::unique_ptr<view::ViewCheckerMainWindow>(checkerView);
 		checkerView_->show();
 
 	}

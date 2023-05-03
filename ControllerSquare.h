@@ -8,12 +8,13 @@
 #pragma once
 #include "ModelSquare.h"
 #include "ModelChecker.h"
+#include "ChessBoard.h"
 
 namespace logic {
 	class ControllerSquare
 	{
 	public:
-		static void clickSquareControl(ModelSquare* clickedSquare, ModelChecker* checker);
+		static void clickSquareControl(ModelSquare* clickedSquare, ChessBoard* checker);
 		static void clickSquareMove(ModelSquare* clickedSquare, ModelChecker* checker);
 	};
 }

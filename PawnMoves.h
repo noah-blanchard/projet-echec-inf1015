@@ -8,7 +8,7 @@ namespace logic {
 	public:
 		PawnMoves() = default;
 		~PawnMoves();
-		std::vector<class ModelSquare*> calculate(ModelSquare* currentSquare, class ModelChecker* checker, bool validate) override;
+		std::vector<class ModelSquare*> calculate(ModelSquare* currentSquare, class ChessBoard* checker, bool validate) override;
 	};
 }
 

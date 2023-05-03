@@ -30,7 +30,7 @@ namespace view {
 	//	}
 	//}
 
-	ViewCheckerMainWindow::ViewCheckerMainWindow(logic::ModelChecker* model, QWidget* parent) {
+	ViewCheckerMainWindow::ViewCheckerMainWindow(logic::ChessBoard* model, QWidget* parent) {
 		centralWidget_ = new QWidget(this);
 		QSplitter* splitter = new QSplitter(Qt::Horizontal, centralWidget_);
 		splitter->setFixedSize(1000, 500);
@@ -57,11 +57,11 @@ namespace view {
 		connect(startLayout, &QPushButton::clicked, this, &ViewCheckerMainWindow::clickStartFile);
 
 		gridLayout_ = new QGridLayout(leftSection);
-		this->model_ = model;
+		this->model_ = std::shared_ptr<logic::ChessBoard>(model);
 		this->setCentralWidget(centralWidget_);
 
 		// connect signal and slot
-		connect(this->model_, &logic::ModelChecker::unallowedMoveSignal, this, &ViewCheckerMainWindow::unallowedMoveNotification);
+		//connect(model_.get(), &logic::ChessBoard::unallowedMoveSignal, this, &ViewCheckerMainWindow::unallowedMoveNotification); inutile
 
 		// create left section
 		for (int i = 0; i < 8; ++i) {
@@ -119,10 +119,10 @@ namespace view {
 
 	void ViewCheckerMainWindow::unallowedPieceNotification()
 	{
-		std::string color = logic::GameManager::isWhiteTurn() ? "white" : "black";
-		std::string message = "It is " + color + "'s turn";
+		/*std::string color = logic::GameManager::isWhiteTurn() ? "white" : "black";*/
+		/*std::string message = "It is " + color + "'s turn";*/
 
-		QMessageBox::warning(this, "Unallowed piece", message.c_str());
+		/*QMessageBox::warning(this, "Unallowed piece", message.c_str());*/
 	}
 
 	void ViewCheckerMainWindow::clickLoadFile()
@@ -152,7 +152,7 @@ namespace view {
 		if (isPieceAllowed)
 		{
 			selectedViewSquare_ = clickedSquare;
-			logic::/*ControllerSquare */GameController::/*clickSquareControl*/selectPiece(clickedSquare->getModel(), model_);
+			logic::/*ControllerSquare */GameController::/*clickSquareControl*/selectPiece(clickedSquare->getModel(), model_.get());
 		}
 		else
 		{
@@ -171,7 +171,7 @@ namespace view {
 
 		//selectedViewSquare->disconnectFromPiece();
 		//model->setSelectedSquare(clickedSquare->getModel());			
-		logic::/*ControllerSquare*/GameController::/*clickSquareMove*/movePiece(clickedSquare->getModel(), model_);
+		logic::/*ControllerSquare*/GameController::/*clickSquareMove*/movePiece(clickedSquare->getModel(), model_.get());
 		/*logic::GameManager::nextTurn();*/
 		if (logic::GameController::isGameOver())
 		{

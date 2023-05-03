@@ -11,7 +11,7 @@
 
 namespace logic {
 	void ControllerChecker::restartGameEvent() {
-		GameManager::reset();
-		GameManager::startEndgame1();
+		/*GameManager::reset();
+		GameManager::startEndgame1();*/
 	}
 }

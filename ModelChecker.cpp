@@ -52,21 +52,21 @@ namespace logic {
 
 		square->setPiece(nullptr);
 
-		for (int i = 0; i < 8; ++i) {
-			for (int j = 0; j < 8; ++j) {
-				if (!(squares_[i][j]->getPiece() != nullptr && squares_[i][j]->getPiece()->isWhite() != validMove->getPiece()->isWhite())) // si la case est vide ou qu'elle contient une piece alliee, continue
-					continue;
+		//for (int i = 0; i < 8; ++i) {
+		//	for (int j = 0; j < 8; ++j) {
+		//		if (!(squares_[i][j]->getPiece() != nullptr && squares_[i][j]->getPiece()->isWhite() != validMove->getPiece()->isWhite())) // si la case est vide ou qu'elle contient une piece alliee, continue
+		//			continue;
 
-				std::vector<ModelSquare*> validMoves = squares_[i][j]->getPiece()->getValidMoves2(this, false);
+		//		//std::vector<ModelSquare*> validMoves = squares_[i][j]->getPiece()->getValidMoves2(this, false);
 
-				if (!(std::find(validMoves.begin(), validMoves.end(), kingPosition) != validMoves.end())) // s'il n'y a pas de roi dans validMoves de la case, continue
-					continue;
+		//		if (!(std::find(validMoves.begin(), validMoves.end(), kingPosition) != validMoves.end())) // s'il n'y a pas de roi dans validMoves de la case, continue
+		//			continue;
 
-				result = false;
-				break;
+		//		result = false;
+		//		break;
 
-			}
-		}
+		//	}
+		//}
 
 		square->setPiece(validMove->getPiece());
 		validMove->setPiece(tempSquare->getPiece());

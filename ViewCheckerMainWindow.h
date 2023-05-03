@@ -16,13 +16,14 @@
 #include "ModelChecker.h"
 #include "ControllerChecker.h"
 #include "ViewSquareLabel.h"
+#include "ChessBoard.h"
 
 namespace view {
 	class ViewCheckerMainWindow : public QMainWindow
 	{
 		Q_OBJECT
 	public:
-		ViewCheckerMainWindow(logic::ModelChecker* model, QWidget* parent = nullptr);
+		ViewCheckerMainWindow(logic::ChessBoard* model, QWidget* parent = nullptr);
 		//~ViewChecker() override;
 		void squareClickPiece();
 		void squareClickMove();
@@ -41,7 +42,7 @@ namespace view {
 		QWidget* centralWidget_;
 		QFile* layoutFile_;
 		QLineEdit* filePathLineEdit_;
-		logic::ModelChecker* model_;
+		std::shared_ptr<logic::ChessBoard> model_;
 	};
 }
 

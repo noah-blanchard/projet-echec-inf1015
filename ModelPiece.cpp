@@ -52,7 +52,7 @@ namespace logic {
 		return false;
 	}
 
-	std::vector<class ModelSquare*> ModelPiece::getValidMoves2(class ModelChecker* checker, bool validate) {
+	std::vector<class ModelSquare*> ModelPiece::getValidMoves2(class ChessBoard* checker, bool validate) {
 		std::vector<ModelSquare*> validMoves;
 		for (auto calculator : calculators_) {
 			std::vector<ModelSquare*> moves = calculator->calculate(currentSquare, checker, validate);

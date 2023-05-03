@@ -7,7 +7,7 @@ namespace logic {
 	public:
 			ValidMovesCalculator() = default;
 			~ValidMovesCalculator();
-			virtual std::vector<class ModelSquare*> calculate(ModelSquare* currentSquare, class ModelChecker* checker, bool validate) = 0;
+			virtual std::vector<class ModelSquare*> calculate(ModelSquare* currentSquare, class ChessBoard* checker, bool validate) = 0;
 	};
 }
 

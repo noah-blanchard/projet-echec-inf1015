@@ -8,7 +8,7 @@
 #include "ControllerSquare.h"
 
 namespace logic {
-	void ControllerSquare::clickSquareControl(ModelSquare* clickedSquare, ModelChecker* checker)
+	void ControllerSquare::clickSquareControl(ModelSquare* clickedSquare, ChessBoard* checker)
 	{
 		checker->setSelectedSquare(clickedSquare);
 		std::vector <ModelSquare*> validMoves = clickedSquare->getPiece()->getValidMoves2(checker, true);
