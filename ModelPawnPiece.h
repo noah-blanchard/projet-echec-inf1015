@@ -19,6 +19,7 @@ namespace logic {
 		//get valid moves
 		std::vector<ModelSquare*> getValidMoves(ModelChecker* checker, bool validate) override;
 		void firstMoveDone() override;
+		bool transform(ModelSquare* square) override;
 	
 	private:
 		bool firstMove_ = true;

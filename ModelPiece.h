@@ -29,6 +29,7 @@ namespace logic {
 		void setCurrentSquare(ModelSquare * square);
 		virtual void firstMoveDone();
 		virtual bool isKing();
+		virtual bool transform(ModelSquare* square);
 		//void move(ModelSquare* square);
 	
 	protected:

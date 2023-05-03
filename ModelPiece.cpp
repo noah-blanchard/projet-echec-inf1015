@@ -42,4 +42,8 @@ namespace logic {
 	void ModelPiece::firstMoveDone() {
 		//do nothing
 	}
+
+	bool ModelPiece::transform(ModelSquare* square) {
+		return false;
+	}
 }

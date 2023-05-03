@@ -65,6 +65,10 @@ namespace logic
 			playableSquareToReset_ = checker_->getSelectedSquare()->getPiece()->getValidMoves(checker_, true);
 			clickedSquarePiece_ = clickedSquare_->getPiece();
 			clickedSquare_->setPiece(checker_->getSelectedSquare()->getPiece());
+
+			if (clickedSquare_->getPiece()->transform(clickedSquare_)) {
+				clickedSquare_->emitTransformSignal();
+			}
 			
 			checkerPiece_ = checker_->getSelectedSquare()->getPiece();
 			checker_->getSelectedSquare()->setPiece(nullptr);

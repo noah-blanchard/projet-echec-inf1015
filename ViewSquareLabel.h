@@ -8,6 +8,7 @@
 #pragma once
 #include <QLabel>
 #include "ModelSquare.h"
+#include <QInputDialog>
 #include "ControllerSquare.h"
 
 namespace view {
@@ -34,6 +35,7 @@ namespace view {
 	public slots:
 		void updatePlayable();
 		void updatePiece();
+		void transformPiece();
 
 	signals:
 		void clickPiece();

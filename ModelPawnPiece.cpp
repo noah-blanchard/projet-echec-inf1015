@@ -92,6 +92,13 @@ namespace logic {
     void ModelPawnPiece::firstMoveDone() {
 		firstMove_ = false;
 	}
+
+    bool ModelPawnPiece::transform(ModelSquare* square) {
+        if (square->getX() == 0 || square->getX() == 7) {
+			return true;
+		}
+		return false;
+    }
 	
 	ModelPawnPiece::ModelPawnPiece(bool isWhite, bool firstMove) : ModelPiece(isWhite, whiteImagePath_, blackImagePath_), firstMove_(firstMove) {}
 }

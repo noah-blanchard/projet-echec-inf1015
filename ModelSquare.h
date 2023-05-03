@@ -9,6 +9,7 @@
 #include "ModelPiece.h"
 #include <QObject>
 
+
 namespace logic {
 	class ModelSquare : public QObject
 	{
@@ -25,6 +26,8 @@ namespace logic {
 		void setPiece(std::shared_ptr<ModelPiece> piece);
 		void setPlayable(bool p);
 		bool isPlayable() const { return playable_; }
+		void transformPiece(std::string selected);
+		void emitTransformSignal();
 	private:
 		int x_, y_;
 		bool light_ = false;
@@ -34,6 +37,7 @@ namespace logic {
 	signals:
 		void playableSignal();
 		void updatePieceSignal();
+		void transformPieceSignal();
 	};
 }
 

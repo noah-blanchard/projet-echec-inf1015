@@ -34,6 +34,35 @@ namespace view
 		}
 	}
 
+	void ViewSquareLabel::transformPiece()
+	{
+		if (!this->model_->getPiece())
+		{
+			return;
+		}
+
+		// Determine the possible piece types for transformation
+		std::vector<std::string> pieceTypes = { "Queen", "Rook", "Bishop", "Knight" };
+		QList<QString> qItems;
+
+		for (const auto& pieceType : pieceTypes)
+		{
+			qItems.append(pieceType.c_str());
+		}
+
+		// Ask the user to select a piece type
+		QString selected = QInputDialog::getItem(this, "Pawn Transformation", "Select a piece type", qItems, 0, false);
+
+		// If the user cancels, do nothing
+		if (selected.isNull())
+		{
+			return;
+		}
+
+		// Otherwise, transform the piece
+		model_->transformPiece(selected.toStdString());
+	}
+
 	void ViewSquareLabel::mousePressEvent(QMouseEvent* event)
 	{
 		emit model_->isPlayable() ? clickMove() : model_->getPiece() != nullptr ? clickPiece() : void();
@@ -61,6 +90,7 @@ namespace view
 		// connect the models signals.
 		connect(model, &logic::ModelSquare::playableSignal, this, &ViewSquareLabel::updatePlayable);
 		connect(model, &logic::ModelSquare::updatePieceSignal, this, &ViewSquareLabel::updatePiece);
+		connect(model, &logic::ModelSquare::transformPieceSignal, this, &ViewSquareLabel::transformPiece);
 	}
 
 	ViewSquareLabel::~ViewSquareLabel()

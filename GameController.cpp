@@ -20,6 +20,12 @@ namespace logic
 				QString pieceChar = fields[3];
 
 				checkerModel->getSquareAtPosition(row, col)->setPiece(createPieceFromChar(pieceChar.toStdString()[0], isWhite));
+				if (pieceChar.toStdString()[0] == 'K') {
+					if (isWhite)
+						checkerModel->setWhiteKingSquare(checkerModel->getSquareAtPosition(row, col));
+					else
+						checkerModel->setBlackKingSquare(checkerModel->getSquareAtPosition(row, col));
+				}
 
 				// Faites quelque chose avec les informations extraites
 			}
