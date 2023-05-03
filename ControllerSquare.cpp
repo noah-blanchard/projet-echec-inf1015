@@ -11,7 +11,7 @@ namespace logic {
 	void ControllerSquare::clickSquareControl(ModelSquare* clickedSquare, ModelChecker* checker)
 	{
 		checker->setSelectedSquare(clickedSquare);
-		std::vector <ModelSquare*> validMoves = clickedSquare->getPiece()->getValidMoves(checker, true);
+		std::vector <ModelSquare*> validMoves = clickedSquare->getPiece()->getValidMoves2(checker, true);
 		for (ModelSquare* square : validMoves)
 		{
 			square->setPlayable(true);	

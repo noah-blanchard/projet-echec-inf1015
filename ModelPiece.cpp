@@ -5,9 +5,9 @@
  * @date 20/04/2023
  */
 
-#pragma once
 #include "ModelPiece.h"
 #include "ModelSquare.h"
+#include "ValidMovesCalculator.h"
 
 namespace logic {
 	
@@ -28,6 +28,11 @@ namespace logic {
 		currentSquare = square;
 	}
 
+	bool ModelPiece::isFirstMove()
+	{
+		return false;
+	}
+
 	ModelPiece::ModelPiece(bool isWhite, std::string whitePath, std::string blackPath)
 	{
 		white_ = isWhite;
@@ -45,5 +50,14 @@ namespace logic {
 
 	bool ModelPiece::transform(ModelSquare* square) {
 		return false;
+	}
+
+	std::vector<class ModelSquare*> ModelPiece::getValidMoves2(class ModelChecker* checker, bool validate) {
+		std::vector<ModelSquare*> validMoves;
+		for (auto calculator : calculators_) {
+			std::vector<ModelSquare*> moves = calculator->calculate(currentSquare, checker, validate);
+			validMoves.insert(validMoves.end(), moves.begin(), moves.end());
+		}
+		return validMoves;
 	}
 }

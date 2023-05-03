@@ -54,8 +54,8 @@ namespace logic
 			return std::make_shared<ModelBishopPiece>(isWhite);
 		case 'N':
 			return std::make_shared<ModelKnightPiece>(isWhite);
-		//case 'R':
-			//return std::make_shared<ModelRookPiece>(isWhite);
+		case 'R':
+			return std::make_shared<ModelRook>(isWhite);
 		default:
 			return nullptr;
 		}

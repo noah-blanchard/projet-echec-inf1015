@@ -7,13 +7,14 @@
 
 #include "ModelKnightPiece.h"
 #include "ModelChecker.h"
+#include "KnightMoves.h"
 
 namespace logic
 {
     const std::string ModelKnightPiece::whiteImagePath_ = "images/white/cavalier_white.png";
     const std::string ModelKnightPiece::blackImagePath_ = "images/black/cavalier_black.png";
 
-    std::vector<ModelSquare*> ModelKnightPiece::getValidMoves(ModelChecker* checker, bool validate)
+    /*std::vector<ModelSquare*> ModelKnightPiece::getValidMoves(ModelChecker* checker, bool validate)
     {
         std::vector<ModelSquare*> validMoves;
 
@@ -43,8 +44,9 @@ namespace logic
         }
 
         return validMoves;
-    }
+    }*/
 
     ModelKnightPiece::ModelKnightPiece(bool isWhite) : ModelPiece(isWhite, whiteImagePath_, blackImagePath_) {
+        calculators_.push_back(new KnightMoves());
     }
 }

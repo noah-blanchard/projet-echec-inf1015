@@ -7,13 +7,17 @@
 
 #pragma once
 #include "ModelQueenPiece.h"
+#include "ModelSquare.h"
+#include "ModelChecker.h"
+#include "RookMoves.h"
+#include "BishopMoves.h"
 
 namespace logic
 {
 	const std::string ModelQueenPiece::whiteImagePath_ = "images/white/reine_white.png";
 	const std::string ModelQueenPiece::blackImagePath_ = "images/black/reine_black.png";
 	
-	std::vector<ModelSquare*> ModelQueenPiece::getValidMoves(ModelChecker* checker, bool validate)
+	/*std::vector<ModelSquare*> ModelQueenPiece::getValidMoves(ModelChecker* checker, bool validate)
 	{
 		std::vector<ModelSquare*> validMoves;
 		int x = currentSquare->getX();
@@ -53,5 +57,12 @@ namespace logic
 		}
 
 		return validMoves;
+	}*/
+
+	ModelQueenPiece::ModelQueenPiece(bool isWhite) : ModelPiece(isWhite, whiteImagePath_, blackImagePath_) {
+		
+		calculators_.push_back(new RookMoves());
+		calculators_.push_back(new BishopMoves());
+
 	}
 }

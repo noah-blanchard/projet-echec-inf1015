@@ -17,7 +17,8 @@ namespace logic {
 		//~ModelPionPiece();
 
 		//get valid moves
-		std::vector<ModelSquare*> getValidMoves(ModelChecker* checker, bool validate) override;
+		//std::vector<ModelSquare*> getValidMoves(ModelChecker* checker, bool validate) override;
+		bool isFirstMove() override;
 		void firstMoveDone() override;
 		bool transform(ModelSquare* square) override;
 	

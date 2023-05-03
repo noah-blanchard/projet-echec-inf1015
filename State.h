@@ -10,6 +10,7 @@
 #include "ModelBishopPiece.h"
 #include "ModelPawnPiece.h"
 #include "ModelKnightPiece.h"
+#include "ModelRook.h"
 
 
 #pragma once
@@ -30,7 +31,7 @@ namespace logic
 		SelectPieceCommand(ModelSquare* clickedSquare, ModelChecker* checker)
 		{
 			checker->setSelectedSquare(clickedSquare);
-			validMoves_ = clickedSquare->getPiece()->getValidMoves(checker, true);
+			validMoves_ = clickedSquare->getPiece()->getValidMoves2(checker, true);
 		}
 
 		void execute() override
@@ -62,7 +63,7 @@ namespace logic
 
 		void execute() override
 		{
-			playableSquareToReset_ = checker_->getSelectedSquare()->getPiece()->getValidMoves(checker_, true);
+			playableSquareToReset_ = checker_->getSelectedSquare()->getPiece()->getValidMoves2(checker_, true);
 			clickedSquarePiece_ = clickedSquare_->getPiece();
 			clickedSquare_->setPiece(checker_->getSelectedSquare()->getPiece());
 
@@ -199,7 +200,7 @@ namespace logic
 				{
 					std::shared_ptr<ModelPiece> piece = checker->getSquareAtPosition(i, j)->getPiece();
 
-					if (piece != nullptr && piece->isWhite() && !piece->getValidMoves(checker, true).empty())
+					if (piece != nullptr && piece->isWhite() && !piece->getValidMoves2(checker, true).empty())
 					{
 						return isGameOver = false;
 					}
@@ -234,7 +235,7 @@ namespace logic
 				{
 					std::shared_ptr<ModelPiece> piece = checker->getSquareAtPosition(i, j)->getPiece();
 
-					if (piece != nullptr && !piece->isWhite() && !piece->getValidMoves(checker, true).empty())
+					if (piece != nullptr && !piece->isWhite() && !piece->getValidMoves2(checker, true).empty())
 					{
 						return isGameOver = false;
 					}

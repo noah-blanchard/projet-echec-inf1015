@@ -57,7 +57,7 @@ namespace logic {
 				if (!(squares_[i][j]->getPiece() != nullptr && squares_[i][j]->getPiece()->isWhite() != validMove->getPiece()->isWhite())) // si la case est vide ou qu'elle contient une piece alliee, continue
 					continue;
 
-				std::vector<ModelSquare*> validMoves = squares_[i][j]->getPiece()->getValidMoves(this, false);
+				std::vector<ModelSquare*> validMoves = squares_[i][j]->getPiece()->getValidMoves2(this, false);
 
 				if (!(std::find(validMoves.begin(), validMoves.end(), kingPosition) != validMoves.end())) // s'il n'y a pas de roi dans validMoves de la case, continue
 					continue;

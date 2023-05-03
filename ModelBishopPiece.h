@@ -15,11 +15,11 @@ namespace logic {
 	{
 	public:
 		ModelBishopPiece() = default;
-		ModelBishopPiece(bool isWhite) : ModelPiece(isWhite, whiteImagePath_, blackImagePath_) {}
+		ModelBishopPiece(bool isWhite);
 		//~ModelFouPiece();
 		
 		//get valid moves
-		std::vector<ModelSquare*> getValidMoves(ModelChecker* checker, bool validate) override;
+		//std::vector<ModelSquare*> getValidMoves(ModelChecker* checker, bool validate) override;
 	private:
 		static const std::string whiteImagePath_;
 		static const std::string blackImagePath_;
