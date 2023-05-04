@@ -46,7 +46,7 @@ int main(int argc, char *argv[])
 	//logic::GameManager::reset();
 	//logic::GameManager::startEndgame1();
 
-	logic::GameController::startGameFileLayout(new QFile("game_layouts/classic_game_layout.txt"), true);
+	model::GameController::startGameFileLayout(new QFile("game_layouts/classic_game_layout.txt"), true);
 	
 	return app.exec();
 }

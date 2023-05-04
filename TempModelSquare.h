@@ -8,16 +8,16 @@
 #pragma once
 #include "ModelSquare.h"
 
-namespace logic {
+namespace model {
 
 	// implémentation RAII
-	class TempModelSquare {
+	class TempSquare {
 	public:
-		TempModelSquare() : modelSquare_(new ModelSquare()) {}
-		~TempModelSquare();
-		ModelSquare* operator->();
+		TempSquare() : modelSquare_(new Square()) {}
+		~TempSquare();
+		Square* operator->();
 	private:
-		ModelSquare* modelSquare_;
+		Square* modelSquare_;
 	};
 
 }

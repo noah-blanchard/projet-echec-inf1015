@@ -2,10 +2,10 @@
 #include "ModelSquare.h"
 #include "ModelChecker.h"
 
-namespace logic {
-    std::vector<class ModelSquare*> logic::RookMoves::calculate(ModelSquare* currentSquare, ModelChecker* checker, bool validate)
+namespace model {
+    std::vector<class Square*> model::RookMoves::calculate(Square* currentSquare, Checker* checker, bool validate)
     {
-        std::vector<ModelSquare*> validMoves;
+        std::vector<Square*> validMoves;
         int x = currentSquare->getX();
         int y = currentSquare->getY();
 

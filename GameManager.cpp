@@ -15,7 +15,7 @@
 #include "ModelPawnPiece.h"
 #include "ModelKnightPiece.h"
 
-namespace logic
+namespace model
 {
     // initialize game variables
     bool GameManager::whiteTurn_      =  true;
@@ -25,7 +25,7 @@ namespace logic
     bool GameManager::whiteCheckMate_ = false;
     bool GameManager::blackCheckMate_ = false;
     //std::unique_ptr<logic::ModelChecker> GameManager::checkerModel_ = nullptr;
-    std::unique_ptr<view::ViewCheckerMainWindow> GameManager::checkerView_ = nullptr;
+    std::unique_ptr<view::CheckerMainWindow> GameManager::checkerView_ = nullptr;
 
     void GameManager::nextTurn()
     {
@@ -44,16 +44,16 @@ namespace logic
     }
 
     void GameManager::startEndgame1() {
-        ModelChecker* checkerModel = new ModelChecker();
+        Checker* checkerModel = new Checker();
 
         // créer les objets en utilisant std::make_shared
-        auto blackKing   = std::make_shared<ModelKingPiece>(false);
-        auto whiteKing   = std::make_shared<ModelKingPiece>(true);
-        auto whiteBishop = std::make_shared<ModelBishopPiece>(true);
-        auto blackBishop = std::make_shared<ModelBishopPiece>(false);
-        auto blackPawn   = std::make_shared<ModelPawnPiece>(false, false);
-		auto blackKnight = std::make_shared<ModelKnightPiece>(false);
-        auto whiteQueen = std::make_shared<ModelQueenPiece>(true);
+        auto blackKing   = std::make_shared<King>(false);
+        auto whiteKing   = std::make_shared<King>(true);
+        auto whiteBishop = std::make_shared<Bishop>(true);
+        auto blackBishop = std::make_shared<Bishop>(false);
+        auto blackPawn   = std::make_shared<Pawn>(false, false);
+		auto blackKnight = std::make_shared<Knight>(false);
+        auto whiteQueen = std::make_shared<Queen>(true);
 
         // utiliser les shared_ptr pour initialiser les cases
         checkerModel->getSquareAtPosition(0, 3)->setPiece(blackKing);
@@ -66,7 +66,7 @@ namespace logic
 		checkerModel->getSquareAtPosition(6, 4)->setPiece(blackKnight);
         checkerModel->getSquareAtPosition(0, 0)->setPiece(whiteQueen);
 
-        checkerView_ = std::make_unique<view::ViewCheckerMainWindow>(checkerModel);
+        checkerView_ = std::make_unique<view::CheckerMainWindow>(checkerModel);
         showChecker();
     }
 
@@ -90,7 +90,7 @@ namespace logic
 
     void GameManager::reset()
     {
-        ModelKingPiece::resetInstanceCounter();
+        King::resetInstanceCounter();
         closeChecker();
         //checkerModel_ = nullptr;
         checkerView_ = nullptr;

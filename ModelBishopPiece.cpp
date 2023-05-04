@@ -8,9 +8,9 @@
 #include "ModelBishopPiece.h"
 #include "BishopMoves.h"
 
-namespace logic {
-    const std::string ModelBishopPiece::whiteImagePath_ = "images/white/fou_white.png";
-    const std::string ModelBishopPiece::blackImagePath_ = "images/black/fou_black.png";
+namespace model {
+    const std::string Bishop::whiteImagePath_ = "images/white/fou_white.png";
+    const std::string Bishop::blackImagePath_ = "images/black/fou_black.png";
 
     /*std::vector<ModelSquare*> ModelBishopPiece::getValidMoves(ModelChecker* checker, bool validate)
     {
@@ -89,7 +89,7 @@ namespace logic {
 
     }*/
 
-    ModelBishopPiece::ModelBishopPiece(bool isWhite) : ModelPiece(isWhite, whiteImagePath_, blackImagePath_)
+    Bishop::Bishop(bool isWhite) : Piece(isWhite, whiteImagePath_, blackImagePath_)
     {
         calculators_.push_back(new BishopMoves());
 	}

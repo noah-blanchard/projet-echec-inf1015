@@ -8,14 +8,14 @@
 #pragma once
 #include "TempModelSquare.h"
 
-namespace logic
+namespace model
 {
-	TempModelSquare::~TempModelSquare()
+	TempSquare::~TempSquare()
 	{
 		delete modelSquare_;
 	}
 	
-	ModelSquare* TempModelSquare::operator->()
+	Square* TempSquare::operator->()
 	{
 		return modelSquare_;
 	}

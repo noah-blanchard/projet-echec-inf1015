@@ -10,7 +10,7 @@
 #include "ModelChecker.h"
 #include "ViewCheckerMainWindow.h"
 
-namespace logic {
+namespace model {
 	class GameManager {
 	public:
 		static void nextTurn();
@@ -18,7 +18,7 @@ namespace logic {
 		static bool isBlackTurn();
 
 		// game objects
-		static std::unique_ptr<ModelChecker> checker;
+		static std::unique_ptr<Checker> checker;
 
 		static void deletePieceAtPosition(int x, int y);
 		static void startDefaultGame();
@@ -39,7 +39,7 @@ namespace logic {
 		//static std::unique_ptr<ModelChecker> checkerModel_;
 
 		//views
-		static std::unique_ptr<view::ViewCheckerMainWindow> checkerView_;
+		static std::unique_ptr<view::CheckerMainWindow> checkerView_;
 
 	};
 }

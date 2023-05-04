@@ -2,11 +2,11 @@
 #include "ModelSquare.h"
 #include "ModelChecker.h"
 
-namespace logic {
+namespace model {
 
-    std::vector<class ModelSquare*> BishopMoves::calculate(ModelSquare* currentSquare, ModelChecker* checker, bool validate)
+    std::vector<class Square*> BishopMoves::calculate(Square* currentSquare, Checker* checker, bool validate)
     {
-        std::vector<ModelSquare*> validMoves;
+        std::vector<Square*> validMoves;
         int x = currentSquare->getX();
         int y = currentSquare->getY();
         int i = 1;

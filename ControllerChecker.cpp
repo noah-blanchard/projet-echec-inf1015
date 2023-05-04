@@ -9,7 +9,7 @@
 #include "GameManager.h"
 #include <iostream>
 
-namespace logic {
+namespace model {
 	void ControllerChecker::restartGameEvent() {
 		GameManager::reset();
 		GameManager::startEndgame1();

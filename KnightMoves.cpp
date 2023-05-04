@@ -2,10 +2,10 @@
 #include "ModelSquare.h"
 #include "ModelChecker.h"
 
-namespace logic {
-	std::vector<class ModelSquare*> KnightMoves::calculate(ModelSquare* currentSquare, ModelChecker* checker, bool validate)
+namespace model {
+	std::vector<class Square*> KnightMoves::calculate(Square* currentSquare, Checker* checker, bool validate)
 	{
-        std::vector<ModelSquare*> validMoves;
+        std::vector<Square*> validMoves;
 
         int possibleMoves[8][2] = { {-1, -2}, {1, -2}, {2, -1}, {2, 1}, {1, 2}, {-1, 2}, {-2, 1}, {-2, -1} };
 

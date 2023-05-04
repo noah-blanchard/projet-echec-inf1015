@@ -1,11 +1,11 @@
 #include "State.h"
 
-namespace logic
+namespace model
 {
 
-	ModelChecker* GameController::startGameFileLayout(QFile* file, bool showChessboard) {
-		logic::ModelKingPiece::resetInstanceCounter();
-		ModelChecker* checkerModel = new ModelChecker();
+	Checker* GameController::startGameFileLayout(QFile* file, bool showChessboard) {
+		model::King::resetInstanceCounter();
+		Checker* checkerModel = new Checker();
 
 		if (file->open(QIODevice::ReadOnly | QIODevice::Text)) {
 			QTextStream in(file);
@@ -39,7 +39,7 @@ namespace logic
 			checkerView_ = nullptr;
 			
 
-			checkerView_ = std::make_unique<view::ViewCheckerMainWindow>(checkerModel);
+			checkerView_ = std::make_unique<view::CheckerMainWindow>(checkerModel);
 			checkerView_->show();
 		}
 
@@ -47,21 +47,21 @@ namespace logic
 
 	}
 
-	std::shared_ptr<ModelPiece> GameController::createPieceFromChar(char pieceChar, bool isWhite) {
+	std::shared_ptr<Piece> GameController::createPieceFromChar(char pieceChar, bool isWhite) {
 		switch (pieceChar)
 		{
 		case 'P':
-			return std::make_shared<ModelPawnPiece>(isWhite, true);
+			return std::make_shared<Pawn>(isWhite, true);
 		case 'K':
-			return std::make_shared<ModelKingPiece>(isWhite);
+			return std::make_shared<King>(isWhite);
 		case 'Q':
-			return std::make_shared<ModelQueenPiece>(isWhite);
+			return std::make_shared<Queen>(isWhite);
 		case 'B':
-			return std::make_shared<ModelBishopPiece>(isWhite);
+			return std::make_shared<Bishop>(isWhite);
 		case 'N':
-			return std::make_shared<ModelKnightPiece>(isWhite);
+			return std::make_shared<Knight>(isWhite);
 		case 'R':
-			return std::make_shared<ModelRook>(isWhite);
+			return std::make_shared<Rook>(isWhite);
 		default:
 			return nullptr;
 		}

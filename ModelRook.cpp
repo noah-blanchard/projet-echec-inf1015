@@ -1,11 +1,11 @@
 #include "ModelRook.h"
 #include "RookMoves.h"
 
-namespace logic {
-	const std::string ModelRook::whiteImagePath_ = "images/white/tour_white.png";
-	const std::string ModelRook::blackImagePath_ = "images/black/tour_black.png";
+namespace model {
+	const std::string Rook::whiteImagePath_ = "images/white/tour_white.png";
+	const std::string Rook::blackImagePath_ = "images/black/tour_black.png";
 
-	ModelRook::ModelRook(bool isWhite) : ModelPiece(isWhite, whiteImagePath_, blackImagePath_) {
+	Rook::Rook(bool isWhite) : Piece(isWhite, whiteImagePath_, blackImagePath_) {
 
 		calculators_.push_back(new RookMoves());
 

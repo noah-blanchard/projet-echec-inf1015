@@ -2,9 +2,9 @@
 #include "ModelSquare.h"
 #include "ModelChecker.h"
 
-namespace logic {
-	std::vector<class ModelSquare*> PawnMoves::calculate(ModelSquare* currentSquare, ModelChecker* checker, bool validate) {
-        std::vector<ModelSquare*> validMoves;
+namespace model {
+	std::vector<class Square*> PawnMoves::calculate(Square* currentSquare, Checker* checker, bool validate) {
+        std::vector<Square*> validMoves;
         int x = currentSquare->getX();
         int y = currentSquare->getY();
         if (!currentSquare->getPiece()->isWhite()) {

@@ -2,10 +2,10 @@
 #include "ModelSquare.h"
 #include "ModelChecker.h"
 
-namespace logic {
-    std::vector<class ModelSquare*> KingMoves::calculate(ModelSquare* currentSquare, ModelChecker* checker, bool validate)
+namespace model {
+    std::vector<class Square*> KingMoves::calculate(Square* currentSquare, Checker* checker, bool validate)
     {
-		std::vector<ModelSquare*> validMoves;
+		std::vector<Square*> validMoves;
 		int posX = currentSquare->getX();
 		int posY = currentSquare->getY();
 
@@ -21,7 +21,7 @@ namespace logic {
 		{
 			int newX = posX + possibleMoves[i][0];
 			int newY = posY + possibleMoves[i][1];
-			ModelSquare* square = checker->getSquareAtPosition(newX, newY);
+			Square* square = checker->getSquareAtPosition(newX, newY);
 
 			if (isMoveValid(newX, newY) && (!validate || checker->validateMove(currentSquare, square))) {
 				validMoves.push_back(checker->getSquareAtPosition(newX, newY));

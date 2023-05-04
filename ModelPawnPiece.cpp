@@ -10,10 +10,10 @@
 #include "ModelChecker.h"
 #include "PawnMoves.h"
 
-namespace logic {
+namespace model {
 	
-	const std::string ModelPawnPiece::whiteImagePath_ = "images/white/pion_white.png";
-	const std::string ModelPawnPiece::blackImagePath_ = "images/black/pion_black.png";
+	const std::string Pawn::whiteImagePath_ = "images/white/pion_white.png";
+	const std::string Pawn::blackImagePath_ = "images/black/pion_black.png";
 
    /* std::vector<ModelSquare*> ModelPawnPiece::getValidMoves(ModelChecker* checker, bool validate) {
         std::vector<ModelSquare*> validMoves;
@@ -90,23 +90,23 @@ namespace logic {
         return validMoves;
     }*/
 
-    bool ModelPawnPiece::isFirstMove()
+    bool Pawn::isFirstMove()
     {
         return firstMove_;
     }
 
-    void ModelPawnPiece::firstMoveDone() {
+    void Pawn::firstMoveDone() {
 		firstMove_ = false;
 	}
 
-    bool ModelPawnPiece::transform(ModelSquare* square) {
+    bool Pawn::transform(Square* square) {
         if (square->getX() == 0 || square->getX() == 7) {
 			return true;
 		}
 		return false;
     }
 	
-	ModelPawnPiece::ModelPawnPiece(bool isWhite, bool firstMove) : ModelPiece(isWhite, whiteImagePath_, blackImagePath_), firstMove_(firstMove) {
+	Pawn::Pawn(bool isWhite, bool firstMove) : Piece(isWhite, whiteImagePath_, blackImagePath_), firstMove_(firstMove) {
         calculators_.push_back(new PawnMoves());
     }
 }

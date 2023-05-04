@@ -12,18 +12,18 @@
 #include "ControllerSquare.h"
 
 namespace view {
-	class ViewSquareLabel : public QLabel
+	class SquareLabel : public QLabel
 	{
 		Q_OBJECT
 	public:
-		ViewSquareLabel(logic::ModelSquare* model, QWidget* parent = nullptr);
-		~ViewSquareLabel() override;
+		SquareLabel(model::Square* model, QWidget* parent = nullptr);
+		~SquareLabel() override;
 		
 		void setImage(QPixmap image);
 
-		logic::ModelSquare* getModel() const { return model_; }
+		model::Square* getModel() const { return model_; }
 	private:
-		logic::ModelSquare* model_;
+		model::Square* model_;
 		
 		void mousePressEvent(QMouseEvent* event) override;
 

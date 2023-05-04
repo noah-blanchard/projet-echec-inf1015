@@ -7,7 +7,7 @@
 #pragma once
 #include "ModelChecker.h"
 
-namespace logic {
+namespace model {
 	class ControllerChecker
 	{
 	public:

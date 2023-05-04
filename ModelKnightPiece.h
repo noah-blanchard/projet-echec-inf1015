@@ -8,12 +8,12 @@
 #pragma once
 #include "ModelPiece.h"
 
-namespace logic {
-    class ModelKnightPiece : public ModelPiece
+namespace model {
+    class Knight : public Piece
     {
     public:
-        ModelKnightPiece() = default;
-        ModelKnightPiece(bool isWhite);
+        Knight() = default;
+        Knight(bool isWhite);
 
         //std::vector<ModelSquare*> getValidMoves(ModelChecker* checker, bool validate) override;
 

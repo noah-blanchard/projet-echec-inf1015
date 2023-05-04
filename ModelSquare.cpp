@@ -11,13 +11,13 @@
 #include "ModelBishopPiece.h"
 #include "ModelKnightPiece.h"
 
-namespace logic {
-	void ModelSquare::setPlayable(bool p) { 
+namespace model {
+	void Square::setPlayable(bool p) { 
 		playable_ = p;
 		emit playableSignal();
 	}
 
-	void ModelSquare::setPiece(std::shared_ptr<ModelPiece> piece) {
+	void Square::setPiece(std::shared_ptr<Piece> piece) {
 		this->piece_ = piece;
 		if (piece != nullptr) {
 			piece->setCurrentSquare(nullptr);
@@ -31,22 +31,22 @@ namespace logic {
 		//}
 	}
 
-	void ModelSquare::emitTransformSignal() {
+	void Square::emitTransformSignal() {
 		emit transformPieceSignal();
 	}
 
-	void ModelSquare::transformPiece(std::string selected) {
+	void Square::transformPiece(std::string selected) {
 		if (selected == "Queen") {
-			this->setPiece(std::make_shared<ModelQueenPiece>(this->getPiece()->isWhite()));
+			this->setPiece(std::make_shared<Queen>(this->getPiece()->isWhite()));
 		}
 		//else if (*selected == "Rook") {
 		//	this->setPiece(std::make_shared<ModelRookPiece>(this->getPiece()->isWhite()));
 		//}
 		else if (selected == "Bishop") {
-			this->setPiece(std::make_shared<ModelBishopPiece>(this->getPiece()->isWhite()));
+			this->setPiece(std::make_shared<Bishop>(this->getPiece()->isWhite()));
 		}
 		else if (selected == "Knight") {
-			this->setPiece(std::make_shared<ModelKnightPiece>(this->getPiece()->isWhite()));
+			this->setPiece(std::make_shared<Knight>(this->getPiece()->isWhite()));
 		}
 		/*	else {
 				throw std::invalid_argument("Invalid piece type");
@@ -55,6 +55,6 @@ namespace logic {
 		emit updatePieceSignal();
 	}
 
-	ModelSquare::~ModelSquare() {
+	Square::~Square() {
 	}
 }

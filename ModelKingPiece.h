@@ -9,14 +9,14 @@
 #include <string>
 #include "ModelPiece.h"
 
-namespace logic {
+namespace model {
 	//static int counter;
 
-	class ModelKingPiece : public ModelPiece
+	class King : public Piece
 	{
 	public:
-		ModelKingPiece(bool isWhite);
-		ModelKingPiece();
+		King(bool isWhite);
+		King();
 		//~ModelRoiPiece();
 		static void resetInstanceCounter();
 		bool isKing() override;

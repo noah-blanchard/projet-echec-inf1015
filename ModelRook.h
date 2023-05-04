@@ -1,13 +1,13 @@
 #pragma once
 #include "ModelPiece.h"
 
-namespace logic {
-    class ModelRook :
-        public ModelPiece
+namespace model {
+    class Rook :
+        public Piece
     {
     public:
-        ModelRook() = default;
-        ModelRook(bool isWhite);
+        Rook() = default;
+        Rook(bool isWhite);
     private:
         static const std::string whiteImagePath_;
         static const std::string blackImagePath_;

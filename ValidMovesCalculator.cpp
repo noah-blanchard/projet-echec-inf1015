@@ -2,7 +2,7 @@
 #include "ModelSquare.h"
 #include "ModelChecker.h"
 
-namespace logic {
+namespace model {
 	/*std::vector<class ModelSquare*> ValidMovesCalculator::calculate(ModelSquare* currentSquare, ModelChecker* checker, bool validate) {
 		std::vector<ModelSquare*> validMoves;
 		if (currentSquare->getPiece() != nullptr) {

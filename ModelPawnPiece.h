@@ -8,19 +8,19 @@
 #pragma once
 #include "ModelPiece.h"
 
-namespace logic {
-	class ModelPawnPiece : public ModelPiece
+namespace model {
+	class Pawn : public Piece
 	{
 	public:
-		ModelPawnPiece() = default;
-		ModelPawnPiece(bool isWhite, bool firstMove);
+		Pawn() = default;
+		Pawn(bool isWhite, bool firstMove);
 		//~ModelPionPiece();
 
 		//get valid moves
 		//std::vector<ModelSquare*> getValidMoves(ModelChecker* checker, bool validate) override;
 		bool isFirstMove() override;
 		void firstMoveDone() override;
-		bool transform(ModelSquare* square) override;
+		bool transform(Square* square) override;
 	
 	private:
 		bool firstMove_ = true;

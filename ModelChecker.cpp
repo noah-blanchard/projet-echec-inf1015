@@ -8,24 +8,24 @@
 #pragma once
 #include "ModelChecker.h"
 
-namespace logic {
+namespace model {
 
-	void ModelChecker::setSelectedSquare(ModelSquare* square)
+	void Checker::setSelectedSquare(Square* square)
 	{
 		selectedSquare_ = square;
 	}
 
-	void ModelChecker::setWhiteKingSquare(ModelSquare* square)
+	void Checker::setWhiteKingSquare(Square* square)
 	{
 		whiteKingSquare_ = square;
 	}
 	
-	void ModelChecker::setBlackKingSquare(ModelSquare* square)
+	void Checker::setBlackKingSquare(Square* square)
 	{
 		blackKingSquare_ = square;
 	}
 
-	void ModelChecker::resetPlayableSquares()
+	void Checker::resetPlayableSquares()
 	{
 		for (int i = 0; i < 8; i++) {
 			for (int j = 0; j < 8; j++) {
@@ -34,10 +34,10 @@ namespace logic {
 		}
 	}
 	
-	bool ModelChecker::validateMove(ModelSquare* square, ModelSquare* validMove) {
+	bool Checker::validateMove(Square* square, Square* validMove) {
 		bool result = true;
-		ModelSquare* kingPosition = nullptr;
-		TempModelSquare tempSquare;
+		Square* kingPosition = nullptr;
+		TempSquare tempSquare;
 		tempSquare->setPiece(validMove->getPiece());
 		validMove->setPiece(square->getPiece());
 		if (square == whiteKingSquare_ || square == blackKingSquare_) {
@@ -57,7 +57,7 @@ namespace logic {
 				if (!(squares_[i][j]->getPiece() != nullptr && squares_[i][j]->getPiece()->isWhite() != validMove->getPiece()->isWhite())) // si la case est vide ou qu'elle contient une piece alliee, continue
 					continue;
 
-				std::vector<ModelSquare*> validMoves = squares_[i][j]->getPiece()->getValidMoves2(this, false);
+				std::vector<Square*> validMoves = squares_[i][j]->getPiece()->getValidMoves2(this, false);
 
 				if (!(std::find(validMoves.begin(), validMoves.end(), kingPosition) != validMoves.end())) // s'il n'y a pas de roi dans validMoves de la case, continue
 					continue;
@@ -73,27 +73,27 @@ namespace logic {
 		return result;		
 	}
 	
-	ModelSquare* ModelChecker::getSelectedSquare() const
+	Square* Checker::getSelectedSquare() const
 	{
 		return selectedSquare_;
 	}
 
-	ModelSquare* ModelChecker::getSquareAtPosition(int x, int y) const
+	Square* Checker::getSquareAtPosition(int x, int y) const
 	{
 		return squares_[x][y];
 	}
 
 
-	ModelChecker::ModelChecker()
+	Checker::Checker()
 	{
 		for (int i = 0; i < 8; i++) {
 			for (int j = 0; j < 8; j++) {
-				squares_[i][j] = new ModelSquare((i + j) % 2 == 0, i, j);
+				squares_[i][j] = new Square((i + j) % 2 == 0, i, j);
 			}
 		}
 	}
 
-	ModelChecker::~ModelChecker()
+	Checker::~Checker()
 	{
 		for (int i = 0; i < 8; i++) {
 			for (int j = 0; j < 8; j++) {

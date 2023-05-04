@@ -10,31 +10,31 @@
 #include "TempModelSquare.h"
 #include <QObject>
 
-namespace logic {
+namespace model {
 	//class ModelSquare;
-	class ModelChecker : public QObject
+	class Checker : public QObject
 	{
 		Q_OBJECT
 	public:
-		ModelChecker();
-		~ModelChecker();
-		ModelSquare* getSquareAtPosition(int x, int y) const;	
-		void setSelectedSquare(ModelSquare* square);
-		ModelSquare* getSelectedSquare() const;
+		Checker();
+		~Checker();
+		Square* getSquareAtPosition(int x, int y) const;	
+		void setSelectedSquare(Square* square);
+		Square* getSelectedSquare() const;
 		void resetPlayableSquares();
 		// validate move with reference to std vector
-		bool validateMove(ModelSquare* currentSquare, ModelSquare* move);
+		bool validateMove(Square* currentSquare, Square* move);
 		
-		void setWhiteKingSquare(ModelSquare* square);
-		void setBlackKingSquare(ModelSquare* square);
-		ModelSquare* getWhiteKingSquare() const { return whiteKingSquare_; }
-		ModelSquare* getBlackKingSquare() const { return blackKingSquare_; }
+		void setWhiteKingSquare(Square* square);
+		void setBlackKingSquare(Square* square);
+		Square* getWhiteKingSquare() const { return whiteKingSquare_; }
+		Square* getBlackKingSquare() const { return blackKingSquare_; }
 	private:
-		ModelSquare* whiteKingSquare_;
-		ModelSquare* blackKingSquare_;
-		ModelSquare* squares_[8][8];
+		Square* whiteKingSquare_;
+		Square* blackKingSquare_;
+		Square* squares_[8][8];
 		//std::unique_ptr < std::shared_ptr<ModelSquare*>> squares;
-		ModelSquare* selectedSquare_ = nullptr;
+		Square* selectedSquare_ = nullptr;
 
 	signals:
 		void unallowedMoveSignal();

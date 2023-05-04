@@ -1,14 +1,14 @@
 #pragma once
 #include "ValidMovesCalculator.h"
 
-namespace logic {
+namespace model {
 	class KingMoves :
 		public ValidMovesCalculator
 	{
 	public:
 		KingMoves() = default;
 		~KingMoves();
-		std::vector<class ModelSquare*> calculate(ModelSquare* currentSquare, class ModelChecker* checker, bool validate) override;
+		std::vector<class Square*> calculate(Square* currentSquare, class Checker* checker, bool validate) override;
 	};
 }
 

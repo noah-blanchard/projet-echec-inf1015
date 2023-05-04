@@ -13,16 +13,16 @@
 namespace view
 {
 
-	const QString ViewSquareLabel::COLOR_LIGHT_    = "background-color: #F0D9B5;";
-	const QString ViewSquareLabel::COLOR_DARK_     = "background-color: #B58863;";
-	const QString ViewSquareLabel::COLOR_PLAYABLE_ = "background-color: #9AB0E4";
+	const QString SquareLabel::COLOR_LIGHT_    = "background-color: #F0D9B5;";
+	const QString SquareLabel::COLOR_DARK_     = "background-color: #B58863;";
+	const QString SquareLabel::COLOR_PLAYABLE_ = "background-color: #9AB0E4";
 
-	void ViewSquareLabel::updatePlayable()
+	void SquareLabel::updatePlayable()
 	{
 		setStyleSheet(model_->isPlayable() ? COLOR_PLAYABLE_ : model_->isLight() ? COLOR_LIGHT_ : COLOR_DARK_);
 	}
 
-	void ViewSquareLabel::updatePiece()
+	void SquareLabel::updatePiece()
 	{
 		if (model_->getPiece() != nullptr)
 		{
@@ -34,7 +34,7 @@ namespace view
 		}
 	}
 
-	void ViewSquareLabel::transformPiece()
+	void SquareLabel::transformPiece()
 	{
 		if (!this->model_->getPiece())
 		{
@@ -63,17 +63,17 @@ namespace view
 		model_->transformPiece(selected.toStdString());
 	}
 
-	void ViewSquareLabel::mousePressEvent(QMouseEvent* event)
+	void SquareLabel::mousePressEvent(QMouseEvent* event)
 	{
 		emit model_->isPlayable() ? clickMove() : model_->getPiece() != nullptr ? clickPiece() : void();
 	}
 
-	void ViewSquareLabel::setImage(QPixmap pixmap)
+	void SquareLabel::setImage(QPixmap pixmap)
 	{
 		setPixmap(pixmap.isNull() ? QPixmap() : pixmap.scaled(50, 50, Qt::KeepAspectRatio, Qt::SmoothTransformation));
 	}
 
-	ViewSquareLabel::ViewSquareLabel(logic::ModelSquare* model, QWidget* parent)
+	SquareLabel::SquareLabel(model::Square* model, QWidget* parent)
 		: QLabel(parent)
 		, model_(model)
 	{
@@ -88,12 +88,12 @@ namespace view
 		}
 
 		// connect the models signals.
-		connect(model, &logic::ModelSquare::playableSignal, this, &ViewSquareLabel::updatePlayable);
-		connect(model, &logic::ModelSquare::updatePieceSignal, this, &ViewSquareLabel::updatePiece);
-		connect(model, &logic::ModelSquare::transformPieceSignal, this, &ViewSquareLabel::transformPiece);
+		connect(model, &model::Square::playableSignal, this, &SquareLabel::updatePlayable);
+		connect(model, &model::Square::updatePieceSignal, this, &SquareLabel::updatePiece);
+		connect(model, &model::Square::transformPieceSignal, this, &SquareLabel::transformPiece);
 	}
 
-	ViewSquareLabel::~ViewSquareLabel()
+	SquareLabel::~SquareLabel()
 	{
 	}
 }

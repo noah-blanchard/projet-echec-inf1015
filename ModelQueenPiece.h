@@ -10,13 +10,13 @@
 #include "ModelSquare.h"
 #include "ModelChecker.h"
 
-namespace logic {
+namespace model {
 	//class ModelChecker;
-	class ModelQueenPiece : public ModelPiece
+	class Queen : public Piece
 	{
 	public:
-		ModelQueenPiece() = default;
-		ModelQueenPiece(bool isWhite);
+		Queen() = default;
+		Queen(bool isWhite);
 		//~ModelReinePiece();
 		//get valid moves
 		//std::vector<ModelSquare*> getValidMoves(ModelChecker* checker, bool validate) override;

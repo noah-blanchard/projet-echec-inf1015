@@ -18,11 +18,11 @@
 #include "ViewSquareLabel.h"
 
 namespace view {
-	class ViewCheckerMainWindow : public QMainWindow
+	class CheckerMainWindow : public QMainWindow
 	{
 		Q_OBJECT
 	public:
-		ViewCheckerMainWindow(logic::ModelChecker* model, QWidget* parent = nullptr);
+		CheckerMainWindow(model::Checker* model, QWidget* parent = nullptr);
 		//~ViewChecker() override;
 		void squareClickPiece();
 		void squareClickMove();
@@ -36,12 +36,12 @@ namespace view {
 		void showInfo(std::string message);
 		void showError(std::string message);
 	private:
-		ViewSquareLabel* selectedViewSquare_ = nullptr;
+		SquareLabel* selectedViewSquare_ = nullptr;
 		QGridLayout* gridLayout_;
 		QWidget* centralWidget_;
 		QFile* layoutFile_;
 		QLineEdit* filePathLineEdit_;
-		logic::ModelChecker* model_;
+		model::Checker* model_;
 	};
 }
 

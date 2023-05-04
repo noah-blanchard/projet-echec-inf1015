@@ -10,16 +10,16 @@
 #include "ModelChecker.h"
 #include "KingMoves.h"
 
-namespace logic {
-	const std::string ModelKingPiece::whiteImagePath_ = "images/white/roi_white.png";
-	const std::string ModelKingPiece::blackImagePath_ = "images/black/roi_black.png";
-	int ModelKingPiece::instanceCounter_ = 0;
+namespace model {
+	const std::string King::whiteImagePath_ = "images/white/roi_white.png";
+	const std::string King::blackImagePath_ = "images/black/roi_black.png";
+	int King::instanceCounter_ = 0;
 
-	void ModelKingPiece::resetInstanceCounter() {
+	void King::resetInstanceCounter() {
 		instanceCounter_ = 0;
 	}
 	
-	bool ModelKingPiece::isKing() {
+	bool King::isKing() {
 		return true;
 	}
 
@@ -52,7 +52,7 @@ namespace logic {
 	//}
 
 	
-	ModelKingPiece::ModelKingPiece(bool isWhite) : ModelPiece(isWhite, whiteImagePath_, blackImagePath_) {
+	King::King(bool isWhite) : Piece(isWhite, whiteImagePath_, blackImagePath_) {
 		if (instanceCounter_ < 2) {
 			instanceCounter_++;
 			calculators_.push_back(new KingMoves());
@@ -63,5 +63,5 @@ namespace logic {
 		}
 	}
 
-	ModelKingPiece::ModelKingPiece() : ModelKingPiece(false) {}
+	King::King() : King(false) {}
 }

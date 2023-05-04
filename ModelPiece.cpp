@@ -9,13 +9,13 @@
 #include "ModelSquare.h"
 #include "ValidMovesCalculator.h"
 
-namespace logic {
+namespace model {
 	
-	bool ModelPiece::isWhite() {
+	bool Piece::isWhite() {
 		return white_;
 	}
 
-	bool ModelPiece::isKing() {
+	bool Piece::isKing() {
 		return false;
 	}
 
@@ -24,38 +24,38 @@ namespace logic {
 		emit movedSignal();
 	}*/
 
-	void ModelPiece::setCurrentSquare(ModelSquare* square) {
+	void Piece::setCurrentSquare(Square* square) {
 		currentSquare = square;
 	}
 
-	bool ModelPiece::isFirstMove()
+	bool Piece::isFirstMove()
 	{
 		return false;
 	}
 
-	ModelPiece::ModelPiece(bool isWhite, std::string whitePath, std::string blackPath)
+	Piece::Piece(bool isWhite, std::string whitePath, std::string blackPath)
 	{
 		white_ = isWhite;
 		imagePath_ = isWhite ? whitePath : blackPath;
 	}
 
-	ModelPiece::~ModelPiece()
+	Piece::~Piece()
 	{
 		this->setCurrentSquare(nullptr);
 	}
 
-	void ModelPiece::firstMoveDone() {
+	void Piece::firstMoveDone() {
 		//do nothing
 	}
 
-	bool ModelPiece::transform(ModelSquare* square) {
+	bool Piece::transform(Square* square) {
 		return false;
 	}
 
-	std::vector<class ModelSquare*> ModelPiece::getValidMoves2(class ModelChecker* checker, bool validate) {
-		std::vector<ModelSquare*> validMoves;
+	std::vector<class Square*> Piece::getValidMoves2(class Checker* checker, bool validate) {
+		std::vector<Square*> validMoves;
 		for (auto calculator : calculators_) {
-			std::vector<ModelSquare*> moves = calculator->calculate(currentSquare, checker, validate);
+			std::vector<Square*> moves = calculator->calculate(currentSquare, checker, validate);
 			validMoves.insert(validMoves.end(), moves.begin(), moves.end());
 		}
 		return validMoves;

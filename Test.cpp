@@ -5,60 +5,60 @@
 #include "State.h"
 
 TEST(ChessGame, Test_Max2_King) {
-	logic::ModelKingPiece::resetInstanceCounter();
-	logic::ModelKingPiece* king1 = new logic::ModelKingPiece(true);
-	logic::ModelKingPiece* king2 = new logic::ModelKingPiece(true);
+	model::King::resetInstanceCounter();
+	model::King* king1 = new model::King(true);
+	model::King* king2 = new model::King(true);
 	try {
-		EXPECT_ANY_THROW(logic::ModelKingPiece * king3 = new logic::ModelKingPiece(true));
+		EXPECT_ANY_THROW(model::King * king3 = new model::King(true));
 	}
 	catch (std::exception& e) {
 		std::cout << e.what() << std::endl;
 	}
 	delete king1;
 	delete king2;
-	logic::ModelKingPiece::resetInstanceCounter();
+	model::King::resetInstanceCounter();
 
 }
 
 // test check mate situation 1
 
 TEST(ChessGame, Test_Checkmate_1) {
-	logic::ModelKingPiece::resetInstanceCounter();
-	logic::ModelChecker* checkerModel = logic::GameController::startGameFileLayout(new QFile("game_layouts/check_mate_situation1.txt"), false);
-	EXPECT_EQ(logic::GameController::isGameOver(), false);
-	logic::GameController::selectPiece(checkerModel->getSquareAtPosition(2, 0), checkerModel);
-	logic::GameController::movePiece(checkerModel->getSquareAtPosition(0, 0), checkerModel);
+	model::King::resetInstanceCounter();
+	model::Checker* checkerModel = model::GameController::startGameFileLayout(new QFile("game_layouts/check_mate_situation1.txt"), false);
+	EXPECT_EQ(model::GameController::isGameOver(), false);
+	model::GameController::selectPiece(checkerModel->getSquareAtPosition(2, 0), checkerModel);
+	model::GameController::movePiece(checkerModel->getSquareAtPosition(0, 0), checkerModel);
 	bool isCheckMate = false;
-	EXPECT_EQ(logic::GameController::getCurrentTurn()->isGameOver(checkerModel, isCheckMate), true);
-	logic::ModelKingPiece::resetInstanceCounter();
-	logic::ModelKingPiece::resetInstanceCounter();
+	EXPECT_EQ(model::GameController::getCurrentTurn()->isGameOver(checkerModel, isCheckMate), true);
+	model::King::resetInstanceCounter();
+	model::King::resetInstanceCounter();
 	delete checkerModel;
 }
 
 // test no moves for king in the start of the game
 TEST(ChessGame, No_Possible_Moves) {
-	logic::ModelKingPiece::resetInstanceCounter();
-	logic::ModelChecker* checkerModel = logic::GameController::startGameFileLayout(new QFile("game_layouts/classic_game_layout.txt"), false);
+	model::King::resetInstanceCounter();
+	model::Checker* checkerModel = model::GameController::startGameFileLayout(new QFile("game_layouts/classic_game_layout.txt"), false);
 	EXPECT_EQ(checkerModel->getSquareAtPosition(7, 4)->getPiece()->getValidMoves2(checkerModel, false).size(), 0);
-	logic::ModelKingPiece::resetInstanceCounter();
+	model::King::resetInstanceCounter();
 	delete checkerModel;
 }
 
 // test the impossibility to play when it 's not your turn
 TEST(ChessGame, No_White_Play_When_Black_Turn) {
-	logic::ModelKingPiece::resetInstanceCounter();
-	logic::ModelChecker* checkerModel = logic::GameController::startGameFileLayout(new QFile("game_layouts/classic_game_layout.txt"), false);
+	model::King::resetInstanceCounter();
+	model::Checker* checkerModel = model::GameController::startGameFileLayout(new QFile("game_layouts/classic_game_layout.txt"), false);
 	// selecting a white piece
-	logic::GameController::selectPiece(checkerModel->getSquareAtPosition(6, 0), checkerModel);
+	model::GameController::selectPiece(checkerModel->getSquareAtPosition(6, 0), checkerModel);
 	EXPECT_TRUE(checkerModel->getSelectedSquare() != nullptr);
 	EXPECT_TRUE(checkerModel->getSelectedSquare()->getPiece()->isWhite() == true);
 	// moving a white piece
-	logic::GameController::movePiece(checkerModel->getSquareAtPosition(5, 0), checkerModel);
+	model::GameController::movePiece(checkerModel->getSquareAtPosition(5, 0), checkerModel);
 	EXPECT_TRUE(checkerModel->getSelectedSquare() == nullptr);
 
 	// trying to select a white piece again
-	logic::GameController::selectPiece(checkerModel->getSquareAtPosition(5, 0), checkerModel);
+	model::GameController::selectPiece(checkerModel->getSquareAtPosition(5, 0), checkerModel);
 	EXPECT_TRUE(checkerModel->getSelectedSquare() == nullptr);
-	logic::ModelKingPiece::resetInstanceCounter();
+	model::King::resetInstanceCounter();
 	delete checkerModel;
 }

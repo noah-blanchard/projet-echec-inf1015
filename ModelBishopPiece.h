@@ -10,12 +10,12 @@
 #include "ModelSquare.h"
 #include "ModelChecker.h"
 
-namespace logic {
-	class ModelBishopPiece : public ModelPiece
+namespace model {
+	class Bishop : public Piece
 	{
 	public:
-		ModelBishopPiece() = default;
-		ModelBishopPiece(bool isWhite);
+		Bishop() = default;
+		Bishop(bool isWhite);
 		//~ModelFouPiece();
 		
 		//get valid moves

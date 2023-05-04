@@ -9,12 +9,12 @@
 #include "ModelSquare.h"
 #include "ModelChecker.h"
 
-namespace logic {
+namespace model {
 	class ControllerSquare
 	{
 	public:
-		static void clickSquareControl(ModelSquare* clickedSquare, ModelChecker* checker);
-		static void clickSquareMove(ModelSquare* clickedSquare, ModelChecker* checker);
+		static void clickSquareControl(Square* clickedSquare, Checker* checker);
+		static void clickSquareMove(Square* clickedSquare, Checker* checker);
 	};
 }
 

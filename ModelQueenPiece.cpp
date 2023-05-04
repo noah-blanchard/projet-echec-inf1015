@@ -12,10 +12,10 @@
 #include "RookMoves.h"
 #include "BishopMoves.h"
 
-namespace logic
+namespace model
 {
-	const std::string ModelQueenPiece::whiteImagePath_ = "images/white/reine_white.png";
-	const std::string ModelQueenPiece::blackImagePath_ = "images/black/reine_black.png";
+	const std::string Queen::whiteImagePath_ = "images/white/reine_white.png";
+	const std::string Queen::blackImagePath_ = "images/black/reine_black.png";
 	
 	/*std::vector<ModelSquare*> ModelQueenPiece::getValidMoves(ModelChecker* checker, bool validate)
 	{
@@ -59,7 +59,7 @@ namespace logic
 		return validMoves;
 	}*/
 
-	ModelQueenPiece::ModelQueenPiece(bool isWhite) : ModelPiece(isWhite, whiteImagePath_, blackImagePath_) {
+	Queen::Queen(bool isWhite) : Piece(isWhite, whiteImagePath_, blackImagePath_) {
 		
 		calculators_.push_back(new RookMoves());
 		calculators_.push_back(new BishopMoves());
