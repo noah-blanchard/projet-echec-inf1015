@@ -52,12 +52,6 @@
     <ClCompile Include="ModelQueenPiece.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="ControllerChecker.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="ControllerSquare.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="ModelBishopPiece.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -106,6 +100,30 @@
     <ClCompile Include="Test.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Command.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="SelectPieceCommand.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="MovePieceCommand.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="CommandsInvoker.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="GameTurn.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="WhiteTurn.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="BlackTurn.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Checkmate.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <QtMoc Include="ViewCheckerMainWindow.h">
@@ -126,12 +144,6 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ModelQueenPiece.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="ControllerChecker.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="ControllerSquare.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="ModelBishopPiece.h">
@@ -174,6 +186,30 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="ValidMovesCalculator.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Command.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="SelectPieceCommand.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="MovePieceCommand.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="CommandsInvoker.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="GameTurn.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="WhiteTurn.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="BlackTurn.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Checkmate.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

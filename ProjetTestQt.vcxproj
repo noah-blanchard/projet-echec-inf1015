@@ -114,10 +114,13 @@
     <ClCompile Include="bibliotheque_cours\bibliotheque_cours.cpp" />
     <ClCompile Include="bibliotheque_cours\verification_allocation.cpp" />
     <ClCompile Include="BishopMoves.cpp" />
-    <ClCompile Include="ControllerChecker.cpp" />
-    <ClCompile Include="ControllerSquare.cpp" />
+    <ClCompile Include="BlackTurn.cpp" />
+    <ClCompile Include="Checkmate.cpp" />
+    <ClCompile Include="Command.cpp" />
+    <ClCompile Include="CommandsInvoker.cpp" />
     <ClCompile Include="GameController.cpp" />
     <ClCompile Include="GameManager.cpp" />
+    <ClCompile Include="GameTurn.cpp" />
     <ClCompile Include="googletest\src\gtest-all.cc" />
     <ClCompile Include="KingMoves.cpp" />
     <ClCompile Include="KnightMoves.cpp" />
@@ -131,34 +134,43 @@
     <ClCompile Include="ModelKingPiece.cpp" />
     <ClCompile Include="ModelRook.cpp" />
     <ClCompile Include="ModelSquare.cpp" />
+    <ClCompile Include="MovePieceCommand.cpp" />
     <ClCompile Include="PawnMoves.cpp" />
     <ClCompile Include="RookMoves.cpp" />
+    <ClCompile Include="SelectPieceCommand.cpp" />
     <ClCompile Include="State.cpp" />
     <ClCompile Include="TempModelSquare.cpp" />
     <ClCompile Include="Test.cpp" />
     <ClCompile Include="ValidMovesCalculator.cpp" />
     <ClCompile Include="ViewChecker.cpp" />
     <ClCompile Include="ViewSquare.cpp" />
+    <ClCompile Include="WhiteTurn.cpp" />
   </ItemGroup>
   <ItemGroup>
     <QtMoc Include="ViewCheckerMainWindow.h" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="BishopMoves.h" />
-    <ClInclude Include="ControllerChecker.h" />
-    <ClInclude Include="ControllerSquare.h" />
+    <ClInclude Include="BlackTurn.h" />
+    <ClInclude Include="Checkmate.h" />
+    <ClInclude Include="Command.h" />
+    <ClInclude Include="CommandsInvoker.h" />
     <ClInclude Include="GameManager.h" />
+    <ClInclude Include="GameTurn.h" />
     <ClInclude Include="KingMoves.h" />
     <ClInclude Include="KnightMoves.h" />
     <ClInclude Include="ModelKnightPiece.h" />
     <ClInclude Include="ModelPawnPiece.h" />
     <ClInclude Include="ModelKingPiece.h" />
     <ClInclude Include="ModelRook.h" />
+    <ClInclude Include="MovePieceCommand.h" />
     <ClInclude Include="PawnMoves.h" />
     <ClInclude Include="RookMoves.h" />
+    <ClInclude Include="SelectPieceCommand.h" />
     <ClInclude Include="State.h" />
     <ClInclude Include="TempModelSquare.h" />
     <ClInclude Include="ValidMovesCalculator.h" />
+    <ClInclude Include="WhiteTurn.h" />
     <QtMoc Include="ModelChecker.h" />
     <ClInclude Include="ModelBishopPiece.h" />
     <QtMoc Include="ModelPiece.h" />

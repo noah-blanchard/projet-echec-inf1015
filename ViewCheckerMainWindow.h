@@ -14,7 +14,6 @@
 #include <QFileDialog>
 #include <QFile>
 #include "ModelChecker.h"
-#include "ControllerChecker.h"
 #include "ViewSquareLabel.h"
 
 namespace view {

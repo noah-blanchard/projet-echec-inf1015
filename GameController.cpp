@@ -2,10 +2,49 @@
 
 namespace model
 {
+	void GameController::selectPiece(Square* clickedSquare, Checker* checker)
+	{
+		currentTurn_->selectPiece(clickedSquare, checker);
+	}
+
+	void GameController::movePiece(Square* clickedSquare, Checker* checker)
+
+	{
+		// change the state
+
+		currentTurn_->movePiece(clickedSquare, checker);
+		clickedSquare->getPiece()->firstMoveDone();
+		currentTurn_ = transitions_[currentTurn_];
+
+		if (currentTurn_->isGameOver(checker, isGameOver_))
+		{
+			currentTurn_ = checkmate_;
+		}
+
+
+
+	}
+
+	void GameController::undo()
+	{
+		CommandsInvoker::undoCommand();
+	}
+
+	void GameController::redo()
+	{
+		CommandsInvoker::redoCommand();
+	}
+
+	GameTurn* GameController::getCurrentTurn()
+	{
+		return currentTurn_;
+	}
 
 	Checker* GameController::startGameFileLayout(QFile* file, bool showChessboard) {
 		model::King::resetInstanceCounter();
 		Checker* checkerModel = new Checker();
+		
+		currentFileLayout_ = file;
 
 		if (file->open(QIODevice::ReadOnly | QIODevice::Text)) {
 			QTextStream in(file);
@@ -47,6 +86,14 @@ namespace model
 
 	}
 
+	void GameController::restartGame()
+	{
+		if (currentFileLayout_ == nullptr) {
+			currentFileLayout_ = new QFile("game_layouts/classic_game_layout.txt");
+		}
+		startGameFileLayout(currentFileLayout_, true);
+	}
+
 	std::shared_ptr<Piece> GameController::createPieceFromChar(char pieceChar, bool isWhite) {
 		switch (pieceChar)
 		{
@@ -65,5 +112,9 @@ namespace model
 		default:
 			return nullptr;
 		}
+	}
+	bool GameController::isGameOver()
+	{
+		return isGameOver_;
 	}
 }

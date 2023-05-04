@@ -9,7 +9,6 @@
 #include <QLabel>
 #include "ModelSquare.h"
 #include <QInputDialog>
-#include "ControllerSquare.h"
 
 namespace view {
 	class SquareLabel : public QLabel

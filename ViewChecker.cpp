@@ -99,7 +99,7 @@ namespace view {
 
 	
 	void CheckerMainWindow::clickRestartGame() {
-		model::ControllerChecker::restartGameEvent();
+		model::GameController::restartGame();
 	}
 
 	void CheckerMainWindow::clickUndo()
