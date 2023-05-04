@@ -38,6 +38,7 @@ void initialiserBibliothequeCours([[maybe_unused]] int argc, [[maybe_unused]] ch
 
 int main(int argc, char *argv[])
 {
+	bibliotheque_cours::BreakpointSurAllocations breakpointSurAllocations = { 555U, 562U, 560U, 561U, 563U, 564U, 595U, 597U, 705U, 707U, 709U, 817U, 1852U, 1716U, 1850U, 1402U, 1407U, 1408U, 1409U, 1410U, 1411U, 1986U, 1718U, 1854U, 2159U, };
 	bibliotheque_cours::VerifierFuitesAllocations verifierFuitesAllocations;
 	QApplication app(argc, argv);
 	initialiserBibliothequeCours(argc, argv);
@@ -47,6 +48,5 @@ int main(int argc, char *argv[])
 	//logic::GameManager::startEndgame1();
 
 	model::GameController::startGameFileLayout(new QFile("game_layouts/classic_game_layout.txt"), true);
-	
 	return app.exec();
 }

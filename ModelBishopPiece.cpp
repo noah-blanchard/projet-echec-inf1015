@@ -93,4 +93,13 @@ namespace model {
     {
         calculators_.push_back(new BishopMoves());
 	}
+
+    Bishop::~Bishop()
+    {
+        for (auto& calculator : calculators_)
+        {
+			delete calculator;
+		}
+        calculators_.clear();
+	}
 }

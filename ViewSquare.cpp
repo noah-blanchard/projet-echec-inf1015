@@ -95,5 +95,6 @@ namespace view
 
 	SquareLabel::~SquareLabel()
 	{
+	
 	}
 }

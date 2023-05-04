@@ -17,6 +17,7 @@ namespace model {
 	public:
 		King(bool isWhite);
 		King();
+		~King();
 		//~ModelRoiPiece();
 		static void resetInstanceCounter();
 		bool isKing() override;

@@ -56,5 +56,6 @@ namespace model {
 	}
 
 	Square::~Square() {
+		//delete piece_.get();
 	}
 }

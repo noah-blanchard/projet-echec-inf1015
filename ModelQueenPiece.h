@@ -17,6 +17,7 @@ namespace model {
 	public:
 		Queen() = default;
 		Queen(bool isWhite);
+		~Queen();
 		//~ModelReinePiece();
 		//get valid moves
 		//std::vector<ModelSquare*> getValidMoves(ModelChecker* checker, bool validate) override;

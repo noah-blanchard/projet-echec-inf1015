@@ -14,6 +14,7 @@ namespace model {
     public:
         Knight() = default;
         Knight(bool isWhite);
+        ~Knight();
 
         //std::vector<ModelSquare*> getValidMoves(ModelChecker* checker, bool validate) override;
 

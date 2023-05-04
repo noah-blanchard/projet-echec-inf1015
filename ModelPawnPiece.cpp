@@ -109,4 +109,11 @@ namespace model {
 	Pawn::Pawn(bool isWhite, bool firstMove) : Piece(isWhite, whiteImagePath_, blackImagePath_), firstMove_(firstMove) {
         calculators_.push_back(new PawnMoves());
     }
+
+    Pawn::~Pawn() {
+        for (auto& calculator : calculators_) {
+			delete calculator;
+		}
+        calculators_.clear();
+	}
 }

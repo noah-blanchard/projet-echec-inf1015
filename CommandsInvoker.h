@@ -5,6 +5,7 @@ namespace model {
 	class CommandsInvoker
 	{
 	public:
+
 		static void executeCommand(Command* command)
 		{
 			command->execute();
@@ -35,6 +36,8 @@ namespace model {
 			commandsUndone_.pop_back();
 			commandsDone_.push_back(command);
 		}
+
+
 
 	private:
 		inline static std::vector<Command*> commandsDone_;

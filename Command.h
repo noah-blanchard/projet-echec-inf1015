@@ -8,7 +8,7 @@ namespace model {
 	{
 	public:
 		Command() = default;
-		virtual ~Command() = default;
+		virtual ~Command() {};
 		virtual void execute() = 0;
 		virtual void cancel() = 0;
 	};

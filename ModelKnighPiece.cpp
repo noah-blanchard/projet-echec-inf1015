@@ -49,4 +49,13 @@ namespace model
     Knight::Knight(bool isWhite) : Piece(isWhite, whiteImagePath_, blackImagePath_) {
         calculators_.push_back(new KnightMoves());
     }
+
+    Knight::~Knight() {
+        for (auto& calculator : calculators_) {
+			delete calculator;
+		}
+        calculators_.clear();
+    }
+
+
 }

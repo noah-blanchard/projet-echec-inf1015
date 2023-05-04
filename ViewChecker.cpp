@@ -97,6 +97,11 @@ namespace view {
 		setWindowTitle("Simple Chess Game");
 	}
 
+	CheckerMainWindow::~CheckerMainWindow()
+	{
+		delete model_;
+	}
+
 	
 	void CheckerMainWindow::clickRestartGame() {
 		model::GameController::restartGame();

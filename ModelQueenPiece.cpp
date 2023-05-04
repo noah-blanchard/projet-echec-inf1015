@@ -65,4 +65,12 @@ namespace model
 		calculators_.push_back(new BishopMoves());
 
 	}
+	Queen::~Queen()
+	{
+		for (auto& calculator : calculators_)
+		{
+			delete calculator;
+		}
+		calculators_.clear();
+	}
 }

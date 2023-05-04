@@ -16,6 +16,7 @@ namespace model {
 	public:
 		Bishop() = default;
 		Bishop(bool isWhite);
+		~Bishop();
 		//~ModelFouPiece();
 		
 		//get valid moves

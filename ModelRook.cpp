@@ -10,4 +10,12 @@ namespace model {
 		calculators_.push_back(new RookMoves());
 
 	}
+
+	Rook::~Rook() {
+		for (auto& calculator : calculators_)
+		{
+			delete calculator;
+		}
+		calculators_.clear();
+	}
 }

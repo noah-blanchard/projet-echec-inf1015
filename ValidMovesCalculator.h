@@ -6,7 +6,7 @@ namespace model {
 	{
 	public:
 			ValidMovesCalculator() = default;
-			~ValidMovesCalculator();
+			virtual ~ValidMovesCalculator() {};
 			virtual std::vector<class Square*> calculate(Square* currentSquare, class Checker* checker, bool validate) = 0;
 	};
 }

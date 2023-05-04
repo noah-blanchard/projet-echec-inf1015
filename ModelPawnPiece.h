@@ -14,6 +14,7 @@ namespace model {
 	public:
 		Pawn() = default;
 		Pawn(bool isWhite, bool firstMove);
+		~Pawn();
 		//~ModelPionPiece();
 
 		//get valid moves

@@ -7,7 +7,7 @@ namespace model {
 	{
 	public:
 		PawnMoves() = default;
-		~PawnMoves();
+		//~PawnMoves();
 		std::vector<class Square*> calculate(Square* currentSquare, class Checker* checker, bool validate) override;
 	};
 }

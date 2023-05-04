@@ -77,10 +77,10 @@ namespace model
 
 	}
 
-	Checker* GameController::testCheckmate1()
+	std::unique_ptr<Checker> GameController::testCheckmate1()
 	{
 		model::King::resetInstanceCounter();
-		Checker* checkerModel = new Checker();
+		std::unique_ptr<Checker> checkerModel = std::unique_ptr<Checker>(new Checker());
 
 		checkerModel->getSquareAtPosition(2, 0)->setPiece(std::make_shared<Rook>(true));
 		checkerModel->getSquareAtPosition(1, 1)->setPiece(std::make_shared<Rook>(true));

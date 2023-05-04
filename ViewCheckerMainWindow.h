@@ -22,7 +22,7 @@ namespace view {
 		Q_OBJECT
 	public:
 		CheckerMainWindow(model::Checker* model, QWidget* parent = nullptr);
-		//~ViewChecker() override;
+		~CheckerMainWindow() override;
 		void squareClickPiece();
 		void squareClickMove();
 		void clickRestartGame();

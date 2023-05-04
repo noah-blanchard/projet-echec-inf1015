@@ -64,4 +64,11 @@ namespace model {
 	}
 
 	King::King() : King(false) {}
+
+	King::~King() {
+		for (auto& calculator : calculators_) {
+			delete calculator;
+		}
+		calculators_.clear();
+	}
 }

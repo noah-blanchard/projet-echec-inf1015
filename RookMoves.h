@@ -7,7 +7,7 @@ namespace model {
     {
     public:
 		RookMoves() = default;
-		~RookMoves();
+		//~RookMoves();
 		std::vector<class Square*> calculate(Square* currentSquare, class Checker* checker, bool validate) override;
     };
 }

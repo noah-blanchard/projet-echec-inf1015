@@ -74,7 +74,7 @@ namespace model
 
 		// for testing
 		static Checker* testDefaultGame();
-		static Checker* testCheckmate1();
+		static std::unique_ptr<Checker> testCheckmate1();
 
 	private:
 		inline static QFile* currentFileLayout_ = nullptr;

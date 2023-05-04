@@ -25,15 +25,14 @@ TEST(ChessGame, Test_Max2_King) {
 
 TEST(ChessGame, Test_Checkmate_1) {
 	model::King::resetInstanceCounter();
-	model::Checker* checkerModel = model::GameController::testCheckmate1();
+	std::unique_ptr<model::Checker> checkerModel = model::GameController::testCheckmate1();
 	EXPECT_EQ(model::GameController::isGameOver(), false);
-	model::GameController::selectPiece(checkerModel->getSquareAtPosition(2, 0), checkerModel);
-	model::GameController::movePiece(checkerModel->getSquareAtPosition(0, 0), checkerModel);
+	model::GameController::selectPiece(checkerModel->getSquareAtPosition(2, 0), checkerModel.get());
+	model::GameController::movePiece(checkerModel->getSquareAtPosition(0, 0), checkerModel.get());
 	bool isCheckMate = false;
-	EXPECT_EQ(model::GameController::getCurrentTurn()->isGameOver(checkerModel, isCheckMate), true);
+	EXPECT_EQ(model::GameController::getCurrentTurn()->isGameOver(checkerModel.get(), isCheckMate), true);
 	model::King::resetInstanceCounter();
 	model::King::resetInstanceCounter();
-	delete checkerModel;
 }
 
 // test no moves for king in the start of the game
