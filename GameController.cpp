@@ -37,7 +37,7 @@ namespace model
 
 	GameTurn* GameController::getCurrentTurn()
 	{
-		return currentTurn_;
+		return currentTurn_.get();
 	}
 
 	Checker* GameController::testDefaultGame() {
@@ -80,7 +80,7 @@ namespace model
 	std::unique_ptr<Checker> GameController::testCheckmate1()
 	{
 		model::King::resetInstanceCounter();
-		std::unique_ptr<Checker> checkerModel = std::unique_ptr<Checker>(new Checker());
+		std::unique_ptr<Checker> checkerModel = std::make_unique<Checker>();
 
 		checkerModel->getSquareAtPosition(2, 0)->setPiece(std::make_shared<Rook>(true));
 		checkerModel->getSquareAtPosition(1, 1)->setPiece(std::make_shared<Rook>(true));
@@ -95,13 +95,15 @@ namespace model
 		return checkerModel;
 	}
 
-	void GameController::startGameFileLayout(QFile* file, bool showChessboard) {
+	void GameController::startGameFileLayout(std::string& file, bool showChessboard) {
 		model::King::resetInstanceCounter();
 		Checker* checkerModel = new Checker();		
 		currentFileLayout_ = file;
 
-		if (file->open(QIODevice::ReadOnly | QIODevice::Text)) {
-			QTextStream in(file);
+		QFile qfile_obj(QString::fromStdString(file));
+
+		if (qfile_obj.open(QIODevice::ReadOnly | QIODevice::Text)) {
+			QTextStream in(&qfile_obj);
 
 			while (!in.atEnd()) {
 				QString line = in.readLine();
@@ -122,9 +124,9 @@ namespace model
 
 				// Faites quelque chose avec les informations extraites
 			}
-
-			file->close();
 		}
+
+		qfile_obj.close();
 
 		currentTurn_ = whiteTurn_;
 
@@ -140,8 +142,8 @@ namespace model
 
 	void GameController::restartGame()
 	{
-		if (currentFileLayout_ == nullptr) {
-			currentFileLayout_ = new QFile("game_layouts/classic_game_layout.txt");
+		if (currentFileLayout_ == "") {
+			currentFileLayout_ = "game_layouts/classic_game_layout.txt";
 		}
 		startGameFileLayout(currentFileLayout_, true);
 	}

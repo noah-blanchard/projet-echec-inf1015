@@ -38,7 +38,7 @@ namespace view {
 		QWidget* rightSection = new QWidget(splitter);
 		rightSection->setFixedWidth(500);
 		QVBoxLayout* rightLayout = new QVBoxLayout(rightSection);
-		QPushButton* button = new QPushButton("Restart Game", rightSection);
+		QPushButton* button = new QPushButton("Restart Game with this layout", rightSection);
 		connect(button, &QPushButton::clicked, this, &CheckerMainWindow::clickRestartGame);
 
 		QPushButton* undo = new QPushButton("Undo", rightSection);
@@ -47,14 +47,23 @@ namespace view {
 		QPushButton* redo = new QPushButton("Redo", rightSection);
 		connect(redo, &QPushButton::clicked, this, &CheckerMainWindow::clickRedo);
 
-		QPushButton* loadFile = new QPushButton("Load File", rightSection);
+	
+		
+
+		QPushButton* loadFile = new QPushButton("Load Template File", rightSection);
 		connect(loadFile, &QPushButton::clicked, this, &CheckerMainWindow::clickLoadFile);
 
-		filePathLineEdit_ = new QLineEdit(rightSection);
+		QSplitter* innerSplitter = new QSplitter(Qt::Horizontal);
+		QLabel* label = new QLabel("Template file : ", innerSplitter);
+
+		filePathLineEdit_ = new QLineEdit(innerSplitter);
 		filePathLineEdit_->setReadOnly(true);
+
+		
 
 		QPushButton* startLayout = new QPushButton("Start a game with this template", rightSection);
 		connect(startLayout, &QPushButton::clicked, this, &CheckerMainWindow::clickStartFile);
+
 
 		gridLayout_ = new QGridLayout(leftSection);
 		this->model_ = model;
@@ -82,7 +91,8 @@ namespace view {
 		rightLayout->addWidget(undo);
 		rightLayout->addWidget(redo);
 		rightLayout->addWidget(loadFile);
-		rightLayout->addWidget(filePathLineEdit_);
+		/*rightLayout->addWidget(filePathLineEdit_); */
+		rightLayout->addWidget(innerSplitter);
 		rightLayout->addWidget(startLayout);
 		// add stretch to push button to the top
 		rightLayout->addStretch();
@@ -100,6 +110,11 @@ namespace view {
 	CheckerMainWindow::~CheckerMainWindow()
 	{
 		delete model_;
+		for (int i = 0; i < gridLayout_->count(); ++i) {
+			delete gridLayout_->itemAt(i)->widget();
+		}
+		delete gridLayout_;
+		delete centralWidget_;
 	}
 
 	
@@ -124,24 +139,22 @@ namespace view {
 
 	void CheckerMainWindow::unallowedPieceNotification()
 	{
-		std::string color = model::GameManager::isWhiteTurn() ? "white" : "black";
-		std::string message = "It is " + color + "'s turn";
 
-		QMessageBox::warning(this, "Unallowed piece", message.c_str());
+
 	}
 
 	void CheckerMainWindow::clickLoadFile()
 	{
 		QString filePath = QFileDialog::getOpenFileName(this, "Load Layout File", "", "Text Files (*.txt)");
 		if (filePath != "") {
-			layoutFile_ = new QFile(filePath);
+			layoutFile_ = filePath.toStdString();
 			filePathLineEdit_->setText(filePath);
 		}
 	}
 
 	void CheckerMainWindow::clickStartFile()
 	{
-		if (layoutFile_ != nullptr) {
+		if (layoutFile_ != "") {
 			model::GameController::startGameFileLayout(layoutFile_, true);
 		}
 	}

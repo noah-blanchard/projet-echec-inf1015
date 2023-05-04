@@ -38,7 +38,7 @@ namespace view {
 		SquareLabel* selectedViewSquare_ = nullptr;
 		QGridLayout* gridLayout_;
 		QWidget* centralWidget_;
-		QFile* layoutFile_;
+		std::string layoutFile_;
 		QLineEdit* filePathLineEdit_;
 		model::Checker* model_;
 	};

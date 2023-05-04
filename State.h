@@ -4,7 +4,6 @@
 #include "ModelSquare.h"
 #include "ModelChecker.h"
 #include <map>
-#include "GameManager.h"
 #include "ModelKingPiece.h"
 #include "ModelQueenPiece.h"
 #include "ModelBishopPiece.h"
@@ -67,7 +66,7 @@ namespace model
 		//	checkerView_->show();
 		//}
 
-		static void startGameFileLayout(QFile* file, bool showChessboard);
+		static void startGameFileLayout(std::string& file, bool showChessboard);
 		static void restartGame();
 		static std::shared_ptr<Piece> createPieceFromChar(char pieceChar, bool isWhite);
 		static bool isGameOver();
@@ -77,13 +76,15 @@ namespace model
 		static std::unique_ptr<Checker> testCheckmate1();
 
 	private:
-		inline static QFile* currentFileLayout_ = nullptr;
-		inline static GameTurn* blackTurn_ = new BlackTurn;
-		inline static GameTurn* whiteTurn_ = new WhiteTurn;
-		inline static GameTurn* checkmate_ = new Checkmate;
-		inline static GameTurn* currentTurn_ = whiteTurn_;
+		//inline static std::shared_ptr<QFile> currentFileLayout_ = nullptr;
+		inline static std::string currentFileLayout_ = "";
+		inline static std::shared_ptr<GameTurn> blackTurn_ = std::make_shared<BlackTurn>();
+		inline static std::shared_ptr<GameTurn> whiteTurn_ = std::make_shared<WhiteTurn>();
+		inline static std::shared_ptr<GameTurn> checkmate_ = std::make_shared<Checkmate>();
+		inline static std::shared_ptr<GameTurn> currentTurn_ = whiteTurn_;
 		inline static bool isGameOver_ = false;
-		inline static std::map<GameTurn*, GameTurn*> transitions_ = { {whiteTurn_, blackTurn_}, {blackTurn_, whiteTurn_} };
-		inline static std::unique_ptr<view::CheckerMainWindow> checkerView_ = nullptr;
+		inline static std::map<std::shared_ptr<GameTurn>, std::shared_ptr<GameTurn>> transitions_ = { {whiteTurn_, blackTurn_}, {blackTurn_, whiteTurn_} };
+		inline static std::shared_ptr<view::CheckerMainWindow> checkerView_ = nullptr;
+
 	};
 }

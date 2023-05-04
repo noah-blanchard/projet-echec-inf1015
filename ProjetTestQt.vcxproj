@@ -119,7 +119,6 @@
     <ClCompile Include="Command.cpp" />
     <ClCompile Include="CommandsInvoker.cpp" />
     <ClCompile Include="GameController.cpp" />
-    <ClCompile Include="GameManager.cpp" />
     <ClCompile Include="GameTurn.cpp" />
     <ClCompile Include="googletest\src\gtest-all.cc" />
     <ClCompile Include="KingMoves.cpp" />
@@ -155,7 +154,6 @@
     <ClInclude Include="Checkmate.h" />
     <ClInclude Include="Command.h" />
     <ClInclude Include="CommandsInvoker.h" />
-    <ClInclude Include="GameManager.h" />
     <ClInclude Include="GameTurn.h" />
     <ClInclude Include="KingMoves.h" />
     <ClInclude Include="KnightMoves.h" />
