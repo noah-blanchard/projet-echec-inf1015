@@ -43,3 +43,22 @@ TEST(ChessGame, No_Possible_Moves) {
 	logic::ModelKingPiece::resetInstanceCounter();
 	delete checkerModel;
 }
+
+// test the impossibility to play when it 's not your turn
+TEST(ChessGame, No_White_Play_When_Black_Turn) {
+	logic::ModelKingPiece::resetInstanceCounter();
+	logic::ModelChecker* checkerModel = logic::GameController::startGameFileLayout(new QFile("game_layouts/classic_game_layout.txt"), false);
+	// selecting a white piece
+	logic::GameController::selectPiece(checkerModel->getSquareAtPosition(6, 0), checkerModel);
+	EXPECT_TRUE(checkerModel->getSelectedSquare() != nullptr);
+	EXPECT_TRUE(checkerModel->getSelectedSquare()->getPiece()->isWhite() == true);
+	// moving a white piece
+	logic::GameController::movePiece(checkerModel->getSquareAtPosition(5, 0), checkerModel);
+	EXPECT_TRUE(checkerModel->getSelectedSquare() == nullptr);
+
+	// trying to select a white piece again
+	logic::GameController::selectPiece(checkerModel->getSquareAtPosition(5, 0), checkerModel);
+	EXPECT_TRUE(checkerModel->getSelectedSquare() == nullptr);
+	logic::ModelKingPiece::resetInstanceCounter();
+	delete checkerModel;
+}

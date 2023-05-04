@@ -33,9 +33,11 @@ namespace logic
 			file->close();
 		}
 
+		currentTurn_ = whiteTurn_;
+
 		if (showChessboard) {
 			checkerView_ = nullptr;
-			currentTurn_ = whiteTurn_;
+			
 
 			checkerView_ = std::make_unique<view::ViewCheckerMainWindow>(checkerModel);
 			checkerView_->show();
