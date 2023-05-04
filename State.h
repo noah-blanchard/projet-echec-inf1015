@@ -270,6 +270,7 @@ namespace logic
 	{
 	public:
 
+
 		static void selectPiece(ModelSquare* clickedSquare, ModelChecker* checker)
 		{
 			currentTurn_->selectPiece(clickedSquare, checker);
@@ -302,9 +303,14 @@ namespace logic
 			CommandsInvoker::redoCommand();
 		}
 
+		static GameTurn* getCurrentTurn()
+		{
+			return currentTurn_;
+		}
+
 		static void startNewGame()
 		{
-			//checkerView_->close();
+			if(checkerView_ != nullptr) checkerView_->close();
 			checkerView_ = nullptr;
 			currentTurn_ = whiteTurn_;
 			ModelChecker* checkerModel = new ModelChecker();
@@ -333,7 +339,7 @@ namespace logic
 			checkerView_->show();
 		}
 
-		static void startGameFileLayout(QFile* file);
+		static ModelChecker* startGameFileLayout(QFile* file, bool showChessboard);
 		static std::shared_ptr<ModelPiece> createPieceFromChar(char pieceChar, bool isWhite);
 
 		static bool isGameOver()

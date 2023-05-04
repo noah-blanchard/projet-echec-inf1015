@@ -137,7 +137,7 @@ namespace view {
 	void ViewCheckerMainWindow::clickStartFile()
 	{
 		if (layoutFile_ != nullptr) {
-			logic::GameController::startGameFileLayout(layoutFile_);
+			logic::GameController::startGameFileLayout(layoutFile_, true);
 		}
 	}
 	

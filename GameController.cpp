@@ -3,7 +3,7 @@
 namespace logic
 {
 
-	void GameController::startGameFileLayout(QFile* file) {
+	ModelChecker* GameController::startGameFileLayout(QFile* file, bool showChessboard) {
 		logic::ModelKingPiece::resetInstanceCounter();
 		ModelChecker* checkerModel = new ModelChecker();
 
@@ -33,11 +33,15 @@ namespace logic
 			file->close();
 		}
 
-		checkerView_ = nullptr;
-		currentTurn_ = whiteTurn_;
+		if (showChessboard) {
+			checkerView_ = nullptr;
+			currentTurn_ = whiteTurn_;
 
-		checkerView_ = std::make_unique<view::ViewCheckerMainWindow>(checkerModel);
-		checkerView_->show();
+			checkerView_ = std::make_unique<view::ViewCheckerMainWindow>(checkerModel);
+			checkerView_->show();
+		}
+
+		return checkerModel;
 
 	}
 
