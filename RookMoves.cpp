@@ -16,31 +16,35 @@ namespace logic {
             return (posX >= 0 && posX < 8 && posY >= 0 && posY < 8);
         };
 
-        for (int i = 0; i < 4; ++i)
+        for (int i = 0; i < 4; i++)
         {
-            for (int j = 1; isInsideChessBoard(x + j * direction[i][0], y + j * direction[i][1]); ++j)
+			int posX = x + direction[i][0];
+			int posY = y + direction[i][1];
+            while (isInsideChessBoard(posX, posY))
             {
-                ModelSquare* square = checker->getSquareAtPosition(x + j * direction[i][0], y + j * direction[i][1]);
-
-                if (!(!validate || checker->validateMove(currentSquare, square)))
-                {
-                    continue;
-                }
-
+				auto square = checker->getSquareAtPosition(posX, posY);
                 if (square->getPiece() == nullptr)
                 {
-                    validMoves.push_back(square);
-                    continue;
-                }
-
-                if (square->getPiece()->isWhite() != currentSquare->getPiece()->isWhite())
+                    if (!validate || checker->validateMove(currentSquare, square))
+                    {
+						validMoves.push_back(square);
+					}
+				}
+                else
                 {
-                    validMoves.push_back(square);
-                }
-
-                break;
-            }
-        }
+                    if (square->getPiece()->isWhite() != currentSquare->getPiece()->isWhite())
+                    {
+                        if (!validate || checker->validateMove(currentSquare, square))
+                        {
+							validMoves.push_back(square);
+						}
+					}
+					break;
+				}
+				posX += direction[i][0];
+				posY += direction[i][1];
+			}
+		}
 
         return validMoves;
     }
