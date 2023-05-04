@@ -3,6 +3,7 @@
 #include "ModelChecker.h"
 #include "ModelRook.h"
 #include "State.h"
+#include <QApplication>
 
 TEST(ChessGame, Test_Max2_King) {
 	model::King::resetInstanceCounter();
@@ -24,7 +25,7 @@ TEST(ChessGame, Test_Max2_King) {
 
 TEST(ChessGame, Test_Checkmate_1) {
 	model::King::resetInstanceCounter();
-	model::Checker* checkerModel = model::GameController::startGameFileLayout(new QFile("game_layouts/check_mate_situation1.txt"), false);
+	model::Checker* checkerModel = model::GameController::testCheckmate1();
 	EXPECT_EQ(model::GameController::isGameOver(), false);
 	model::GameController::selectPiece(checkerModel->getSquareAtPosition(2, 0), checkerModel);
 	model::GameController::movePiece(checkerModel->getSquareAtPosition(0, 0), checkerModel);
@@ -38,7 +39,7 @@ TEST(ChessGame, Test_Checkmate_1) {
 // test no moves for king in the start of the game
 TEST(ChessGame, No_Possible_Moves) {
 	model::King::resetInstanceCounter();
-	model::Checker* checkerModel = model::GameController::startGameFileLayout(new QFile("game_layouts/classic_game_layout.txt"), false);
+	model::Checker* checkerModel = model::GameController::testDefaultGame();
 	EXPECT_EQ(checkerModel->getSquareAtPosition(7, 4)->getPiece()->getValidMoves2(checkerModel, false).size(), 0);
 	model::King::resetInstanceCounter();
 	delete checkerModel;
@@ -47,7 +48,7 @@ TEST(ChessGame, No_Possible_Moves) {
 // test the impossibility to play when it 's not your turn
 TEST(ChessGame, No_White_Play_When_Black_Turn) {
 	model::King::resetInstanceCounter();
-	model::Checker* checkerModel = model::GameController::startGameFileLayout(new QFile("game_layouts/classic_game_layout.txt"), false);
+	model::Checker* checkerModel = model::GameController::testDefaultGame();
 	// selecting a white piece
 	model::GameController::selectPiece(checkerModel->getSquareAtPosition(6, 0), checkerModel);
 	EXPECT_TRUE(checkerModel->getSelectedSquare() != nullptr);

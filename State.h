@@ -67,10 +67,14 @@ namespace model
 		//	checkerView_->show();
 		//}
 
-		static Checker* startGameFileLayout(QFile* file, bool showChessboard);
+		static void startGameFileLayout(QFile* file, bool showChessboard);
 		static void restartGame();
 		static std::shared_ptr<Piece> createPieceFromChar(char pieceChar, bool isWhite);
 		static bool isGameOver();
+
+		// for testing
+		static Checker* testDefaultGame();
+		static Checker* testCheckmate1();
 
 	private:
 		inline static QFile* currentFileLayout_ = nullptr;

@@ -40,10 +40,64 @@ namespace model
 		return currentTurn_;
 	}
 
-	Checker* GameController::startGameFileLayout(QFile* file, bool showChessboard) {
+	Checker* GameController::testDefaultGame() {
 		model::King::resetInstanceCounter();
 		Checker* checkerModel = new Checker();
+
+		for (int i = 0; i < 8; i++) {
+			checkerModel->getSquareAtPosition(1, i)->setPiece(std::make_shared<Pawn>(false, true));
+			checkerModel->getSquareAtPosition(6, i)->setPiece(std::make_shared<Pawn>(true, true));
+		}
+
+		// black pieces
+		checkerModel->getSquareAtPosition(0, 0)->setPiece(std::make_shared<Rook>(false));
+		checkerModel->getSquareAtPosition(0, 1)->setPiece(std::make_shared<Knight>(false));
+		checkerModel->getSquareAtPosition(0, 2)->setPiece(std::make_shared<Bishop>(false));
+		checkerModel->getSquareAtPosition(0, 3)->setPiece(std::make_shared<Queen>(false));
+		checkerModel->getSquareAtPosition(0, 4)->setPiece(std::make_shared<King>(false));
+		checkerModel->setBlackKingSquare(checkerModel->getSquareAtPosition(0, 4));
+		checkerModel->getSquareAtPosition(0, 5)->setPiece(std::make_shared<Bishop>(false));
+		checkerModel->getSquareAtPosition(0, 6)->setPiece(std::make_shared<Knight>(false));
+		checkerModel->getSquareAtPosition(0, 7)->setPiece(std::make_shared<Rook>(false));
+
+		// white pieces
+		checkerModel->getSquareAtPosition(7, 0)->setPiece(std::make_shared<Rook>(true));
+		checkerModel->getSquareAtPosition(7, 1)->setPiece(std::make_shared<Knight>(true));
+		checkerModel->getSquareAtPosition(7, 2)->setPiece(std::make_shared<Bishop>(true));
+		checkerModel->getSquareAtPosition(7, 3)->setPiece(std::make_shared<Queen>(true));
+		checkerModel->getSquareAtPosition(7, 4)->setPiece(std::make_shared<King>(true));
+		checkerModel->setWhiteKingSquare(checkerModel->getSquareAtPosition(7, 4));
+		checkerModel->getSquareAtPosition(7, 5)->setPiece(std::make_shared<Bishop>(true));
+		checkerModel->getSquareAtPosition(7, 6)->setPiece(std::make_shared<Knight>(true));
+		checkerModel->getSquareAtPosition(7, 7)->setPiece(std::make_shared<Rook>(true));
 		
+		currentTurn_ = whiteTurn_;
+
+		return checkerModel;
+
+	}
+
+	Checker* GameController::testCheckmate1()
+	{
+		model::King::resetInstanceCounter();
+		Checker* checkerModel = new Checker();
+
+		checkerModel->getSquareAtPosition(2, 0)->setPiece(std::make_shared<Rook>(true));
+		checkerModel->getSquareAtPosition(1, 1)->setPiece(std::make_shared<Rook>(true));
+		checkerModel->getSquareAtPosition(7, 3)->setPiece(std::make_shared<King>(true));
+		checkerModel->setWhiteKingSquare(checkerModel->getSquareAtPosition(7, 3));
+
+		checkerModel->getSquareAtPosition(0, 7)->setPiece(std::make_shared<King>(false));
+		checkerModel->setBlackKingSquare(checkerModel->getSquareAtPosition(0, 7));
+
+		currentTurn_ = whiteTurn_;
+
+		return checkerModel;
+	}
+
+	void GameController::startGameFileLayout(QFile* file, bool showChessboard) {
+		model::King::resetInstanceCounter();
+		Checker* checkerModel = new Checker();		
 		currentFileLayout_ = file;
 
 		if (file->open(QIODevice::ReadOnly | QIODevice::Text)) {
@@ -81,8 +135,6 @@ namespace model
 			checkerView_ = std::make_unique<view::CheckerMainWindow>(checkerModel);
 			checkerView_->show();
 		}
-
-		return checkerModel;
 
 	}
 
