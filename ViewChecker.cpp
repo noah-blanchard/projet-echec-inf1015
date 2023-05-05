@@ -29,16 +29,42 @@ namespace view {
 		connect(redo, &QPushButton::clicked, this, &CheckerMainWindow::clickRedo);
 
 	
-		
+		helpDialog_ = new QDialog(this);
+		helpDialog_->setFixedSize(440, 320);
+		helpDialog_->setWindowTitle("Help");
+		QLabel* helpLabel = new QLabel("To load a template file, click on the button \"Load Template File\" and select a file.\n"
+			"To start a game with this template, click on the button \"Start a game with this template\".\n"
+			"To restart the game with the current template, click on the button \"Restart Game with this layout\".\n"
+			"To create custom templates, place a \".txt\" file in the \"game_layouts\" folder.\n"
+			"The file should be filled with lines containing : column number (0-7), row number (0-7), is white (0-1), piece char\n"
+			"The piece char should be : \n"
+			"\"P\" for a pawn\n"
+			"\"R\" for a rook\n"
+			"\"N\" for a knight\n"
+			"\"B\" for a bishop\n"
+			"\"Q\" for a queen\n"
+			"\"K\" for a king\n"
+			"Example : for a white rook at the top left corner, the line should be : 0 0 1 R\n"
+			"Example : for a black pawn at the bottom right corner, the line should be : 7 7 0 P\n"
+			"Full examples already exist in the \"game_layouts\" folder.\n"
+			, helpDialog_);
+		helpLabel->setWordWrap(true);
+		helpLabel->setAlignment(Qt::AlignCenter);
+		helpLabel->setFixedSize(435, 315);
+		helpLabel->setMargin(5);
 
-		QPushButton* loadFile = new QPushButton("Load Template File", rightSection);
-		connect(loadFile, &QPushButton::clicked, this, &CheckerMainWindow::clickLoadFile);
+
+		
 
 		QSplitter* innerSplitter = new QSplitter(Qt::Horizontal);
 		QLabel* label = new QLabel("Template file : ", innerSplitter);
 
 		filePathLineEdit_ = new QLineEdit(innerSplitter);
 		filePathLineEdit_->setReadOnly(true);
+		QPushButton* loadFile = new QPushButton("Load Template File", innerSplitter);
+		connect(loadFile, &QPushButton::clicked, this, &CheckerMainWindow::clickLoadFile);
+		QPushButton* help = new QPushButton("?", innerSplitter);
+		connect(help, &QPushButton::clicked, this, &CheckerMainWindow::clickHelp);
 
 		
 
@@ -61,31 +87,18 @@ namespace view {
 				gridLayout_->addWidget(square, i, j);
 			}
 		}
-		// set left section as central widget
 
-		// create right section
-
-		// add button to right section
 		rightLayout->addWidget(button);
 		rightLayout->addWidget(undo);
 		rightLayout->addWidget(redo);
-		rightLayout->addWidget(loadFile);
-		/*rightLayout->addWidget(filePathLineEdit_); */
 		rightLayout->addWidget(innerSplitter);
 		rightLayout->addWidget(startLayout);
-		// add stretch to push button to the top
 		rightLayout->addStretch();
 
-		// create horizontal splitter
-		
-		// set main window as central widget
 		setCentralWidget(centralWidget_);
 
-		// set main window size
 		setFixedSize(1000, 500);
 		setWindowTitle("Simple Chess Game");
-
-		// add all widgets to widgets_ vector from the most specific to the most general
 
 	}
 
@@ -102,6 +115,7 @@ namespace view {
 			}
 		}
 		delete model_;
+		delete helpDialog_;
 	}
 
 	
@@ -131,7 +145,7 @@ namespace view {
 
 	void CheckerMainWindow::clickLoadFile()
 	{
-		QString filePath = QFileDialog::getOpenFileName(this, "Load Layout File", "", "Text Files (*.txt)");
+		QString filePath = QFileDialog::getOpenFileName(this, "Load Layout File", "game_layouts", "Text Files (*.txt)");
 		if (filePath != "") {
 			layoutFile_ = filePath.toStdString();
 			filePathLineEdit_->setText(filePath);
@@ -143,6 +157,13 @@ namespace view {
 		if (layoutFile_ != "") {
 			model::GameController::startGameFileLayout(layoutFile_, true);
 		}
+	}
+
+	void CheckerMainWindow::clickHelp()
+	{
+		
+		helpDialog_->show();
+
 	}
 	
 	void CheckerMainWindow::squareClickPiece()
@@ -172,11 +193,8 @@ namespace view {
 		{
 			return;
 		}
-
-		//selectedViewSquare->disconnectFromPiece();
-		//model->setSelectedSquare(clickedSquare->getModel());			
-		model::/*ControllerSquare*/GameController::/*clickSquareMove*/movePiece(clickedSquare->getModel(), model_);
-		/*logic::GameManager::nextTurn();*/
+	
+		model:: GameController::movePiece(clickedSquare->getModel(), model_);
 		if (model::GameController::isGameOver())
 		{
 			QMessageBox::information(this, "Game Over", "Checkmate");

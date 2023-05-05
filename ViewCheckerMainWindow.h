@@ -30,6 +30,7 @@ namespace view {
 		void clickRedo();
 		void clickLoadFile();
 		void clickStartFile();
+		void clickHelp();
 		void unallowedMoveNotification();
 		void unallowedPieceNotification();
 		void showInfo(std::string message);
@@ -41,6 +42,7 @@ namespace view {
 		std::string layoutFile_;
 		QLineEdit* filePathLineEdit_;
 		model::Checker* model_;
+		QDialog* helpDialog_;
 	};
 }
 
