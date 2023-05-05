@@ -25,8 +25,8 @@ namespace view {
 		QPushButton* undo = new QPushButton("Undo", rightSection);
 		connect(undo, &QPushButton::clicked, this, &CheckerMainWindow::clickUndo);
 
-		QPushButton* redo = new QPushButton("Redo", rightSection);
-		connect(redo, &QPushButton::clicked, this, &CheckerMainWindow::clickRedo);
+		//QPushButton* redo = new QPushButton("Redo", rightSection);
+		//connect(redo, &QPushButton::clicked, this, &CheckerMainWindow::clickRedo);
 
 	
 		helpDialog_ = new QDialog(this);
@@ -90,7 +90,7 @@ namespace view {
 
 		rightLayout->addWidget(button);
 		rightLayout->addWidget(undo);
-		rightLayout->addWidget(redo);
+		//rightLayout->addWidget(redo);
 		rightLayout->addWidget(innerSplitter);
 		rightLayout->addWidget(startLayout);
 		rightLayout->addStretch();
