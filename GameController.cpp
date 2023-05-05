@@ -1,185 +1,46 @@
-#include "State.h"
+#include "GameController.h"
 
 namespace model
 {
-	void GameController::selectPiece(Square* clickedSquare, Checker* checker)
+	std::shared_ptr<PlayerTurn> GameController::whiteTurn_ = std::make_shared<WhiteTurn>();
+	std::shared_ptr<PlayerTurn> GameController::blackTurn_ = std::make_shared<BlackTurn>();
+	std::shared_ptr<PlayerTurn> GameController::checkmate_ = std::make_shared<GameOver>();
+	std::shared_ptr<PlayerTurn> GameController::currentTurn_ = whiteTurn_;
+	std::unordered_map<std::shared_ptr<PlayerTurn>, std::shared_ptr<PlayerTurn>> GameController::transitions_ = { {whiteTurn_, blackTurn_}, {blackTurn_, whiteTurn_} };
+	 std::unique_ptr<view::ViewCheckerMainWindow> GameController::checkerView_ = nullptr;
+	void GameController::selectPiece(Piece* piece)
 	{
-		currentTurn_->selectPiece(clickedSquare, checker);
+		currentTurn_->selectPiece(piece);
 	}
 
-	void GameController::movePiece(Square* clickedSquare, Checker* checker)
-
+	void GameController::movePiece(Piece* piece, Square* selectedSquare)
 	{
 		// change the state
 
-		currentTurn_->movePiece(clickedSquare, checker);
-		clickedSquare->getPiece()->firstMoveDone();
+		currentTurn_->movePiece(piece, selectedSquare);
 		currentTurn_ = transitions_[currentTurn_];
 
-		if (currentTurn_->isGameOver(checker, isGameOver_))
+		if (currentTurn_->isGameOver())
 		{
 			currentTurn_ = checkmate_;
 		}
 
-
-
 	}
 
-	void GameController::undo()
+	void GameController::startNewGame()
 	{
-		CommandsInvoker::undoCommand();
-	}
-
-	void GameController::redo()
-	{
-		CommandsInvoker::redoCommand();
-	}
-
-	GameTurn* GameController::getCurrentTurn()
-	{
-		return currentTurn_.get();
-	}
-
-	Checker* GameController::testDefaultGame() {
-		model::King::resetInstanceCounter();
-		Checker* checkerModel = new Checker();
-
-		for (int i = 0; i < 8; i++) {
-			checkerModel->getSquareAtPosition(1, i)->setPiece(std::make_shared<Pawn>(false, true));
-			checkerModel->getSquareAtPosition(6, i)->setPiece(std::make_shared<Pawn>(true, true));
-		}
-
-		// black pieces
-		checkerModel->getSquareAtPosition(0, 0)->setPiece(std::make_shared<Rook>(false));
-		checkerModel->getSquareAtPosition(0, 1)->setPiece(std::make_shared<Knight>(false));
-		checkerModel->getSquareAtPosition(0, 2)->setPiece(std::make_shared<Bishop>(false));
-		checkerModel->getSquareAtPosition(0, 3)->setPiece(std::make_shared<Queen>(false));
-		checkerModel->getSquareAtPosition(0, 4)->setPiece(std::make_shared<King>(false));
-		checkerModel->setBlackKingSquare(checkerModel->getSquareAtPosition(0, 4));
-		checkerModel->getSquareAtPosition(0, 5)->setPiece(std::make_shared<Bishop>(false));
-		checkerModel->getSquareAtPosition(0, 6)->setPiece(std::make_shared<Knight>(false));
-		checkerModel->getSquareAtPosition(0, 7)->setPiece(std::make_shared<Rook>(false));
-
-		// white pieces
-		checkerModel->getSquareAtPosition(7, 0)->setPiece(std::make_shared<Rook>(true));
-		checkerModel->getSquareAtPosition(7, 1)->setPiece(std::make_shared<Knight>(true));
-		checkerModel->getSquareAtPosition(7, 2)->setPiece(std::make_shared<Bishop>(true));
-		checkerModel->getSquareAtPosition(7, 3)->setPiece(std::make_shared<Queen>(true));
-		checkerModel->getSquareAtPosition(7, 4)->setPiece(std::make_shared<King>(true));
-		checkerModel->setWhiteKingSquare(checkerModel->getSquareAtPosition(7, 4));
-		checkerModel->getSquareAtPosition(7, 5)->setPiece(std::make_shared<Bishop>(true));
-		checkerModel->getSquareAtPosition(7, 6)->setPiece(std::make_shared<Knight>(true));
-		checkerModel->getSquareAtPosition(7, 7)->setPiece(std::make_shared<Rook>(true));
-		
+		checkerView_ = nullptr;
 		currentTurn_ = whiteTurn_;
+		//ChessBoard::addPiece<class King>(0, 3, false);
+		//ChessBoard::addPiece<class King>(5, 0, true);
+		//ChessBoard::addPiece<class Queen>(0, 4, false);
+		//ChessBoard::addPiece<class Queen>(5, 1, true);
+		//ChessBoard::addPiece<class Bishop>(0, 2, false);
+		//ChessBoard::addPiece<class Bishop>(5, 2, true);
+		//ChessBoard::addPiece<class Bishop>(0, 5, false);
+		//ChessBoard::addPiece<class Bishop>(5, 5, true);
 
-		return checkerModel;
-
-	}
-
-	std::unique_ptr<Checker> GameController::testCheckmate1()
-	{
-		model::King::resetInstanceCounter();
-		std::unique_ptr<Checker> checkerModel = std::make_unique<Checker>();
-
-		checkerModel->getSquareAtPosition(2, 0)->setPiece(std::make_shared<Rook>(true));
-		checkerModel->getSquareAtPosition(1, 1)->setPiece(std::make_shared<Rook>(true));
-		checkerModel->getSquareAtPosition(7, 3)->setPiece(std::make_shared<King>(true));
-		checkerModel->setWhiteKingSquare(checkerModel->getSquareAtPosition(7, 3));
-
-		checkerModel->getSquareAtPosition(0, 7)->setPiece(std::make_shared<King>(false));
-		checkerModel->setBlackKingSquare(checkerModel->getSquareAtPosition(0, 7));
-
-		currentTurn_ = whiteTurn_;
-
-		return checkerModel;
-	}
-
-	void GameController::startGameFileLayout(std::string& file, bool showChessboard) {
-		model::King::resetInstanceCounter();
-		Checker* checkerModel = new Checker();		
-		currentFileLayout_ = file;
-
-		QFile qfile_obj(QString::fromStdString(file));
-
-		if (qfile_obj.open(QIODevice::ReadOnly | QIODevice::Text)) {
-			QTextStream in(&qfile_obj);
-
-			while (!in.atEnd()) {
-				QString line = in.readLine();
-				QStringList fields = line.split(" ");
-
-				int col = fields[0].toInt();
-				int row = fields[1].toInt();
-				bool isWhite = fields[2].toInt() == 1;
-				QString pieceChar = fields[3];
-
-				checkerModel->getSquareAtPosition(row, col)->setPiece(createPieceFromChar(pieceChar.toStdString()[0], isWhite));
-				if (pieceChar.toStdString()[0] == 'K') {
-					if (isWhite)
-						checkerModel->setWhiteKingSquare(checkerModel->getSquareAtPosition(row, col));
-					else
-						checkerModel->setBlackKingSquare(checkerModel->getSquareAtPosition(row, col));
-				}
-
-				// Faites quelque chose avec les informations extraites
-			}
-		}
-
-		qfile_obj.close();
-
-		currentTurn_ = whiteTurn_;
-
-		if (showChessboard) {
-			checkerView_ = nullptr;
-			
-
-			checkerView_ = std::make_unique<view::CheckerMainWindow>(checkerModel);
-			checkerView_->show();
-		}
-
-	}
-
-	void GameController::restartGame()
-	{
-		if (currentFileLayout_ == "") {
-			currentFileLayout_ = "game_layouts/classic_game_layout.txt";
-		}
-		startGameFileLayout(currentFileLayout_, true);
-	}
-
-	bool GameController::isPieceAllowed(Piece* piece)
-	{
-		if(piece == nullptr)
-			return false;
-
-		if (currentTurn_ == whiteTurn_ && piece->isWhite() || currentTurn_ == blackTurn_ && !piece->isWhite())
-			return true;
-
-		return false;
-	}
-
-	std::shared_ptr<Piece> GameController::createPieceFromChar(char pieceChar, bool isWhite) {
-		switch (pieceChar)
-		{
-		case 'P':
-			return std::make_shared<Pawn>(isWhite, true);
-		case 'K':
-			return std::make_shared<King>(isWhite);
-		case 'Q':
-			return std::make_shared<Queen>(isWhite);
-		case 'B':
-			return std::make_shared<Bishop>(isWhite);
-		case 'N':
-			return std::make_shared<Knight>(isWhite);
-		case 'R':
-			return std::make_shared<Rook>(isWhite);
-		default:
-			return nullptr;
-		}
-	}
-	bool GameController::isGameOver()
-	{
-		return isGameOver_;
+		checkerView_ = std::make_unique<view::ViewCheckerMainWindow>();
+		checkerView_->show();
 	}
 }

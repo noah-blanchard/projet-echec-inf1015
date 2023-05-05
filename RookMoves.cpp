@@ -1,51 +1,50 @@
 #include "RookMoves.h"
-#include "ModelSquare.h"
-#include "ModelChecker.h"
+#include "ChessBoard.h"
+#include "Square.h"
 
-namespace model {
-    std::vector<class Square*> model::RookMoves::calculate(Square* currentSquare, Checker* checker, bool validate)
-    {
-        std::vector<Square*> validMoves;
-        int x = currentSquare->getX();
-        int y = currentSquare->getY();
+namespace model
+{
+	std::array<std::pair<int, int>, 4> DISPLACEMENTS_ = 
+	{
+		std::pair<int, int> {-1,  0},
+		std::pair<int, int> { 0,  1},
+		std::pair<int, int> { 1,  0},
+		std::pair<int, int> { 0, -1},
+	};
 
-        int direction[4][2] = { {0, -1}, {1, 0}, {0, 1}, {-1, 0} };
+	RookMoves::RookMoves(Piece* piece) : piece_(piece) {};
 
-        auto isInsideChessBoard = [&checker](int posX, int posY)
-        {
-            return (posX >= 0 && posX < 8 && posY >= 0 && posY < 8);
-        };
+	std::vector<Square*> RookMoves::get()
+	{
+		std::vector<Square*> legalMoves;
 
-        for (int i = 0; i < 4; i++)
-        {
-			int posX = x + direction[i][0];
-			int posY = y + direction[i][1];
-            while (isInsideChessBoard(posX, posY))
-            {
-				auto square = checker->getSquareAtPosition(posX, posY);
-                if (square->getPiece() == nullptr)
-                {
-                    if (!validate || checker->validateMove(currentSquare, square))
-                    {
-						validMoves.push_back(square);
-					}
-				}
-                else
-                {
-                    if (square->getPiece()->isWhite() != currentSquare->getPiece()->isWhite())
-                    {
-                        if (!validate || checker->validateMove(currentSquare, square))
-                        {
-							validMoves.push_back(square);
-						}
-					}
-					break;
-				}
-				posX += direction[i][0];
-				posY += direction[i][1];
+		for (auto move : guess())
+		{
+			if (willCauseCheckmate(piece_, move))
+			{
+				legalMoves.push_back(move);
 			}
 		}
 
-        return validMoves;
-    }
+		return legalMoves;
+	}
+
+	std::vector<Square*> RookMoves::guess()
+	{
+		std::vector<Square*> moves;
+
+		auto currentSquare = ChessBoard::getSquare(piece_);
+
+		for (auto [dx, dy] : DISPLACEMENTS_)
+		{
+			auto direction = ValidMoves::getDirection(currentSquare, dx, dy);
+
+			for (auto square : direction)
+			{
+				moves.push_back(square);
+			}
+		}
+
+		return moves;
+	}
 }

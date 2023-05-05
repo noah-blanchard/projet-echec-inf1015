@@ -1,33 +1,38 @@
 #include "WhiteTurn.h"
+#include "Piece.h"
+#include "ChessBoard.h"
+#include "Square.h"
 
-void model::WhiteTurn::selectPiece(Square* clickedSquare, Checker* checker)
-
+namespace model
 {
-	if (clickedSquare->getPiece()->isWhite())
+	void WhiteTurn::selectPiece(Piece* piece)
 	{
-		GameTurn::selectPiece(clickedSquare, checker);
-	}
-}
-
-void model::WhiteTurn::movePiece(Square* clickedSquare, Checker* checker)
-{
-	GameTurn::movePiece(clickedSquare, checker);
-}
-
-bool model::WhiteTurn::isGameOver(Checker* checker, bool& isGameOver)
-{
-	for (int i = 0; i < 8; ++i)
-	{
-		for (int j = 0; j < 8; ++j)
+		if (piece->isWhite())
 		{
-			std::shared_ptr<Piece> piece = checker->getSquareAtPosition(i, j)->getPiece();
-
-			if (piece != nullptr && piece->isWhite() && !piece->getValidMoves2(checker, true).empty())
-			{
-				return isGameOver = false;
-			}
+			PlayerTurn::selectPiece(piece);
+		}
+		else
+		{
+			// send warning
 		}
 	}
 
-	return isGameOver = true;
+	void WhiteTurn::movePiece(Piece* piece, Square* selectedSquare)
+	{
+		if (piece->isWhite())
+		{
+			PlayerTurn::movePiece(piece, selectedSquare);
+		}
+		else
+		{
+			// send warning
+		}
+	}
+
+	bool WhiteTurn::isGameOver()
+	{
+		std::vector<Square*> enemiesMove = ChessBoard::getEnemiesMoves(false);
+
+		return enemiesMove.empty();
+	}
 }

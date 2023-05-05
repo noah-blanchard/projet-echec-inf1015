@@ -10,13 +10,16 @@
 #include "ModelSquare.h"
 #include "ModelChecker.h"
 
-namespace model {
-	class Queen : public Piece
+namespace logic {
+	//class ModelChecker;
+	class ModelQueenPiece : public ModelPiece
 	{
 	public:
-		Queen() = default;
-		Queen(bool isWhite);
-		~Queen();
+		ModelQueenPiece() = default;
+		ModelQueenPiece(bool isWhite) : ModelPiece(isWhite, whiteImagePath_, blackImagePath_) {}
+		//~ModelReinePiece();
+		//get valid moves
+		std::vector<ModelSquare*> getValidMoves(ModelChecker* checker, bool validate) override;
 	private:
 		static const std::string whiteImagePath_;
 		static const std::string blackImagePath_;

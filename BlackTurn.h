@@ -1,16 +1,15 @@
-#pragma once
-#include "GameTurn.h"
 
-namespace model {
-	class BlackTurn : public GameTurn
+#pragma once
+#include "PlayerTurn.h"
+namespace model
+{
+	class BlackTurn : public PlayerTurn
 	{
 	public:
-		void selectPiece(Square* clickedSquare, Checker* checker) override;
+		void selectPiece(Piece* piece) override;
 
-		void movePiece(Square* clickedSquare, Checker* checker) override;
+		void movePiece(Piece* piece, Square* selectedSquare) override;
 
-		bool isGameOver(Checker* checker, bool& isGameOver) override;
-
+		bool isGameOver() override;
 	};
 }
-

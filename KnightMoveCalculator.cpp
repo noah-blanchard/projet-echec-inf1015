@@ -1,0 +1,1 @@
+#include "KnightMoveCalculator.h"

@@ -1,25 +1,29 @@
 #include "SelectPieceCommand.h"
+#include "Piece.h"
+#include "Square.h"
+#include "ValidMoves.h"
 
-model::SelectPieceCommand::SelectPieceCommand(Square* clickedSquare, Checker* checker)
+namespace model
 {
-	checker->setSelectedSquare(clickedSquare);
-	validMoves_ = clickedSquare->getPiece()->getValidMoves2(checker, true);
-}
+    SelectPieceCommand::SelectPieceCommand(Piece* piece)
+        : piece_(piece), validMoves_(piece->getMoves())
+    {
+    }
 
-void model::SelectPieceCommand::execute()
+    void SelectPieceCommand::execute()
+    {
+        
+        for (auto square : validMoves_)
+        {
+            square->markAs(Status::PLAYABLE);
+        }
+    }
 
-{
-	for (Square* square : validMoves_)
-	{
-		square->setPlayable(true);
-	}
-}
-
-void model::SelectPieceCommand::cancel()
-
-{
-	for (Square* square : validMoves_)
-	{
-		square->setPlayable(false);
-	}
+    void SelectPieceCommand::cancel()
+    {
+        for (auto& square : validMoves_)
+        {
+            square->markAs(Status::UNPLAYABLE);
+        }
+    }
 }

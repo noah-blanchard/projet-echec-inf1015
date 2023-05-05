@@ -1,33 +1,56 @@
 #include "KingMoves.h"
-#include "ModelSquare.h"
-#include "ModelChecker.h"
+#include "ChessBoard.h"
+#include "Square.h"
 
-namespace model {
-    std::vector<class Square*> KingMoves::calculate(Square* currentSquare, Checker* checker, bool validate)
-    {
-		std::vector<Square*> validMoves;
-		int posX = currentSquare->getX();
-		int posY = currentSquare->getY();
+namespace model
+{
+	const std::array<std::pair<int, int>, 8> KingMoves::DISPLACEMENTS_ =
+	{
+		std::pair<int, int> {-1, -1},
+		std::pair<int, int> {-1,  0},
+		std::pair<int, int> {-1,  1},
+		std::pair<int, int> { 0, -1},
+		std::pair<int, int> { 0,  1},
+		std::pair<int, int> { 1, -1},
+		std::pair<int, int> { 1,  0},
+		std::pair<int, int> { 1,  1},
+	};
 
-		int possibleMoves[][2] = { {1, 1}, {-1, -1}, {1, -1}, {-1, 1}, {1, 0}, {-1, 0}, {0, 1}, {0, -1} };
+	KingMoves::KingMoves(Piece* piece) : piece_(piece) {};
 
-		auto isMoveValid = [&checker, currentSquare, this](int posX, int posY) {
-			return (posX >= 0 && posX < 8 && posY >= 0 && posY < 8) && // check if the move is on the board
-				(checker->getSquareAtPosition(posX, posY)->getPiece() == nullptr || // check if the move is on an empty square
-					checker->getSquareAtPosition(posX, posY)->getPiece()->isWhite() != currentSquare->getPiece()->isWhite()); // check if the move is on an enemy piece
-		};
+	std::vector<Square*> KingMoves::get()
+	{
+		std::vector<Square*> legalMoves;
+		std::vector<Square*> pseudoLegalMoves = this->guess();
 
-		for (int i = 0; i < 8; ++i)
+		for (Square* move : pseudoLegalMoves)
 		{
-			int newX = posX + possibleMoves[i][0];
-			int newY = posY + possibleMoves[i][1];
-			Square* square = checker->getSquareAtPosition(newX, newY);
-
-			if (isMoveValid(newX, newY) && (!validate || checker->validateMove(currentSquare, square))) {
-				validMoves.push_back(checker->getSquareAtPosition(newX, newY));
+			if (!willCauseCheckmate(piece_, move))
+			{
+				legalMoves.push_back(move);
 			}
 		}
 
-		return validMoves;
-    }
+		return legalMoves;
+	}
+
+	std::vector<Square*> KingMoves::guess()
+	{
+		std::vector<Square*> pseudoLegalMoves;
+
+		auto currentSquare = ChessBoard::getSquare(piece_);
+
+		for (auto [dx, dy] : DISPLACEMENTS_)
+		{
+			auto [x, y] = currentSquare->getPosition();
+			Square* nextSquare = ChessBoard::getSquare(x + dx, y + dy);
+
+			if (nextSquare != nullptr && !hasAllyPiece(nextSquare))
+			{
+				pseudoLegalMoves.push_back(nextSquare);
+			}
+		}
+
+		return pseudoLegalMoves;
+	}
 }

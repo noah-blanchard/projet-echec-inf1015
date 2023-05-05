@@ -5,6 +5,7 @@
  * @date 20/04/2023
  */
 
+#pragma once
 #include <QApplication>
 
 #if __has_include("bibliotheque_cours.hpp")
@@ -20,6 +21,7 @@ auto& cdbg = clog;
 #include "debogage_memoire.hpp"  //NOTE: Incompatible avec le "placement new", ne pas utiliser cette entête si vous utilisez ce type de "new" dans les lignes qui suivent cette inclusion.
 #endif
 
+#include "GameManager.h"
 #include "State.h"
 
 void initialiserBibliothequeCours([[maybe_unused]] int argc, [[maybe_unused]] char* argv[])
@@ -36,10 +38,15 @@ void initialiserBibliothequeCours([[maybe_unused]] int argc, [[maybe_unused]] ch
 
 int main(int argc, char *argv[])
 {
+	bibliotheque_cours::VerifierFuitesAllocations verifierFuitesAllocations;
 	QApplication app(argc, argv);
 	initialiserBibliothequeCours(argc, argv);
 
-	std::string file = "game_layouts/classic_game_layout.txt";
-	model::GameController::startGameFileLayout(file, true);
+	//logic::GameManager::testKingMax();
+	//logic::GameManager::reset();
+	//logic::GameManager::startEndgame1();
+
+	logic::GameController::startNewGame();	
+	
 	return app.exec();
 }

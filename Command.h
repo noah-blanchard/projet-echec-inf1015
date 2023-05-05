@@ -1,14 +1,11 @@
+
 #pragma once
 #include <vector>
-#include "ModelSquare.h"
-#include "ModelChecker.h"
-
-namespace model {
-	class Command
+namespace model
+{
+	class UserCommand
 	{
 	public:
-		Command() = default;
-		virtual ~Command() {};
 		virtual void execute() = 0;
 		virtual void cancel() = 0;
 	};

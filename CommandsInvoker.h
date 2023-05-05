@@ -1,20 +1,46 @@
+
 #pragma once
 #include "Command.h"
-
-namespace model {
+#include <memory>
+namespace model
+{
 	class CommandsInvoker
 	{
 	public:
+		static void executeCommand(std::shared_ptr<UserCommand> command)
+		{
+			command->execute();
+			commandsDone_.push_back(command);
+		}
 
-		static void executeCommand(Command* command);
+		static void undoCommand() // marche bien
+		{
+			if (commandsDone_.empty())
+			{
+				return;
+			}
 
-		static void undoCommand();
+			std::shared_ptr<UserCommand> command = commandsDone_.back();
+			command->cancel();
+			commandsDone_.pop_back();
+			commandsUndone_.push_back(command);
+		}
 
-		static void redoCommand();
+		static void redoCommand() // cause souvent des crash, des bugs
+		{
+			if (commandsUndone_.empty())
+			{
+				return;
+			}
+
+			std::shared_ptr<UserCommand> command = commandsUndone_.back();
+			command->execute();
+			commandsUndone_.pop_back();
+			commandsDone_.push_back(command);
+		}
 
 	private:
-		inline static std::vector<Command*> commandsDone_;
-		inline static std::vector<Command*> commandsUndone_;
+		static std::vector<std::shared_ptr<UserCommand>> commandsDone_;
+		static std::vector<std::shared_ptr<UserCommand>> commandsUndone_;
 	};
 }
-

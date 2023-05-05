@@ -5,45 +5,24 @@
  * @date 20/04/2023
  */
 
+#pragma once
 #include "ModelSquare.h"
-#include "ModelQueenPiece.h"
-#include "ModelBishopPiece.h"
-#include "ModelKnightPiece.h"
 
-namespace model {
-	void Square::setPlayable(bool p) { 
+namespace logic {
+	void ModelSquare::setPlayable(bool p) { 
 		playable_ = p;
 		emit playableSignal();
 	}
 
-	void Square::setPiece(std::shared_ptr<Piece> piece) {
+	void ModelSquare::setPiece(std::shared_ptr<ModelPiece> piece) { 
 		this->piece_ = piece;
 		if (piece != nullptr) {
 			piece->setCurrentSquare(nullptr);
 			piece->setCurrentSquare(this);
 		}
-			emit updatePieceSignal();
-	}
-
-	void Square::emitTransformSignal() {
-		emit transformPieceSignal();
-	}
-
-	void Square::transformPiece(std::string selected) {
-		if (selected == "Queen") {
-			this->setPiece(std::make_shared<Queen>(this->getPiece()->isWhite()));
-		}
-		else if (selected == "Bishop") {
-			this->setPiece(std::make_shared<Bishop>(this->getPiece()->isWhite()));
-		}
-		else if (selected == "Knight") {
-			this->setPiece(std::make_shared<Knight>(this->getPiece()->isWhite()));
-		}
-
 		emit updatePieceSignal();
 	}
 
-	Square::~Square() {
-
+	ModelSquare::~ModelSquare() {
 	}
 }

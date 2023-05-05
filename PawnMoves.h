@@ -1,15 +1,21 @@
-#pragma once
-#include "ValidMovesCalculator.h"
 
-namespace model {
-	class PawnMoves :
-		public ValidMovesCalculator
+#pragma once
+#include "ValidMoves.h"
+namespace model
+{
+	class PawnMoves : public ValidMoves
 	{
 	public:
-		PawnMoves() = default;
-		std::vector<class Square*> calculate(Square* currentSquare, class Checker* checker, bool validate) override;
+		PawnMoves(Piece* piece);
+
+		std::vector<Square*> get() override;
+
+		std::vector<Square*> guess() override;
+		
+
+	private:
+		Piece* piece_;
+		static bool hasMoved_;
 	};
 }
-
-
 

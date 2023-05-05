@@ -1,27 +1,22 @@
+
 #pragma once
 #include "Command.h"
+namespace model
+{
+    class MovePieceCommand : public UserCommand
+    {
+    public:
+        MovePieceCommand(Piece* piece, Square* newSquare);
 
-namespace model {
-	class MovePieceCommand : public Command
-	{
-	public:
-		MovePieceCommand(Square* clickedSquare, Checker* checker) :
-			clickedSquare_(clickedSquare),
-			checker_(checker) {}
+        void execute() override;
 
-		void execute() override;
+        void cancel() override;
 
-		void cancel() override;
-
-	private:
-		Square* clickedSquare_;
-		Checker* checker_;
-		std::shared_ptr<Piece> clickedSquarePiece_;
-		std::shared_ptr<Piece> checkerPiece_;
-		std::vector <Square*> playableSquareToReset_;
-		Square* checkerSquare_;
-		Square* whiteKingSquare_;
-		Square* blackKingSquare_;
-
-	};
+    private:
+        Piece* piece_;
+        std::vector<Square*> playableSquares_;
+        Square* oldSquare_;
+        Square* newSquare_;
+    };
 }
+

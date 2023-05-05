@@ -8,21 +8,24 @@
 #pragma once
 #include <QLabel>
 #include "ModelSquare.h"
-#include <QInputDialog>
+#include "ControllerSquare.h"
 
 namespace view {
-	class SquareLabel : public QLabel
+	class ViewSquareLabel : public QLabel
 	{
 		Q_OBJECT
 	public:
-		SquareLabel(model::Square* model, QWidget* parent = nullptr);
-		~SquareLabel() override;
-		model::Square* getModel() const { return model_; }
+		ViewSquareLabel(logic::ModelSquare* model, QWidget* parent = nullptr);
+		~ViewSquareLabel() override;
+		
+		void setImage(QPixmap image);
+
+		logic::ModelSquare* getModel() const { return model_; }
 	private:
-		model::Square* model_;
+		logic::ModelSquare* model_;
 		
 		void mousePressEvent(QMouseEvent* event) override;
-		void setImage(QPixmap image);
+
 		static const QString COLOR_LIGHT_;
 		static const QString COLOR_DARK_;
 		static const QString COLOR_PLAYABLE_;
@@ -31,12 +34,11 @@ namespace view {
 	public slots:
 		void updatePlayable();
 		void updatePiece();
-		void transformPiece();
 
 	signals:
 		void clickPiece();
 		void clickMove();
-		void clickEmpty();
+		//void clickMove();
 		
 	};
 }

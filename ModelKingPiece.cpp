@@ -8,25 +8,52 @@
 #include "ModelKingPiece.h"
 #include "ModelSquare.h"
 #include "ModelChecker.h"
-#include "KingMoves.h"
 
-namespace model {
-	const std::string King::whiteImagePath_ = "images/white/roi_white.png";
-	const std::string King::blackImagePath_ = "images/black/roi_black.png";
-	int King::instanceCounter_ = 0;
+namespace logic {
+	const std::string ModelKingPiece::whiteImagePath_ = "images/white/roi_white.png";
+	const std::string ModelKingPiece::blackImagePath_ = "images/black/roi_black.png";
+	int ModelKingPiece::instanceCounter_ = 0;
 
-	void King::resetInstanceCounter() {
+	void ModelKingPiece::resetInstanceCounter() {
 		instanceCounter_ = 0;
 	}
 	
-	bool King::isKing() {
+	bool ModelKingPiece::isKing() {
 		return true;
 	}
+
+	std::vector<ModelSquare*> ModelKingPiece::getValidMoves(ModelChecker* checker, bool validate)
+	{
+		std::vector<ModelSquare*> validMoves;
+		int posX = currentSquare->getX();
+		int posY = currentSquare->getY();
+
+		int possibleMoves[][2] = { {1, 1}, {-1, -1}, {1, -1}, {-1, 1}, {1, 0}, {-1, 0}, {0, 1}, {0, -1} };
+
+		auto isMoveValid = [&checker, this](int posX, int posY) {
+			return (posX >= 0 && posX < 8 && posY >= 0 && posY < 8) && // check if the move is on the board
+				(checker->getSquareAtPosition(posX, posY)->getPiece() == nullptr || // check if the move is on an empty square
+					checker->getSquareAtPosition(posX, posY)->getPiece()->isWhite() != this->isWhite()); // check if the move is on an enemy piece
+		};
+
+		for (int i = 0; i < 8; ++i)
+		{
+			int newX = posX + possibleMoves[i][0];
+			int newY = posY + possibleMoves[i][1];
+			ModelSquare* square = checker->getSquareAtPosition(newX, newY);
+
+			if (isMoveValid(newX, newY) && (!validate || checker->validateMove(currentSquare, square))){
+				validMoves.push_back(checker->getSquareAtPosition(newX, newY));
+			}
+		}
+
+		return validMoves;
+	}
+
 	
-	King::King(bool isWhite) : Piece(isWhite, whiteImagePath_, blackImagePath_) {
+	ModelKingPiece::ModelKingPiece(bool isWhite) : ModelPiece(isWhite, whiteImagePath_, blackImagePath_) {
 		if (instanceCounter_ < 2) {
 			instanceCounter_++;
-			calculators_.push_back(new KingMoves());
 		}
 		else {
 			///delete this;
@@ -34,12 +61,5 @@ namespace model {
 		}
 	}
 
-	King::King() : King(false) {}
-
-	King::~King() {
-		for (auto& calculator : calculators_) {
-			delete calculator;
-		}
-		calculators_.clear();
-	}
+	ModelKingPiece::ModelKingPiece() : ModelKingPiece(false) {}
 }

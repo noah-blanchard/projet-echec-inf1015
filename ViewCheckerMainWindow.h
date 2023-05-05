@@ -10,39 +10,31 @@
 #include <QGridLayout>
 #include <QSplitter>
 #include <QPushButton>
-#include <QLineEdit>
-#include <QFileDialog>
-#include <QFile>
 #include "ModelChecker.h"
+#include "ControllerChecker.h"
 #include "ViewSquareLabel.h"
 
 namespace view {
-	class CheckerMainWindow : public QMainWindow
+	class ViewCheckerMainWindow : public QMainWindow
 	{
 		Q_OBJECT
 	public:
-		CheckerMainWindow(model::Checker* model, QWidget* parent = nullptr);
-		~CheckerMainWindow() override;
+		ViewCheckerMainWindow(logic::ModelChecker* model, QWidget* parent = nullptr);
+		//~ViewChecker() override;
 		void squareClickPiece();
 		void squareClickMove();
 		void clickRestartGame();
 		void clickUndo();
 		void clickRedo();
-		void clickLoadFile();
-		void clickStartFile();
-		void clickHelp();
 		void unallowedMoveNotification();
 		void unallowedPieceNotification();
 		void showInfo(std::string message);
 		void showError(std::string message);
 	private:
-		SquareLabel* selectedViewSquare_ = nullptr;
+		ViewSquareLabel* selectedViewSquare_ = nullptr;
 		QGridLayout* gridLayout_;
 		QWidget* centralWidget_;
-		std::string layoutFile_;
-		QLineEdit* filePathLineEdit_;
-		model::Checker* model_;
-		QDialog* helpDialog_;
+		logic::ModelChecker* model_;
 	};
 }
 

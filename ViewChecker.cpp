@@ -5,13 +5,32 @@
  * @date 20/04/2023
  */
 
+#pragma once
 #include "ViewCheckerMainWindow.h"
 #include <QMessageBox>
-#include "State.h"
+#include /*"GameManager.h"*/ "State.h"
 
 
 namespace view {
-	CheckerMainWindow::CheckerMainWindow(model::Checker* model, QWidget* parent) {
+	//ViewCheckerMainWindow::ViewCheckerMainWindow(logic::ModelChecker* model, QWidget* parent) {
+	//	centralWidget_ = new QWidget(this);
+	//	gridLayout_ = new QGridLayout(centralWidget_);
+	//	this->model_ = model;
+	//	this->setCentralWidget(centralWidget_);
+
+	//	connect(this->model_, &logic::ModelChecker::unallowedMoveSignal, this, &ViewCheckerMainWindow::unallowedMoveNotification);
+	//	
+	//	for (int i = 0; i < 8; ++i) {
+	//		for (int j = 0; j < 8; ++j) {
+	//			ViewSquareLabel* square = new ViewSquareLabel(model->getSquareAtPosition(i, j), this);
+	//			connect(square, &ViewSquareLabel::clickPiece, this, &ViewCheckerMainWindow::squareClickPiece);
+	//			connect(square, &ViewSquareLabel::clickMove, this, &ViewCheckerMainWindow::squareClickMove);
+	//			gridLayout_->addWidget(square, i, j);
+	//		}
+	//	}
+	//}
+
+	ViewCheckerMainWindow::ViewCheckerMainWindow(logic::ModelChecker* model, QWidget* parent) {
 		centralWidget_ = new QWidget(this);
 		QSplitter* splitter = new QSplitter(Qt::Horizontal, centralWidget_);
 		splitter->setFixedSize(1000, 500);
@@ -19,165 +38,94 @@ namespace view {
 		QWidget* rightSection = new QWidget(splitter);
 		rightSection->setFixedWidth(500);
 		QVBoxLayout* rightLayout = new QVBoxLayout(rightSection);
-		QPushButton* button = new QPushButton("Restart Game with this layout", rightSection);
-		connect(button, &QPushButton::clicked, this, &CheckerMainWindow::clickRestartGame);
+		QPushButton* button = new QPushButton("Restart Game", rightSection);
+		connect(button, &QPushButton::clicked, this, &ViewCheckerMainWindow::clickRestartGame);
 
 		QPushButton* undo = new QPushButton("Undo", rightSection);
-		connect(undo, &QPushButton::clicked, this, &CheckerMainWindow::clickUndo);
+		connect(undo, &QPushButton::clicked, this, &ViewCheckerMainWindow::clickUndo);
 
-		//QPushButton* redo = new QPushButton("Redo", rightSection);
-		//connect(redo, &QPushButton::clicked, this, &CheckerMainWindow::clickRedo);
-
-	
-		helpDialog_ = new QDialog(this);
-		helpDialog_->setFixedSize(440, 320);
-		helpDialog_->setWindowTitle("Help");
-		QLabel* helpLabel = new QLabel("To load a template file, click on the button \"Load Template File\" and select a file.\n"
-			"To start a game with this template, click on the button \"Start a game with this template\".\n"
-			"To restart the game with the current template, click on the button \"Restart Game with this layout\".\n"
-			"To create custom templates, place a \".txt\" file in the \"game_layouts\" folder.\n"
-			"The file should be filled with lines containing : column number (0-7), row number (0-7), is white (0-1), piece char\n"
-			"The piece char should be : \n"
-			"\"P\" for a pawn\n"
-			"\"R\" for a rook\n"
-			"\"N\" for a knight\n"
-			"\"B\" for a bishop\n"
-			"\"Q\" for a queen\n"
-			"\"K\" for a king\n"
-			"Example : for a white rook at the top left corner, the line should be : 0 0 1 R\n"
-			"Example : for a black pawn at the bottom right corner, the line should be : 7 7 0 P\n"
-			"Full examples already exist in the \"game_layouts\" folder.\n"
-			, helpDialog_);
-		helpLabel->setWordWrap(true);
-		helpLabel->setAlignment(Qt::AlignCenter);
-		helpLabel->setFixedSize(435, 315);
-		helpLabel->setMargin(5);
-
-
-		
-
-		QSplitter* innerSplitter = new QSplitter(Qt::Horizontal);
-		QLabel* label = new QLabel("Template file : ", innerSplitter);
-
-		filePathLineEdit_ = new QLineEdit(innerSplitter);
-		filePathLineEdit_->setReadOnly(true);
-		QPushButton* loadFile = new QPushButton("Load Template File", innerSplitter);
-		connect(loadFile, &QPushButton::clicked, this, &CheckerMainWindow::clickLoadFile);
-		QPushButton* help = new QPushButton("?", innerSplitter);
-		connect(help, &QPushButton::clicked, this, &CheckerMainWindow::clickHelp);
-
-		
-
-		QPushButton* startLayout = new QPushButton("Start a game with this template", rightSection);
-		connect(startLayout, &QPushButton::clicked, this, &CheckerMainWindow::clickStartFile);
+		QPushButton* redo = new QPushButton("Redo", rightSection);
+		connect(redo, &QPushButton::clicked, this, &ViewCheckerMainWindow::clickRedo);
 
 
 		gridLayout_ = new QGridLayout(leftSection);
 		this->model_ = model;
 		this->setCentralWidget(centralWidget_);
 
+		// connect signal and slot
+		connect(this->model_, &logic::ModelChecker::unallowedMoveSignal, this, &ViewCheckerMainWindow::unallowedMoveNotification);
+
 		// create left section
 		for (int i = 0; i < 8; ++i) {
 			for (int j = 0; j < 8; ++j) {
-				SquareLabel* square = new SquareLabel(model->getSquareAtPosition(i, j), this);
+				ViewSquareLabel* square = new ViewSquareLabel(model->getSquareAtPosition(i, j), this);
 				square->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
-				connect(square, &SquareLabel::clickPiece, this, &CheckerMainWindow::squareClickPiece);
-				connect(square, &SquareLabel::clickMove, this, &CheckerMainWindow::squareClickMove);
-				connect(square, &SquareLabel::clickEmpty, this, &CheckerMainWindow::unallowedMoveNotification);
+				connect(square, &ViewSquareLabel::clickPiece, this, &ViewCheckerMainWindow::squareClickPiece);
+				connect(square, &ViewSquareLabel::clickMove, this, &ViewCheckerMainWindow::squareClickMove);
 				gridLayout_->addWidget(square, i, j);
 			}
 		}
+		// set left section as central widget
 
+		// create right section
+
+		// add button to right section
 		rightLayout->addWidget(button);
 		rightLayout->addWidget(undo);
-		//rightLayout->addWidget(redo);
-		rightLayout->addWidget(innerSplitter);
-		rightLayout->addWidget(startLayout);
+		rightLayout->addWidget(redo);
+		// add stretch to push button to the top
 		rightLayout->addStretch();
 
+		// create horizontal splitter
+		
+		// set main window as central widget
 		setCentralWidget(centralWidget_);
 
+		// set main window size
 		setFixedSize(1000, 500);
 		setWindowTitle("Simple Chess Game");
-
-	}
-
-	CheckerMainWindow::~CheckerMainWindow()
-	{
-		for (int i = 0; i < gridLayout_->count(); ++i)
-		{
-			QLayoutItem* item = gridLayout_->itemAt(i);
-			if (item != nullptr)
-			{
-				gridLayout_->removeItem(item);
-				delete item->widget();
-				delete item;
-			}
-		}
-		delete model_;
-		delete helpDialog_;
 	}
 
 	
-	void CheckerMainWindow::clickRestartGame() {
-		model::GameController::restartGame();
+	void ViewCheckerMainWindow::clickRestartGame() {
+		logic::ControllerChecker::restartGameEvent();
 	}
 
-	void CheckerMainWindow::clickUndo()
+	void ViewCheckerMainWindow::clickUndo()
 	{
-		model::GameController::undo();
+		logic::GameController::undo();
 	}
 
-	void CheckerMainWindow::clickRedo()
+	void ViewCheckerMainWindow::clickRedo()
 	{
-		model::GameController::redo();
+		logic::GameController::redo();
 	}
 
-	void CheckerMainWindow::unallowedMoveNotification()
+	void ViewCheckerMainWindow::unallowedMoveNotification()
 	{
-		QMessageBox::warning(this, "Unallowed move", "This move is not allowed !");
+		QMessageBox::warning(this, "Unallowed move", "You can't move there");
 	}
 
-	void CheckerMainWindow::unallowedPieceNotification()
+	void ViewCheckerMainWindow::unallowedPieceNotification()
 	{
-		QMessageBox::warning(this, "Unallowed piece", "It is not your turn !");
-	}
+		std::string color = logic::GameManager::isWhiteTurn() ? "white" : "black";
+		std::string message = "It is " + color + "'s turn";
 
-	void CheckerMainWindow::clickLoadFile()
-	{
-		QString filePath = QFileDialog::getOpenFileName(this, "Load Layout File", "game_layouts", "Text Files (*.txt)");
-		if (filePath != "") {
-			layoutFile_ = filePath.toStdString();
-			filePathLineEdit_->setText(filePath);
-		}
-	}
-
-	void CheckerMainWindow::clickStartFile()
-	{
-		if (layoutFile_ != "") {
-			model::GameController::startGameFileLayout(layoutFile_, true);
-		}
-	}
-
-	void CheckerMainWindow::clickHelp()
-	{
-		
-		helpDialog_->show();
-
+		QMessageBox::warning(this, "Unallowed piece", message.c_str());
 	}
 	
-	void CheckerMainWindow::squareClickPiece()
+	void ViewCheckerMainWindow::squareClickPiece()
 	{
 		model_->resetPlayableSquares();
 
-		SquareLabel* clickedSquare = qobject_cast<SquareLabel*>(sender());
+		ViewSquareLabel* clickedSquare = qobject_cast<ViewSquareLabel*>(sender());
 
-		bool isPieceAllowed = clickedSquare->getModel()->getPiece() != nullptr && model::GameController::isPieceAllowed(clickedSquare->getModel()->getPiece().get());
+		bool isPieceAllowed = clickedSquare->getModel()->getPiece() != nullptr /* && clickedSquare->getModel()->getPiece()->isWhite() == logic::GameManager::isWhiteTurn()*/;
 		
 		if (isPieceAllowed)
 		{
 			selectedViewSquare_ = clickedSquare;
-			model::/*ControllerSquare */GameController::/*clickSquareControl*/selectPiece(clickedSquare->getModel(), model_);
+			logic::/*ControllerSquare */GameController::/*clickSquareControl*/selectPiece(clickedSquare->getModel(), model_);
 		}
 		else
 		{
@@ -185,28 +133,31 @@ namespace view {
 		}
 	}
 
-	void CheckerMainWindow::squareClickMove()
+	void ViewCheckerMainWindow::squareClickMove()
 	{
-		SquareLabel* clickedSquare = qobject_cast<SquareLabel*>(sender());
+		ViewSquareLabel* clickedSquare = qobject_cast<ViewSquareLabel*>(sender());
 
 		if (!(clickedSquare->getModel()->isPlayable()))
 		{
 			return;
 		}
-	
-		model:: GameController::movePiece(clickedSquare->getModel(), model_);
-		if (model::GameController::isGameOver())
+
+		//selectedViewSquare->disconnectFromPiece();
+		//model->setSelectedSquare(clickedSquare->getModel());			
+		logic::/*ControllerSquare*/GameController::/*clickSquareMove*/movePiece(clickedSquare->getModel(), model_);
+		/*logic::GameManager::nextTurn();*/
+		if (logic::GameController::isGameOver())
 		{
 			QMessageBox::information(this, "Game Over", "Checkmate");
 		}
 	}
 
-	void CheckerMainWindow::showInfo(std::string message)
+	void ViewCheckerMainWindow::showInfo(std::string message)
 	{
 		QMessageBox::information(this, "Info", message.c_str());
 	}
 
-	void CheckerMainWindow::showError(std::string message)
+	void ViewCheckerMainWindow::showError(std::string message)
 	{
 		QMessageBox::critical(this, "Error", message.c_str());
 	}

@@ -11,33 +11,36 @@
 #include <QObject>
 //#include "ModelSquare.h"
 
-namespace model {
+namespace logic {
 
-
-	class Piece : public QObject
+	template <typename T>
+	class foo : public QObject
 	{
-		Q_OBJECT
+	};
+
+	class ModelPiece
+	{
 			
 	public:
-		Piece() = default;
-		Piece(bool isWhite, std::string whitePath, std::string blackPath);
-		~Piece();
+		ModelPiece() = default;
+		ModelPiece(bool isWhite, std::string whitePath, std::string blackPath);
+		~ModelPiece();
 
 		bool isWhite();
-		virtual std::vector<class Square *> getValidMoves2(class Checker* checker, bool validate);
+		virtual std::vector<class ModelSquare*> getValidMoves(class ModelChecker* checker, bool validate) = 0;
 		std::string getImagePath() const { return imagePath_; }
-		void setCurrentSquare(Square * square);
-		virtual bool isFirstMove();
-		virtual void firstMoveDone();
+		void setCurrentSquare(ModelSquare * square);
 		virtual bool isKing();
-		virtual bool transform(Square* square);
+		//void move(ModelSquare* square);
 	
 	protected:
-		std::vector<class ValidMovesCalculator*> calculators_;
-		Square* currentSquare = nullptr;
+		ModelSquare* currentSquare = nullptr;
 	private:
 		std::string imagePath_;
 		bool white_;
+
+	/*signals:
+		void movedSignal();*/
 	};
 }
 

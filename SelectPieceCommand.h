@@ -1,18 +1,19 @@
+
 #pragma once
 #include "Command.h"
+namespace model
+{
+    class SelectPieceCommand : public UserCommand
+    {
+    public:
+        SelectPieceCommand(Piece* piece);
 
-namespace model {
-	class SelectPieceCommand : public Command
-	{
-	public:
-		SelectPieceCommand(Square* clickedSquare, Checker* checker);
+        void execute() override;
 
-		void execute() override;
+        void cancel() override;
 
-		void cancel() override;
-
-	private:
-		std::vector <Square*> validMoves_;
-	};
+    private:
+		Piece* piece_;
+        std::vector<Square*> validMoves_;
+    };
 }
-

@@ -1,37 +1,57 @@
 #include "KnightMoves.h"
-#include "ModelSquare.h"
-#include "ModelChecker.h"
+#include "ChessBoard.h"
+#include "Square.h"
 
-namespace model {
-	std::vector<class Square*> KnightMoves::calculate(Square* currentSquare, Checker* checker, bool validate)
+namespace model
+{
+	const std::array<std::pair<int, int>, 8> KnightMoves::DISPLACEMENTS_ =
 	{
-        std::vector<Square*> validMoves;
+		std::pair<int, int> {-1, -2},
+		std::pair<int, int> {-2, -1},
+		std::pair<int, int> {-2,  1},
+		std::pair<int, int> {-1,  2},
+		std::pair<int, int> { 1,  2},
+		std::pair<int, int> { 2,  1},
+		std::pair<int, int> { 2, -1},
+		std::pair<int, int> { 1, -2},
+	};
 
-        int possibleMoves[8][2] = { {-1, -2}, {1, -2}, {2, -1}, {2, 1}, {1, 2}, {-1, 2}, {-2, 1}, {-2, -1} };
+	KnightMoves::KnightMoves(Piece* piece) : piece_(piece) {};
 
-        auto square = [&checker](int posX, int posY)
-        {
-            return checker->getSquareAtPosition(posX, posY);
-        };
+	std::vector<Square*> KnightMoves::get()
+	{
+		std::vector<Square*> legalMoves;
+		std::vector<Square*> pseudoLegalMoves = guess();
 
-        auto isMoveValid = [square, currentSquare, this](int posX, int posY)
-        {
-            return (posX >= 0 && posX < 8 && posY >= 0 && posY < 8) &&
-                (square(posX, posY)->getPiece() == nullptr ||
-                    square(posX, posY)->getPiece()->isWhite() != currentSquare->getPiece()->isWhite());
-        };
+		for (Square* move : pseudoLegalMoves) // TODO : use copy_if
+		{
+			if (!willCauseCheckmate(piece_, move))
+			{
+				legalMoves.push_back(move);
+			}
+		}
 
-        for (int i = 0; i < 8; ++i)
-        {
-            int newX = currentSquare->getX() + possibleMoves[i][0];
-            int newY = currentSquare->getY() + possibleMoves[i][1];
+		return legalMoves;
+	}
 
-            if (isMoveValid(newX, newY) && (!validate || checker->validateMove(currentSquare, square(newX, newY))))
-            {
-                validMoves.push_back(square(newX, newY));
-            }
-        }
 
-        return validMoves;
+	std::vector<Square*> KnightMoves::guess()
+	{
+		std::vector<Square*> pseudoLegalMoves;
+
+		auto currentSquare = ChessBoard::getSquare(piece_);
+
+		for (auto [dx, dy] : DISPLACEMENTS_) // TODO : use copy_if
+		{
+			auto [x, y] = currentSquare->getPosition();
+			Square* nextSquare = ChessBoard::getSquare(x + dx, y + dy);
+
+			if (nextSquare != nullptr && !hasAllyPiece(nextSquare))
+			{
+				pseudoLegalMoves.push_back(nextSquare);
+			}
+		}
+
+		return pseudoLegalMoves;
 	}
 }
