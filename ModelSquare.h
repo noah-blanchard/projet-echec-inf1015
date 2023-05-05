@@ -17,7 +17,6 @@ namespace model {
 	public:
 		Square() : light_(false), x_(-1), y_(-1) {}
 		Square(bool isLight, int x, int y) : light_(isLight), x_(x), y_(y) {}
-		//ModelSquare(bool isLight, int x, int y, ModelPiece* piece) : light(isLight), x(x), y(y), piece(piece) {}
 		~Square();
 		bool isLight() const { return light_; }
 		int getX() const { return x_; }

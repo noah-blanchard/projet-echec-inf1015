@@ -5,7 +5,6 @@
  * @date 20/04/2023
  */
 
-#pragma once
 #include "ViewSquareLabel.h"
 #include "ModelSquare.h"
 #include <QMessageBox>
@@ -65,7 +64,15 @@ namespace view
 
 	void SquareLabel::mousePressEvent(QMouseEvent* event)
 	{
-		emit model_->isPlayable() ? clickMove() : model_->getPiece() != nullptr ? clickPiece() : void();
+		if (model_->isPlayable()) {
+			emit clickMove();
+		}
+		else if(model_->getPiece() != nullptr) {
+			emit clickPiece();
+		}
+		else {
+			emit clickEmpty();
+		}
 	}
 
 	void SquareLabel::setImage(QPixmap pixmap)

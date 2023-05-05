@@ -148,6 +148,17 @@ namespace model
 		startGameFileLayout(currentFileLayout_, true);
 	}
 
+	bool GameController::isPieceAllowed(Piece* piece)
+	{
+		if(piece == nullptr)
+			return false;
+
+		if (currentTurn_ == whiteTurn_ && piece->isWhite() || currentTurn_ == blackTurn_ && !piece->isWhite())
+			return true;
+
+		return false;
+	}
+
 	std::shared_ptr<Piece> GameController::createPieceFromChar(char pieceChar, bool isWhite) {
 		switch (pieceChar)
 		{

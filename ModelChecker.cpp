@@ -5,7 +5,6 @@
  * @date 20/04/2023
  */
 
-#pragma once
 #include "ModelChecker.h"
 
 namespace model {
@@ -100,8 +99,6 @@ namespace model {
 				delete squares_[i][j];
 			}
 		}
-		//delete whiteKingSquare;
-		//delete blackKingSquare;
 	}
 
 }

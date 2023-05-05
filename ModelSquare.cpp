@@ -5,7 +5,6 @@
  * @date 20/04/2023
  */
 
-#pragma once
 #include "ModelSquare.h"
 #include "ModelQueenPiece.h"
 #include "ModelBishopPiece.h"
@@ -23,12 +22,7 @@ namespace model {
 			piece->setCurrentSquare(nullptr);
 			piece->setCurrentSquare(this);
 		}
-		/*if (piece != nullptr && piece->transform(this)) {
-			emit transformPieceSignal();
-		}*/
-		//else {
 			emit updatePieceSignal();
-		//}
 	}
 
 	void Square::emitTransformSignal() {
@@ -39,23 +33,17 @@ namespace model {
 		if (selected == "Queen") {
 			this->setPiece(std::make_shared<Queen>(this->getPiece()->isWhite()));
 		}
-		//else if (*selected == "Rook") {
-		//	this->setPiece(std::make_shared<ModelRookPiece>(this->getPiece()->isWhite()));
-		//}
 		else if (selected == "Bishop") {
 			this->setPiece(std::make_shared<Bishop>(this->getPiece()->isWhite()));
 		}
 		else if (selected == "Knight") {
 			this->setPiece(std::make_shared<Knight>(this->getPiece()->isWhite()));
 		}
-		/*	else {
-				throw std::invalid_argument("Invalid piece type");
-			}*/
 
 		emit updatePieceSignal();
 	}
 
 	Square::~Square() {
-		//delete piece_.get();
+
 	}
 }

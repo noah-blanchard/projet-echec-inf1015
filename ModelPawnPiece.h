@@ -15,10 +15,6 @@ namespace model {
 		Pawn() = default;
 		Pawn(bool isWhite, bool firstMove);
 		~Pawn();
-		//~ModelPionPiece();
-
-		//get valid moves
-		//std::vector<ModelSquare*> getValidMoves(ModelChecker* checker, bool validate) override;
 		bool isFirstMove() override;
 		void firstMoveDone() override;
 		bool transform(Square* square) override;

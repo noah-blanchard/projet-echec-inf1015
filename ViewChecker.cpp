@@ -5,31 +5,12 @@
  * @date 20/04/2023
  */
 
-#pragma once
 #include "ViewCheckerMainWindow.h"
 #include <QMessageBox>
-#include /*"GameManager.h"*/ "State.h"
+#include "State.h"
 
 
 namespace view {
-	//ViewCheckerMainWindow::ViewCheckerMainWindow(logic::ModelChecker* model, QWidget* parent) {
-	//	centralWidget_ = new QWidget(this);
-	//	gridLayout_ = new QGridLayout(centralWidget_);
-	//	this->model_ = model;
-	//	this->setCentralWidget(centralWidget_);
-
-	//	connect(this->model_, &logic::ModelChecker::unallowedMoveSignal, this, &ViewCheckerMainWindow::unallowedMoveNotification);
-	//	
-	//	for (int i = 0; i < 8; ++i) {
-	//		for (int j = 0; j < 8; ++j) {
-	//			ViewSquareLabel* square = new ViewSquareLabel(model->getSquareAtPosition(i, j), this);
-	//			connect(square, &ViewSquareLabel::clickPiece, this, &ViewCheckerMainWindow::squareClickPiece);
-	//			connect(square, &ViewSquareLabel::clickMove, this, &ViewCheckerMainWindow::squareClickMove);
-	//			gridLayout_->addWidget(square, i, j);
-	//		}
-	//	}
-	//}
-
 	CheckerMainWindow::CheckerMainWindow(model::Checker* model, QWidget* parent) {
 		centralWidget_ = new QWidget(this);
 		QSplitter* splitter = new QSplitter(Qt::Horizontal, centralWidget_);
@@ -69,9 +50,6 @@ namespace view {
 		this->model_ = model;
 		this->setCentralWidget(centralWidget_);
 
-		// connect signal and slot
-		connect(this->model_, &model::Checker::unallowedMoveSignal, this, &CheckerMainWindow::unallowedMoveNotification);
-
 		// create left section
 		for (int i = 0; i < 8; ++i) {
 			for (int j = 0; j < 8; ++j) {
@@ -79,6 +57,7 @@ namespace view {
 				square->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
 				connect(square, &SquareLabel::clickPiece, this, &CheckerMainWindow::squareClickPiece);
 				connect(square, &SquareLabel::clickMove, this, &CheckerMainWindow::squareClickMove);
+				connect(square, &SquareLabel::clickEmpty, this, &CheckerMainWindow::unallowedMoveNotification);
 				gridLayout_->addWidget(square, i, j);
 			}
 		}
@@ -105,16 +84,24 @@ namespace view {
 		// set main window size
 		setFixedSize(1000, 500);
 		setWindowTitle("Simple Chess Game");
+
+		// add all widgets to widgets_ vector from the most specific to the most general
+
 	}
 
 	CheckerMainWindow::~CheckerMainWindow()
 	{
-		delete model_;
-		for (int i = 0; i < gridLayout_->count(); ++i) {
-			delete gridLayout_->itemAt(i)->widget();
+		for (int i = 0; i < gridLayout_->count(); ++i)
+		{
+			QLayoutItem* item = gridLayout_->itemAt(i);
+			if (item != nullptr)
+			{
+				gridLayout_->removeItem(item);
+				delete item->widget();
+				delete item;
+			}
 		}
-		delete gridLayout_;
-		delete centralWidget_;
+		delete model_;
 	}
 
 	
@@ -134,13 +121,12 @@ namespace view {
 
 	void CheckerMainWindow::unallowedMoveNotification()
 	{
-		QMessageBox::warning(this, "Unallowed move", "You can't move there");
+		QMessageBox::warning(this, "Unallowed move", "This move is not allowed !");
 	}
 
 	void CheckerMainWindow::unallowedPieceNotification()
 	{
-
-
+		QMessageBox::warning(this, "Unallowed piece", "It is not your turn !");
 	}
 
 	void CheckerMainWindow::clickLoadFile()
@@ -165,7 +151,7 @@ namespace view {
 
 		SquareLabel* clickedSquare = qobject_cast<SquareLabel*>(sender());
 
-		bool isPieceAllowed = clickedSquare->getModel()->getPiece() != nullptr /* && clickedSquare->getModel()->getPiece()->isWhite() == logic::GameManager::isWhiteTurn()*/;
+		bool isPieceAllowed = clickedSquare->getModel()->getPiece() != nullptr && model::GameController::isPieceAllowed(clickedSquare->getModel()->getPiece().get());
 		
 		if (isPieceAllowed)
 		{

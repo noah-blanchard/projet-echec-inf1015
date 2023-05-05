@@ -137,7 +137,6 @@
     <ClCompile Include="PawnMoves.cpp" />
     <ClCompile Include="RookMoves.cpp" />
     <ClCompile Include="SelectPieceCommand.cpp" />
-    <ClCompile Include="State.cpp" />
     <ClCompile Include="TempModelSquare.cpp" />
     <ClCompile Include="Test.cpp" />
     <ClCompile Include="ValidMovesCalculator.cpp" />

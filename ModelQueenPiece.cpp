@@ -5,7 +5,6 @@
  * @date 20/04/2023
  */
 
-#pragma once
 #include "ModelQueenPiece.h"
 #include "ModelSquare.h"
 #include "ModelChecker.h"
@@ -17,48 +16,6 @@ namespace model
 	const std::string Queen::whiteImagePath_ = "images/white/reine_white.png";
 	const std::string Queen::blackImagePath_ = "images/black/reine_black.png";
 	
-	/*std::vector<ModelSquare*> ModelQueenPiece::getValidMoves(ModelChecker* checker, bool validate)
-	{
-		std::vector<ModelSquare*> validMoves;
-		int x = currentSquare->getX();
-		int y = currentSquare->getY();
-
-		int direction[8][2] = { {0, -1}, {1, -1}, {1, 0}, {1, 1}, {0, 1}, {-1, 1}, {-1, 0}, {-1, -1} };
-
-		auto isInsideChessBoard = [&checker, this](int posX, int posY)
-		{
-			return (posX >= 0 && posX < 8 && posY >= 0 && posY < 8);
-		};
-
-		for (int i = 0; i < 8; ++i)
-		{
-			for (int j = 1; isInsideChessBoard(x + j * direction[i][0], y + j * direction[i][1]); ++j)
-			{
-				ModelSquare* square = checker->getSquareAtPosition(x + j * direction[i][0], y + j * direction[i][1]);
-
-				if (!(!validate || checker->validateMove(currentSquare, square)))
-				{
-					continue;
-				}
-
-				if (square->getPiece() == nullptr)
-				{
-					validMoves.push_back(square);
-					continue;
-				}
-				
-				if (square->getPiece()->isWhite() != this->isWhite())
-				{
-					validMoves.push_back(square);
-				}
-
-				break;
-			}
-		}
-
-		return validMoves;
-	}*/
-
 	Queen::Queen(bool isWhite) : Piece(isWhite, whiteImagePath_, blackImagePath_) {
 		
 		calculators_.push_back(new RookMoves());

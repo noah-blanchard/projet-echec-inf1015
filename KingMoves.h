@@ -7,7 +7,6 @@ namespace model {
 	{
 	public:
 		KingMoves() = default;
-		//~KingMoves();
 		std::vector<class Square*> calculate(Square* currentSquare, class Checker* checker, bool validate) override;
 	};
 }

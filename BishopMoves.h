@@ -7,7 +7,6 @@ namespace model {
 	{
 	public:
 		BishopMoves() = default;
-		//~BishopMoves();
 		std::vector<class Square*> calculate(Square* currentSquare, class Checker* checker, bool validate) override;
 	};
 }

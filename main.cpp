@@ -5,7 +5,6 @@
  * @date 20/04/2023
  */
 
-#pragma once
 #include <QApplication>
 
 #if __has_include("bibliotheque_cours.hpp")
@@ -37,14 +36,9 @@ void initialiserBibliothequeCours([[maybe_unused]] int argc, [[maybe_unused]] ch
 
 int main(int argc, char *argv[])
 {
-	//bibliotheque_cours::BreakpointSurAllocations breakpointSurAllocations = { 555U, 562U, 560U, 561U, 563U, 564U, 595U, 597U, 705U, 707U, 709U, 817U, 1852U, 1716U, 1850U, 1402U, 1407U, 1408U, 1409U, 1410U, 1411U, 1986U, 1718U, 1854U, 2159U, };
 	bibliotheque_cours::VerifierFuitesAllocations verifierFuitesAllocations;
 	QApplication app(argc, argv);
 	initialiserBibliothequeCours(argc, argv);
-
-	//logic::GameManager::testKingMax();
-	//logic::GameManager::reset();
-	//logic::GameManager::startEndgame1();
 
 	std::string file = "game_layouts/classic_game_layout.txt";
 	model::GameController::startGameFileLayout(file, true);

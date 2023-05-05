@@ -17,15 +17,12 @@ namespace view {
 	public:
 		SquareLabel(model::Square* model, QWidget* parent = nullptr);
 		~SquareLabel() override;
-		
-		void setImage(QPixmap image);
-
 		model::Square* getModel() const { return model_; }
 	private:
 		model::Square* model_;
 		
 		void mousePressEvent(QMouseEvent* event) override;
-
+		void setImage(QPixmap image);
 		static const QString COLOR_LIGHT_;
 		static const QString COLOR_DARK_;
 		static const QString COLOR_PLAYABLE_;
@@ -39,7 +36,7 @@ namespace view {
 	signals:
 		void clickPiece();
 		void clickMove();
-		//void clickMove();
+		void clickEmpty();
 		
 	};
 }

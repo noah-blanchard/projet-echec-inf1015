@@ -24,7 +24,6 @@ namespace model {
 		~Piece();
 
 		bool isWhite();
-		//virtual std::vector<class ModelSquare*> getValidMoves(class ModelChecker* checker, bool validate) = 0;
 		virtual std::vector<class Square *> getValidMoves2(class Checker* checker, bool validate);
 		std::string getImagePath() const { return imagePath_; }
 		void setCurrentSquare(Square * square);
@@ -32,7 +31,6 @@ namespace model {
 		virtual void firstMoveDone();
 		virtual bool isKing();
 		virtual bool transform(Square* square);
-		//void move(ModelSquare* square);
 	
 	protected:
 		std::vector<class ValidMovesCalculator*> calculators_;
@@ -40,9 +38,6 @@ namespace model {
 	private:
 		std::string imagePath_;
 		bool white_;
-
-	/*signals:
-		void movedSignal();*/
 	};
 }
 

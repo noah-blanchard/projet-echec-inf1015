@@ -33,11 +33,7 @@ namespace model {
 		Square* whiteKingSquare_;
 		Square* blackKingSquare_;
 		Square* squares_[8][8];
-		//std::unique_ptr < std::shared_ptr<ModelSquare*>> squares;
 		Square* selectedSquare_ = nullptr;
-
-	signals:
-		void unallowedMoveSignal();
 	
 	};
 }

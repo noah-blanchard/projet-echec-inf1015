@@ -10,7 +10,6 @@
 
 namespace model {
 
-	// implémentation RAII
 	class TempSquare {
 	public:
 		TempSquare() : modelSquare_(new Square()) {}

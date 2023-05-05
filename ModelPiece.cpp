@@ -19,11 +19,6 @@ namespace model {
 		return false;
 	}
 
-	/*void ModelPiece::move(ModelSquare* square) {
-		square->setPiece(this);
-		emit movedSignal();
-	}*/
-
 	void Piece::setCurrentSquare(Square* square) {
 		currentSquare = square;
 	}
